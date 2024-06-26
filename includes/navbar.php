@@ -13,8 +13,8 @@
             <a href="/admin" class="nav-item nav-link">Quản lý</a>
         </div>
         <div class="navbar-nav ml-auto py-0">
-            <a href="" class="nav-item nav-link">Đăng nhập</a>
-            <a href="" class="nav-item nav-link">Đăng ký</a>
+            <a href="/login" class="nav-item nav-link">Đăng nhập</a>
+            <a href="/register" class="nav-item nav-link">Đăng ký</a>
             <a href="" class="nav-item nav-link">Đăng xuất</a>
         </div>
     </div>

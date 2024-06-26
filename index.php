@@ -23,6 +23,14 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->contact();
         break;
+    case '/login':
+        $controller = new HomeController();
+        $controller->login();
+        break;
+    case '/register':
+        $controller = new HomeController();
+        $controller->register();
+        break;
     case '/admin':
         $controller = new HomeController();
         $controller->admin();

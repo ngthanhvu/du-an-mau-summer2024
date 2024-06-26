@@ -33,4 +33,14 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/home/contact.php';
     }
+
+    public function login()
+    {
+        include __DIR__ . '/../../app/views/home/login.php';
+    }
+
+    public function register()
+    {
+        include __DIR__ . '/../../app/views/home/register.php';
+    }
 }
