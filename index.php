@@ -15,9 +15,13 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->index();
         break;
-    case '/about':
+    case '/shop':
         $controller = new HomeController();
-        $controller->about();
+        $controller->shop();
+        break;
+    case '/contact':
+        $controller = new HomeController();
+        $controller->contact();
         break;
     case '/admin':
         $controller = new HomeController();

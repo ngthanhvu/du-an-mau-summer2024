@@ -8,12 +8,6 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/home/index.php';
     }
-
-    public function about()
-    {
-        include  __DIR__ . '/../../app/views/home/about.php';
-    }
-
     public function admin()
     {
         include __DIR__ . '/../../app/views/admin/index.php';
@@ -28,5 +22,15 @@ class HomeController
     public function updateUser()
     {
         include __DIR__ . '/../../app/views/admin/updateUser.php';
+    }
+
+    public function shop()
+    {
+        include __DIR__ . '/../../app/views/home/shop.php';
+    }
+
+    public function contact()
+    {
+        include __DIR__ . '/../../app/views/home/contact.php';
     }
 }
