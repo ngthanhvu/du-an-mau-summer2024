@@ -1,13 +1,13 @@
 <?php
 function db_connect()
 {
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
+    try {
+        $conn = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USER, DB_PASS);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // echo "Connection successful!";
+        return $conn;
+    } catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
     }
-
-    return $conn;
 }
+?>

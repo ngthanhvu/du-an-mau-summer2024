@@ -22,4 +22,24 @@ class AdminController
             include __DIR__ . '/../../app/views/home/register.php';
         }
     }
+
+    public function login()
+    {
+        $data = [
+            'username' => $_POST['username'] ?? '',
+            'password' => $_POST['password'] ?? '',
+        ];
+
+        include_once __DIR__ . '/../../app/models/Register.php';
+        $loginRegister = new LoginRegister();
+        $result = $loginRegister->login($data);
+
+        if ($result['success']) {
+            $_SESSION['user'] = $result['user'];
+            header('Location: /');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/home/login.php';
+        }
+    }
 }

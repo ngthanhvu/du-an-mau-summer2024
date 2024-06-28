@@ -55,6 +55,10 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->register();
         break;
+    case '/admin/users/login':
+        $controller = new AdminController();
+        $controller->login();
+        break;
     // case '/admin/users/update':
     //     $controller = new AdminController();
     //     $controller->update($_POST['id'], $_POST['username'], $_POST['full_name'], $_POST['level']);
