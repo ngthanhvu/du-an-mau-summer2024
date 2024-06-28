@@ -34,22 +34,22 @@ class User
         $this->db->query($sql);
     }
 
-    public function AddUser($username, $password, $full_name, $level)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $full_name = $_POST['full_name'];
-            $level = $_POST['level'];
-            $sql = "INSERT INTO users (username, password, full_name, level) VALUES ('$username', '$password', '$full_name', '$level')";
-            $this->db->query($sql);
-        }
-    }
+    // public function AddUser($username, $password, $full_name, $level)
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $username = $_POST['username'];
+    //         $password = $_POST['password'];
+    //         $full_name = $_POST['full_name'];
+    //         $level = $_POST['level'];
+    //         $sql = "INSERT INTO users (username, password, full_name, level) VALUES ('$username', '$password', '$full_name', '$level')";
+    //         $this->db->query($sql);
+    //     }
+    // }
 
-    public function UpdateUser($id ,$username, $full_name, $level)
-    {
-        $id = $_POST['id'];
-        $sql = "UPDATE users SET username = '$username', full_name = '$full_name', level = '$level' WHERE id = $id";
-        $this->db->query($sql);
-    }
+    // public function UpdateUser($id ,$username, $full_name, $level)
+    // {
+    //     $id = $_POST['id'];
+    //     $sql = "UPDATE users SET username = '$username', full_name = '$full_name', level = '$level' WHERE id = $id";
+    //     $this->db->query($sql);
+    // }
 }

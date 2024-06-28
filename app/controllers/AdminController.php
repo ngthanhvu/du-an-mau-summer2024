@@ -1,36 +1,25 @@
 <?php
 class AdminController
 {
-
-    public function users()
+    public function register()
     {
-        include_once __DIR__ . '/../../app/models/User.php';
-        $user = new User();
-        $users = $user->getUser();
-        include __DIR__ . '/../../app/views/admin/users.php';
-    }
+        $data = [
+            'username' => $_POST['username'] ?? '',
+            'email' => $_POST['email'] ?? '',
+            'phone' => $_POST['phone'] ?? '',
+            'password' => $_POST['password'] ?? '',
+            'confirm_password' => $_POST['confirm_password'] ?? '',
+        ];
 
-    public function delete($id)
-    {
-        include_once __DIR__ . '/../../app/models/User.php';
-        $user = new User();
-        $user->DeleteUser($id);
-        header('Location: /admin/users');
-    }
+        include_once __DIR__ . '/../../app/models/Register.php';
+        $loginRegister = new LoginRegister();
+        $result = $loginRegister->register($data);
 
-    public function add($username, $password, $full_name, $level)
-    {
-        include_once __DIR__ . '/../../app/models/User.php';
-        $user = new User();
-        $user->AddUser($username, $password, $full_name, $level);
-        header('Location: /admin/users');
-    }
-
-    public function update($id, $username, $full_name, $level)
-    {
-        include_once __DIR__ . '/../../app/models/User.php';
-        $user = new User();
-        $user->UpdateUser($id, $username, $full_name, $level);
-        header('Location: /admin/users');
+        if ($result['success']) {
+            header('Location: /login');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/home/register.php';
+        }
     }
 }

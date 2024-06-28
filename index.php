@@ -39,28 +39,28 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->adduser();
         break;
-    case '/admin/users':
-        $controller = new AdminController();
-        $controller->users();
-        break;
+    // case '/admin/users':
+    //     $controller = new AdminController();
+    //     $controller->users();
+    //     break;
     case '/admin/update':
         $controller = new HomeController();
         $controller->updateUser();
         break;
-    case '/admin/users/delete':
+    // case '/admin/users/delete':
+    //     $controller = new AdminController();
+    //     $controller->delete($_GET['id']);
+    //     break;
+    case '/admin/users/register':
         $controller = new AdminController();
-        $controller->delete($_GET['id']);
+        $controller->register();
         break;
-    case '/admin/users/add':
-        $controller = new AdminController();
-        $controller->add($_POST['username'], $_POST['password'], $_POST['full_name'], $_POST['level']);
-        break;
-    case '/admin/users/update':
-        $controller = new AdminController();
-        $controller->update($_POST['id'], $_POST['username'], $_POST['full_name'], $_POST['level']);
-        break;
+    // case '/admin/users/update':
+    //     $controller = new AdminController();
+    //     $controller->update($_POST['id'], $_POST['username'], $_POST['full_name'], $_POST['level']);
+    //     break;
     default:
         http_response_code(404);
-        echo "Page not found";
+        include_once '404.html';
         break;
 }
