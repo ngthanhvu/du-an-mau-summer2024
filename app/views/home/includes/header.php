@@ -28,7 +28,7 @@
                 <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <box-icon name='user'></box-icon>
                 </a>
-                <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" style="width: 80%;" href="/profile">Profile</a></li>
                     <li><a class="dropdown-item" style="width: 80%;" href="/order">Order</a></li>
                     <li><a class="dropdown-item" style="width: 80%;" href="/checkout">Checkout</a></li>

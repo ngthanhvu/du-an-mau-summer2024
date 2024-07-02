@@ -31,6 +31,10 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->order();
         break;
+    case '/cart':
+        $controller = new HomeController();
+        $controller->cart();
+        break;
     case '/login':
         $controller = new HomeController();
         $controller->login();
