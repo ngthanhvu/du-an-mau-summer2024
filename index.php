@@ -15,13 +15,21 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->index();
         break;
-    case '/shop':
+    case '/product':
         $controller = new HomeController();
-        $controller->shop();
+        $controller->product();
+        break;
+    case '/checkout':
+        $controller = new HomeController();
+        $controller->checkout();
         break;
     case '/contact':
         $controller = new HomeController();
         $controller->contact();
+        break;
+    case '/order':
+        $controller = new HomeController();
+        $controller->order();
         break;
     case '/login':
         $controller = new HomeController();
@@ -35,22 +43,6 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->admin();
         break;
-    case '/admin/adduser': 
-        $controller = new HomeController();
-        $controller->adduser();
-        break;
-    // case '/admin/users':
-    //     $controller = new AdminController();
-    //     $controller->users();
-    //     break;
-    case '/admin/update':
-        $controller = new HomeController();
-        $controller->updateUser();
-        break;
-    // case '/admin/users/delete':
-    //     $controller = new AdminController();
-    //     $controller->delete($_GET['id']);
-    //     break;
     case '/admin/users/register':
         $controller = new AdminController();
         $controller->register();
@@ -59,10 +51,6 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->login();
         break;
-    // case '/admin/users/update':
-    //     $controller = new AdminController();
-    //     $controller->update($_POST['id'], $_POST['username'], $_POST['full_name'], $_POST['level']);
-    //     break;
     default:
         http_response_code(404);
         include_once '404.html';

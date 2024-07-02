@@ -12,28 +12,6 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/index.php';
     }
-
-    public function adduser()
-    {
-
-        include __DIR__ . '/../../app/views/admin/adduser.php';
-    }
-
-    public function updateUser()
-    {
-        include __DIR__ . '/../../app/views/admin/updateUser.php';
-    }
-
-    public function shop()
-    {
-        include __DIR__ . '/../../app/views/home/shop.php';
-    }
-
-    public function contact()
-    {
-        include __DIR__ . '/../../app/views/home/contact.php';
-    }
-
     public function login()
     {
         include __DIR__ . '/../../app/views/home/login.php';
@@ -42,5 +20,25 @@ class HomeController
     public function register()
     {
         include __DIR__ . '/../../app/views/home/register.php';
+    }
+
+    public function product()
+    {
+        include __DIR__ . '/../../app/views/home/product.php';
+    }
+
+    public function contact()
+    {
+        include __DIR__ . '/../../app/views/home/contact.php';
+    }
+
+    public function checkout()
+    {
+        include __DIR__ . '/../../app/views/home/checkout.php';
+    }
+
+    public function order()
+    {
+        include __DIR__ . '/../../app/views/home/order.php';
     }
 }

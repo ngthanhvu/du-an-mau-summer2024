@@ -1,90 +1,96 @@
-<?php include_once "./includes/header.php" ?>
-    <!-- Navbar Start -->
-    <div class="container-fluid">
-        <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <?php include_once "./includes/sidebar.php" ?>
-            </div>
-            <div class="col-lg-9">
-                <?php include_once "./includes/navbar.php" ?>
+<?php include_once "includes/header.php" ?>
+    <!-- end header  -->
+    <!-- start contact  -->
+    <section class="contact-section">
+        <div class="contact-header">
+            <h1 class="text-center mt-5">Contact</h1>
+            <p class="text-center">
+                Bạn muốn khiếu nại gì ở đây!.
+            </p>
+            <!-- thêm Map -->
+            <div id="map"></div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"></script>
+        </div>
+        </div>
+    </section>
+    <section>
+        <div class="container py-5">
+            <div class="row py-5">
+                <form class="col-md-9 m-auto" method="post" role="form">
+                    <div class="row">
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="inputname">Name</label>
+                            <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group col-md-6 mb-3">
+                            <label for="inputemail">Email</label>
+                            <input type="email" class="form-control mt-1" id="email" name="email"
+                                placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputsubject">Subject</label>
+                        <input type="text" class="form-control mt-1" id="subject" name="subject"
+                            placeholder="Subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputmessage">Message</label>
+                        <textarea class="form-control mt-1" id="message" name="message" placeholder="Message"
+                            rows="8"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col text-end mt-2">
+                            <button type="submit" class="btn btn-success btn-lg px-3">Let’s Talk</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    <!-- Navbar End -->
+    </section>
+    <!-- end contact  -->
 
-
-    <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-5">
-        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Contact Us</h1>
-            <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
-                <p class="m-0 px-2">-</p>
-                <p class="m-0">Contact</p>
-            </div>
-        </div>
-    </div>
-    <!-- Page Header End -->
-
-
-    <!-- Contact Start -->
-    <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Contact For Any Queries</span></h2>
-        </div>
-        <div class="row px-xl-5">
-            <div class="col-lg-7 mb-5">
-                <div class="contact-form">
-                    <div id="success"></div>
-                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name"
-                                required="required" data-validation-required-message="Please enter your name" />
-                            <p class="help-block text-danger"></p>
+    <!-- start footer  -->
+    <footer class="bg-light text-black py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>About Us</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-black ft-end">Email: info@example.com</a></li>
+                        <li><a href="#" class="text-black ft-end">Phone: +123 456 7890</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Follow Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-black ft-end">Facebook</a></li>
+                        <li><a href="#" class="text-black ft-end">Twitter</a></li>
+                        <li><a href="#" class="text-black ft-end">Instagram</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Subscribe</h5>
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email">
                         </div>
-                        <div class="control-group">
-                            <input type="email" class="form-control" id="email" placeholder="Your Email"
-                                required="required" data-validation-required-message="Please enter your email" />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                required="required" data-validation-required-message="Please enter a subject" />
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div class="control-group">
-                            <textarea class="form-control" rows="6" id="message" placeholder="Message"
-                                required="required"
-                                data-validation-required-message="Please enter your message"></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">Send
-                                Message</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
                     </form>
                 </div>
             </div>
-            <div class="col-lg-5 mb-5">
-                <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
-                <p>Justo sed diam ut sed amet duo amet lorem amet stet sea ipsum, sed duo amet et. Est elitr dolor elitr erat sit sit. Dolor diam et erat clita ipsum justo sed.</p>
-                <div class="d-flex flex-column mb-3">
-                    <h5 class="font-weight-semi-bold mb-3">Store 1</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
-                </div>
-                <div class="d-flex flex-column">
-                    <h5 class="font-weight-semi-bold mb-3">Store 2</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2024 Your Company. All rights reserved.</p>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Contact End -->
+    </footer>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    
+</body>
 
-
-    <!-- Footer Start -->
-    <?php include_once './includes/footer.php' ?>
+</html>
