@@ -46,4 +46,14 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/home/cart.php';
     }
+
+    public function detail()
+    {
+        include __DIR__ . '/../../app/views/home/detail.php';
+    }
+
+    public function about()
+    {
+        include __DIR__ . '/../../app/views/home/about.php';
+    }
 }

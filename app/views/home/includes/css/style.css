@@ -14,7 +14,7 @@ header {
     width: 100%;
     justify-content: space-between;
     padding: 0px 18%;
-    background-color: #eee;
+    background-color: #d81f19;
     z-index: 10000;
 }
 
@@ -30,11 +30,14 @@ header {
 }
 
 .navmenu a {
-    color: black;
+    color: #fff;
     font-size: 16px;
     font-weight: 500;
     margin-left: 25px;
     text-decoration: none;
+}
+.navmenu a:hover {
+    color: yellow;
 }
 
 .navicon {
@@ -61,14 +64,15 @@ header {
 .slider {
     background-color: #333;
     width: 100%;
-    height: 55vh;
+    height: auto;
 }
 
 .category-section {
     width: 70%;
-    height: 80vh;
+    /* height: 40rem; */
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 .category-section a {
@@ -87,7 +91,7 @@ header {
 
 .viewshop-section {
     width: 70%;
-    height: 100vh;
+    height: 40rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -108,9 +112,10 @@ header {
 
 .ourproduct-section {
     width: 70%;
-    height: 100vh;
+    /* height: 40rem; */
     margin-left: auto;
     margin-right: auto;
+    position: relative;
 }
 
 .ourproduct-head a {
@@ -263,7 +268,196 @@ header {
 .img-thunbnail {
     border: 1px solid #ddd;
 }
+
 .img-thunbnail:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease-in-out;
+}
+
+
+.shop1 {
+    margin-left: 200px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.shop1 p {
+    width: 400px;
+    color: rgb(159, 158, 158);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop2 {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.shop2 h2 {
+    font-size: 23px;
+}
+
+.select {
+    margin-left: 750px;
+    margin-bottom: 30px;
+}
+
+.select p {
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.loadmore {
+    width: 200px;
+    height: 40px;
+    margin-top: 30px;
+    margin-left: 400px;
+    background-color: white;
+    font-size: 13px;
+    margin-bottom: 100px;
+}
+
+.product-card {
+    height: 200px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dee2e6;
+}
+
+
+/* about */
+.service-item {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.service-item .h1 {
+    font-size: 3em;
+}
+
+.service-item h2 {
+    font-size: 1.25em;
+    margin-top: 15px;
+}
+
+.service-item:hover {
+    background-color: #e9ecef;
+}
+
+.service-item i {
+    transition: color 0.3s ease;
+}
+
+.service-item:hover i {
+    color: #f23619;
+}
+
+.service-content {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.service-item {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ads-brand {
+    height: auto;
+    padding: 10px 0;
+    background-color: #eee;
+    /* margin-top: -122px; */
+    margin-bottom: -50px;
+}
+
+.slider-ads {
+    /* position: relative; */
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.slides-ads img {
+    padding: 0 50px;
+}
+
+.slides-ads {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: calc(100% / 4);
+    transition: opacity 1s;
+}
+
+/* ads banner */
+
+.feature-box {
+    background-color: #0d1a3d;
+    color: white;
+    text-align: left;
+    padding: 20px;
+    border-radius: 5px;
+    flex: 1;
+    /* Make all boxes take equal space */
+    margin: 0 10px;
+    /* Add space between boxes */
+    display: flex;
+    align-items: center;
+}
+
+.feature-box i {
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.feature-box .feature-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-box h6 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.feature-box p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ads-banner2 {
+    position: relative;
+}
+.ads-banner2 img {
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

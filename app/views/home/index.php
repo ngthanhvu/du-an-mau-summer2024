@@ -13,9 +13,9 @@
         <p class="text-center">
             Các danh mục sản phẩm có tại shop
         </p>
-        <a class="btn btn-outline-secondary">Xem tất cả</a>
+        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
     </div>
-    <div class="container mt-4">
+    <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <a href="#" style="text-decoration: none; color: black;">
@@ -45,12 +45,51 @@
     </div>
 </section>
 <!-- end category  -->
+<!-- start ads  -->
+<section class="ads-banner">
+    <div class="container mt-5">
+        <div class="feature-row">
+            <div class="feature-box">
+                <i class="bi bi-truck"></i>
+                <div class="feature-text">
+                    <h6>Vận chuyển SIÊU TỐC</h6>
+                    <p>Khu vực TOÀN QUỐC</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="bi bi-shield-check"></i>
+                <div class="feature-text">
+                    <h6>Cam kết CHÍNH HÃNG</h6>
+                    <p>Sản phẩm TRỌN ĐỜI</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="bi bi-credit-card"></i>
+                <div class="feature-text">
+                    <h6>Tiến hành THANH TOÁN</h6>
+                    <p>Với nhiều PHƯƠNG THỨC</p>
+                </div>
+            </div>
+            <div class="feature-box">
+                <i class="bi bi-arrow-repeat"></i>
+                <div class="feature-text">
+                    <h6>100% HOÀN TIỀN</h6>
+                    <p>Nếu sản phẩm lỗi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ads-banner2">
+    <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/banner_index.jpg?1719910370853" alt="404">
+</section>
+<!-- end ads  -->
 <!-- star view shop  -->
-<section class="viewshop-section mt-5">
+<section class="viewshop-section">
     <div class="viewshop-head">
         <h3 class="text-center mt-5">Các sản phẩm mới nhất của chúng tôi</h3>
         <p class="text-center">Sản phẩm được cập nhật tháng 7 năm 2024</p>
-        <a class="btn btn-outline-secondary">Xem tất cả</a>
+        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
     </div>
     <div class="container mt-4">
         <div class="row">
@@ -79,7 +118,7 @@
         <h3 class="text-center mt-5">Sản phẩm bán chạy</h3>
         <p class="text-center">Các sản phẩm được mua nhiều nhất
         </p>
-        <a class="btn btn-outline-secondary">Xem tất cả</a>
+        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
     </div>
     <div class="container mt-4">
         <div class="row">
@@ -118,6 +157,35 @@
             </div>
         </div>
 </section>
+
+<!-- logo nhà tài trợ -->
+<section class="ads-brand mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-2">
+                <div class="card border-0">
+                    <img height="100" width="100%" src="https://i3.wp.com/pngfre.com/wp-content/uploads/nike-logo-18.png?ssl=1" alt="Brand 1">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card border-0">
+                    <img height="100" width="100%" src="https://avashoppingpark.rs/wp-content/uploads/2022/05/Puma-logo.png" alt="Brand 2">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card border-0">
+                    <img height="100" width="100%" src="https://static.vecteezy.com/system/resources/previews/019/766/237/non_2x/adidas-logo-adidas-icon-transparent-free-png.png" alt="Brand 3">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card border-0">
+                    <img height="100" width="100%" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/New_balance.png" alt="Brand 4">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- kết thúc section logo nhà tài trợ -->
 <!-- end our product  -->
 <!-- start footer  -->
 <script>
@@ -140,7 +208,8 @@
         showSlide(currentIndex);
     }
 
-    // Tự động chuyển ảnh sau mỗi 3 giây
+    showSlide(currentIndex);
+
     setInterval(nextSlide, 3000);
 </script>
 <?php include_once "includes/footer.php" ?>
