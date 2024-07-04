@@ -42,4 +42,12 @@ class AdminController
             include __DIR__ . '/../../app/views/home/login.php';
         }
     }
+
+    public function getUser()
+    {
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $users = $user->getUser();
+        include_once __DIR__ . '/../../app/views/admin/adminUser.php';
+    }
 }

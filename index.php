@@ -67,6 +67,20 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->login();
         break;
+
+        #admin template
+    case '/admin/product':
+        $controller = new HomeController();
+        $controller->adminProduct();
+        break;
+    case '/admin/User':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getUser();
+        $controller->adminUser();
+        break;
+        #end admin tempalte
+
     default:
         http_response_code(404);
         include_once '404.html';
