@@ -1,4 +1,4 @@
-<footer class="bg-light text-black py-4 mt-5">
+<footer class="text-white py-4 mt-5" style="background-color: #d81f19;">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 mb-4">
@@ -8,16 +8,16 @@
                 <div class="col-md-3 mb-4">
                     <h5>Contact</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-black ft-end">Email: info@example.com</a></li>
-                        <li><a href="#" class="text-black ft-end">Phone: +123 456 7890</a></li>
+                        <li><a href="#" class="text-white ft-end">Email: info@example.com</a></li>
+                        <li><a href="#" class="text-white ft-end">Phone: +123 456 7890</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h5>Follow Us</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-black ft-end">Facebook</a></li>
-                        <li><a href="#" class="text-black ft-end">Twitter</a></li>
-                        <li><a href="#" class="text-black ft-end">Instagram</a></li>
+                        <li><a href="#" class="text-white ft-end">Facebook</a></li>
+                        <li><a href="#" class="text-white ft-end">Twitter</a></li>
+                        <li><a href="#" class="text-white ft-end">Instagram</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">

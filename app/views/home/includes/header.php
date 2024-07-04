@@ -15,18 +15,33 @@
 <body>
     <header>
         <a href="/" class="logo">
-            <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">
+            <!-- <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt=""> -->
+            <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+                </style>
+                <text x="10" y="40" font-family="Open Sans" font-size="40" font-weight="500" fill="#333">ShopMall</text>
+                <circle cx="190" cy="35" r="3" fill="lightblue" />
+            </svg>
         </a>
         <ul class="navmenu">
             <li><a href="/">Trang Chủ</a></li>
             <li><a href="/product">Sản Phẩm</a></li>
             <li><a href="/contact">Liên Hệ</a></li>
             <li><a href="/about">Về Chúng tôi </a></li>
+            <?php
+            if (isset($_SESSION['user']['username']) == "admin") {
+                echo '<li><a href="/admin">Admin</a></li>';
+            }
+            ?>
         </ul>
         <ul class="navicon">
             <li><a style="color: #fff;" href="/cart"><i class="bi bi-bag"></i> <span>1</span></a></li>
-            <li><a style="color: #fff;" href="/login">Login</a></li>
-            <li class="nav-item dropdown">
+            <?php
+            if (empty($_SESSION['user'])) {
+                echo '<li><a style="color: #fff;" href="/login">Login</a></li>';
+            } else {
+                echo '<li class="nav-item dropdown">
                 <a style="color: #fff;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle"></i>
                 </a>
@@ -34,10 +49,13 @@
                     <li><a class="dropdown-item" style="width: 80%;" href="/profile">Profile</a></li>
                     <li><a class="dropdown-item" style="width: 80%;" href="/order">Order</a></li>
                     <li><a class="dropdown-item" style="width: 80%;" href="/checkout">Checkout</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="#">Logout</a></li>
+                    <li><a class="dropdown-item" style="width: 80%;" href="/logout">Logout</a></li>
 
                 </ul>
-            </li>
-        </ul>
+            </li>';
+            }
+            // session_destroy();
+            ?>
 
+        </ul>
     </header>

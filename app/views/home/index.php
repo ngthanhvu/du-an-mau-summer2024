@@ -1,4 +1,5 @@
-<?php include_once "includes/header.php" ?>
+<?php include_once "includes/header.php";
+?>
 <!-- start slider -->
 <section class="slider">
     <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/slider_1.jpg?1719892831755" alt="">
@@ -112,6 +113,11 @@
     </div>
 </section>
 <!-- end view shop  -->
+<!-- start ads 3  -->
+<section class="ads-brands-3">
+    <img class="img-fluid mx-auto" src="https://contents.mediadecathlon.com/s1073411/k$1f80f98207b9b5a55851725a88adfb5c/app-mab-web-vi.webp" alt="404">
+</section>
+<!-- end ads 3  -->
 <!-- start our product  -->
 <section class="ourproduct-section">
     <div class="ourproduct-head">
@@ -185,6 +191,7 @@
         </div>
     </div>
 </section>
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top"><i class="bi bi-arrow-up-circle"></i></button>
 <!-- kết thúc section logo nhà tài trợ -->
 <!-- end our product  -->
 <!-- start footer  -->
@@ -211,5 +218,28 @@
     showSlide(currentIndex);
 
     setInterval(nextSlide, 3000);
+
+
+
+    // Hàm cuộn lên đầu trang
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    // Hiển thị hoặc ẩn nút scroll top khi người dùng cuộn trang
+    window.onscroll = function() {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("scrollToTopBtn").style.display = "block";
+        } else {
+            document.getElementById("scrollToTopBtn").style.display = "none";
+        }
+    }
 </script>
 <?php include_once "includes/footer.php" ?>

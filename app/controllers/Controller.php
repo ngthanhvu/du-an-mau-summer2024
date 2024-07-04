@@ -22,6 +22,11 @@ class HomeController
         include __DIR__ . '/../../app/views/home/register.php';
     }
 
+    public function logout()
+    {
+        include __DIR__ . '/../../app/views/home/logout.php';
+    }
+
     public function product()
     {
         include __DIR__ . '/../../app/views/home/product.php';

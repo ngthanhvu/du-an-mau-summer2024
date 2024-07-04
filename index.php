@@ -51,6 +51,10 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->register();
         break;
+    case '/logout':
+        $controller = new HomeController();
+        $controller->logout();
+        break;
     case '/admin':
         $controller = new HomeController();
         $controller->admin();

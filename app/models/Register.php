@@ -87,6 +87,7 @@ class LoginRegister
 
                     if ($user) {
                         if (password_verify($data['password'], $user['password'])) {
+                            $_SESSION['user'] = $user;
                             return ['success' => true, 'user' => $user];
                         } else {
                             $errors['login'] = "Password không đúng!";
