@@ -71,13 +71,31 @@ switch ($base_path) {
         #admin template
     case '/admin/product':
         $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getProduct();
         $controller->adminProduct();
+        break;
+    case '/admin/product/add':
+        $controller = new HomeController();
+        $controller->addProduct();
+        break;
+    case '/admin/product/addProduct':
+        $controllers = new AdminController();
+        $controllers->addProducts();
+        break;
+    case '/admin/product/delete':
+        $controllers = new AdminController();
+        $controllers->deleteProduct($_GET['id']);
         break;
     case '/admin/User':
         $controller = new HomeController();
         $controllers = new AdminController();
         $controllers->getUser();
         $controller->adminUser();
+        break;
+    case '/admin/User/delete':
+        $controllers = new AdminController();
+        $controllers->deleteUser($_GET['id']);
         break;
         #end admin tempalte
 

@@ -69,6 +69,11 @@ class HomeController
         include __DIR__ . '/../../app/views/admin/adminProduct.php';
     }
 
+    public function addProduct()
+    {
+        include __DIR__ . '/../../app/views/admin/add/addProduct.php';
+    }
+
     public function adminUser()
     {
         include __DIR__ . '/../../app/views/admin/adminUser.php';

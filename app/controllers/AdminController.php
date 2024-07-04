@@ -43,11 +43,58 @@ class AdminController
         }
     }
 
+    #user
     public function getUser()
     {
         include_once __DIR__ . '/../../app/models/User.php';
         $user = new User();
         $users = $user->getUser();
         include_once __DIR__ . '/../../app/views/admin/adminUser.php';
+    }
+
+    public function deleteUser($id)
+    {
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $user->deleteUser($id);
+        header('Location: /admin/User');
+    }
+
+    #product
+    public function getProduct()
+    {
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $products = $product->getProduct();
+        include_once __DIR__ . '/../../app/views/admin/adminProduct.php';
+    }
+
+    public function addProducts()
+    {
+        $data = [
+            'name' => $_POST['name'] ?? '',
+            'price' => $_POST['price'] ?? '',
+            'quantity' => $_POST['quantity'] ?? '',
+            'description' => $_POST['description'] ?? '',
+            'image' => $_POST['image'] ?? '',
+        ];
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $result = $product->addProduct($data);
+
+        if ($result['success']) {
+            header('Location: /admin/product');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/admin/add/addProduct.php';
+        }
+    }
+
+    public function deleteProduct($id)
+    {
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $product->deleteProduct($id);
+        header('Location: /admin/product');
     }
 }
