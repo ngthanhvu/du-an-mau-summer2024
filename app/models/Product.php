@@ -25,6 +25,8 @@ class Product
     public function addProduct($data)
     {
         $errors = [];
+        $uploadedFile = [];
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (empty($data['name'])) {
                 $errors['name'] = "Tên sản phẩm không được để trống";
@@ -49,9 +51,17 @@ class Product
                 $file_count = count($_FILES['image']['name']);
 
                 for ($i = 0; $i < $file_count; $i++) {
-                    $target_file = $target_dir . basename($_FILES['image']['name'][$i]);
-                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    // $file_name = pathinfo($_FILES['image']['name'][$i], PATHINFO_BASENAME);
+                    // $target_file = $target_dir . basename($_FILES['image']['name'][$i]);
+                    // $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    // $check = getimagesize($_FILES['image']['tmp_name'][$i]);
+
+                    $file_name = pathinfo($_FILES['image']['name'][$i], PATHINFO_FILENAME);
+                    $imageFileType = strtolower(pathinfo($_FILES['image']['name'][$i], PATHINFO_EXTENSION));
+                    $unique_file_name = $file_name . '_' . time() . '_' . uniqid() . '.' . $imageFileType;
+                    $target_file = $target_dir . $unique_file_name;
                     $check = getimagesize($_FILES['image']['tmp_name'][$i]);
+
 
                     if ($check === false) {
                         $errors['image'] = "Hình ảnh không đúng định dạng";
