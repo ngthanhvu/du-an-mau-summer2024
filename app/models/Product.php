@@ -42,31 +42,62 @@ class Product
                 $errors['description'] = "Mô tả sản phẩm không được để trống";
             }
 
-            if (empty($data['image'])) {
+            if (empty($_FILES['image']['name'][0])) {
                 $errors['image'] = "Hình ảnh sản phẩm không được để trống";
-            }
-        }
+            } else {
+                $target_dir = "uploads/";
+                $file_count = count($_FILES['image']['name']);
 
-        if (empty($errors)) {
-            try {
-                $sql = "INSERT INTO products (name, price, quantity, description, image) VALUES (?, ?, ?, ?, ?)";
-                $stmt = $this->db->prepare($sql);
-                $stmt->execute([
-                    $data['name'],
-                    $data['price'],
-                    $data['quantity'],
-                    $data['description'],
-                    $data['image']
-                ]);
-                return ['success' => true];
-            } catch (PDOException $e) {
-                $errors['db'] = "Lỗi khi thêm sản phẩm: " . $e->getMessage();
-            }
-        }
+                for ($i = 0; $i < $file_count; $i++) {
+                    $target_file = $target_dir . basename($_FILES['image']['name'][$i]);
+                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    $check = getimagesize($_FILES['image']['tmp_name'][$i]);
 
-        return ['success' => false, 'errors' => $errors, 'data' => $data];
+                    if ($check === false) {
+                        $errors['image'] = "Hình ảnh không đúng định dạng";
+                        continue;
+                    }
+
+                    if ($_FILES['image']['size'][$i] > 500000) {
+                        $errors['image'] = "Hình ảnh vượt quá kích thước cho phép";
+                        continue;
+                    }
+
+                    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                        $errors['image'] = "Chỉ chấp nhận file JPG, JPEG, PNG hoặc GIF";
+                        continue;
+                    }
+
+                    if (empty($errors)) {
+                        if (!move_uploaded_file($_FILES['image']['tmp_name'][$i], $target_file)) {
+                            $errors['image'] = "Không thể upload hình ảnh";
+                        } else {
+                            $uploadedFile[] = $target_file;
+                        }
+                    }
+                }
+            }
+
+            if (empty($errors)) {
+                try {
+                    $sql = "INSERT INTO products (name, price, quantity, description, image) VALUES (?, ?, ?, ?, ?)";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute([
+                        $data['name'],
+                        $data['price'],
+                        $data['quantity'],
+                        $data['description'],
+                        json_encode($uploadedFile)
+                    ]);
+                    return ['success' => true];
+                } catch (PDOException $e) {
+                    $errors['db'] = "Lỗi khi thêm sản phẩm: " . $e->getMessage();
+                }
+            }
+
+            return ['success' => false, 'errors' => $errors, 'data' => $data];
+        }
     }
-
     public function deleteProduct($id)
     {
         $sql = "DELETE FROM products WHERE id = :id";

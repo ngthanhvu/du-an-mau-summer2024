@@ -8,7 +8,7 @@ echo '
 
 <div class="container mt-5">
     <h1 class="mb-4">Thêm Sản Phẩm</h1>
-    <form action="/admin/product/addProduct" method="post">
+    <form action="/admin/product/addProduct" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="productName" class="form-label">Tên sản phẩm</label>
             <input name="name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
@@ -47,7 +47,7 @@ echo '
         </div> -->
         <div class="mb-3">
             <label for="productImage" class="form-label">Hình ảnh sản phẩm</label>
-            <input name="image" class="form-control" type="text" id="productImage" placeholder="Nhập link hình ảnh">
+            <input name="image[]" class="form-control" type="file" id="productImage" placeholder="Nhập link hình ảnh" multiple>
         <?php
         if(isset($errors['image'])) {
             echo '<p class="text-danger">' . $errors['image'] . '</p>';
