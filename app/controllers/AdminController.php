@@ -69,6 +69,14 @@ class AdminController
         include_once __DIR__ . '/../../app/views/admin/adminProduct.php';
     }
 
+    public function getProductId($id)
+    {
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $products = $product->getProductId($id);
+        include_once __DIR__ . '/../../app/views/admin/update/updateProduct.php';
+    }
+
     public function addProducts()
     {
         $data = [
@@ -97,4 +105,6 @@ class AdminController
         $product->deleteProduct($id);
         header('Location: /admin/product');
     }
+
+
 }

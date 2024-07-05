@@ -22,6 +22,16 @@ class Product
         return $result;
     }
 
+    public function getProductId($id)
+    {
+        $sql = "SELECT * FROM products WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+
     public function addProduct($data)
     {
         $errors = [];
@@ -51,17 +61,13 @@ class Product
                 $file_count = count($_FILES['image']['name']);
 
                 for ($i = 0; $i < $file_count; $i++) {
-                    // $file_name = pathinfo($_FILES['image']['name'][$i], PATHINFO_BASENAME);
-                    // $target_file = $target_dir . basename($_FILES['image']['name'][$i]);
-                    // $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                    // $check = getimagesize($_FILES['image']['tmp_name'][$i]);
-
+                    
                     $file_name = pathinfo($_FILES['image']['name'][$i], PATHINFO_FILENAME);
                     $imageFileType = strtolower(pathinfo($_FILES['image']['name'][$i], PATHINFO_EXTENSION));
                     $unique_file_name = $file_name . '_' . time() . '_' . uniqid() . '.' . $imageFileType;
                     $target_file = $target_dir . $unique_file_name;
-                    $check = getimagesize($_FILES['image']['tmp_name'][$i]);
 
+                    $check = getimagesize($_FILES['image']['tmp_name'][$i]);
 
                     if ($check === false) {
                         $errors['image'] = "Hình ảnh không đúng định dạng";
@@ -82,7 +88,7 @@ class Product
                         if (!move_uploaded_file($_FILES['image']['tmp_name'][$i], $target_file)) {
                             $errors['image'] = "Không thể upload hình ảnh";
                         } else {
-                            $uploadedFile[] = $target_file;
+                            $uploadedFile[] = $unique_file_name;
                         }
                     }
                 }
@@ -97,7 +103,7 @@ class Product
                         $data['price'],
                         $data['quantity'],
                         $data['description'],
-                        json_encode($uploadedFile)
+                        implode(',', $uploadedFile)
                     ]);
                     return ['success' => true];
                 } catch (PDOException $e) {

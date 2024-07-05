@@ -83,6 +83,10 @@ switch ($base_path) {
         $controllers = new AdminController();
         $controllers->addProducts();
         break;
+    case '/admin/product/update':
+        $controllers = new AdminController();
+        $controllers->getProductId($_GET['id']);
+        break;
     case '/admin/product/delete':
         $controllers = new AdminController();
         $controllers->deleteProduct($_GET['id']);
