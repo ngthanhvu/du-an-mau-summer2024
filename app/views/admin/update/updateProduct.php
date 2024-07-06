@@ -9,18 +9,42 @@ echo '
 
 <div class="container mt-5">
     <h1 class="mb-4">Thêm Sản Phẩm</h1>
-    <form action="/admin/product/updateProduct" method="post" enctype="multipart/form-data">
+    <form action="/admin/product/updateProduct?id=<?= $products['id'] ?>" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="productName" class="form-label">Id sản phẩm</label>
+            <input name="id" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm" value="<?= $products['id'] ?>">
+            <?php
+            if (isset($errors['id'])) {
+                echo '<p class="text-danger">' . $errors['id'] . '</p>';
+            }
+            ?>
+        </div>
         <div class="mb-3">
             <label for="productName" class="form-label">Tên sản phẩm</label>
             <input name="name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm" value="<?= $products['name'] ?>">
+            <?php
+            if (isset($errors['name'])) {
+                echo '<p class="text-danger">' . $errors['name'] . '</p>';
+            }
+            ?>
         </div>
         <div class="mb-3">
             <label for="productPrice" class="form-label">Giá sản phẩm</label>
             <input name="price" type="number" class="form-control" id="productPrice" placeholder="Nhập giá sản phẩm" value="<?= $products['price'] ?>">
+            <?php
+            if (isset($errors['price'])) {
+                echo '<p class="text-danger">' . $errors['price'] . '</p>';
+            }
+            ?>
         </div>
         <div class="mb-3">
             <label for="productPrice" class="form-label">Số lượng sản phẩm</label>
             <input name="quantity" type="number" class="form-control" id="productPrice" placeholder="Nhập số lượng sản phẩm" value="<?= $products['quantity'] ?>">
+            <?php
+            if (isset($errors['quantity'])) {
+                echo '<p class="text-danger">' . $errors['quantity'] . '</p>';
+            }
+            ?>
         </div>
         <!-- <div class="mb-3">
             <label for="productCategory" class="form-label">Danh mục sản phẩm</label>
@@ -34,11 +58,22 @@ echo '
         <div class="mb-3">
             <label for="productImage" class="form-label">Hình ảnh sản phẩm: </label>
             <img src="/uploads/<?= $products['image'] ?>" alt="No image" class="mb-3 border" width="100" height="100">
+            <input type="hidden" name="old_image" value="<?= $products['image'] ?>">
             <input name="image[]" class="form-control" type="file" id="productImage" placeholder="Nhập link hình ảnh" multiple>
+            <?php
+            if (isset($errors['image'])) {
+                echo '<p class="text-danger">' . $errors['image'] . '</p>';
+            }
+            ?>
         </div>
         <div class="mb-3">
             <label for="productDescription" class="form-label">Mô tả sản phẩm</label>
             <input type="text" name="description" class="form-control" id="productDescription" rows="3" placeholder="Nhập mô tả sản phẩm" value="<?= $products['description'] ?>"></input>
+        <?php
+        if(isset($errors['description'])) {
+            echo '<p class="text-danger">' . $errors['description'] . '</p>';
+        }
+        ?>
         </div>
         <button type="submit" class="btn btn-success"><i class="bi bi-plus-circle"></i> Thay đổi sản phẩm</button>
         <a href="/admin/product" class="btn btn-danger"><i class="bi bi-arrow-left-circle"></i> Trở về trang quản trị</a>

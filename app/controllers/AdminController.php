@@ -106,5 +106,11 @@ class AdminController
         header('Location: /admin/product');
     }
 
-
+    public function updateProduct($id, $data)
+    {
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $product->updateProduct($id, $data);
+        header('Location: /admin/product');
+    }
 }
