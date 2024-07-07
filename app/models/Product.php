@@ -122,25 +122,6 @@ class Product
         $stmt->execute();
     }
 
-    // public function updateProduct($id, $data)
-    // {
-    //     try {
-    //         $sql = "UPDATE products SET name = ?, price = ?, quantity = ?, description = ?, image = ? WHERE id = ?";
-    //         $stmt = $this->db->prepare($sql);
-    //         $stmt->execute([
-    //             $data['name'],
-    //             $data['price'],
-    //             $data['quantity'],
-    //             $data['description'],
-    //             $data['image'],
-    //             $id
-    //         ]);
-    //         return ['success' => true];
-    //     } catch (PDOException $e) {
-    //         return ['success' => false, 'errors' => ['db' => "Lỗi khi thêm sản phẩm: " . $e->getMessage()]];
-    //     }
-    // }
-
     public function updateProduct($id, $data)
     {
         $errors = [];

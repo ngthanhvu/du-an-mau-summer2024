@@ -4,6 +4,7 @@ require_once 'includes/database.php';
 
 require_once 'app/controllers/Controller.php';
 require_once 'app/controllers/AdminController.php';
+require_once 'app/controllers/ViewController.php';
 
 
 $request_uri = $_SERVER['REQUEST_URI'];
@@ -17,6 +18,9 @@ switch ($base_path) {
         break;
     case '/product':
         $controller = new HomeController();
+        $viewcontroller = new ViewController();
+        $viewcontroller->viewProduct();
+        break;
         $controller->product();
         break;
     case '/checkout':

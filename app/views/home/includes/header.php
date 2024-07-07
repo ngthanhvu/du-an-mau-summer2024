@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Mall</title>
+    <title>Mini Store.</title>
     <link rel="stylesheet" href="../app/views/home/includes/css/style.css">
     <script src="https://kit.fontawesome.com/de27554dbd.js" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -15,14 +15,7 @@
 <body>
     <header>
         <a href="/" class="logo">
-            <!-- <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt=""> -->
-            <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-                </style>
-                <text x="10" y="40" font-family="Open Sans" font-size="40" font-weight="500" fill="#333">ShopMall</text>
-                <circle cx="190" cy="35" r="3" fill="lightblue" />
-            </svg>
+            <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">
         </a>
         <ul class="navmenu">
             <li><a href="/">Trang Chủ</a></li>

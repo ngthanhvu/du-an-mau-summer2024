@@ -47,62 +47,25 @@ include_once "includes/header.php";
                 <div>Showing 1033 Products</div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
+                <?php
+                foreach ($sanpham as $product) {
+                ?>
+                    <div class="col">
+                        <a href="#" class="text-decoration-none text-black">
+                            <div class="card border-0">
+                                <img src="/uploads/<?php echo $product['image']; ?>" class="card-img-top" alt="404">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $product['name']; ?></h5>
+                                    <h5 class="card-title"><?php echo $product['price']; ?>$</h5>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card border-0">
-                        <img src="https://via.placeholder.com/300x300" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h5 class="card-title">200$</h5>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
-            <button class="btn btn-primary mt-4">Load more products</button>
+            <!-- <button class="btn btn-primary mt-4">Load more products</button> -->
         </div>
     </div>
 </div>
