@@ -78,5 +78,4 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/adminUser.php';
     }
-
 }

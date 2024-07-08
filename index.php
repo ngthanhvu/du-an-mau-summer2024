@@ -41,6 +41,9 @@ switch ($base_path) {
         break;
     case '/detail':
         $controller = new HomeController();
+        $controllers = new ViewController();
+        $controllers->viewProductId($_GET['id']);
+        break;
         $controller->detail();
         break;
     case '/about':
@@ -71,12 +74,13 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->login();
         break;
-
+    
         #admin template
     case '/admin/product':
         $controller = new HomeController();
         $controllers = new AdminController();
         $controllers->getProduct();
+        break;
         $controller->adminProduct();
         break;
     case '/admin/product/add':
@@ -103,6 +107,7 @@ switch ($base_path) {
         $controller = new HomeController();
         $controllers = new AdminController();
         $controllers->getUser();
+        break;
         $controller->adminUser();
         break;
     case '/admin/User/delete':

@@ -51,11 +51,18 @@ include_once "includes/header.php";
                 foreach ($sanpham as $product) {
                 ?>
                     <div class="col">
-                        <a href="#" class="text-decoration-none text-black">
+                        <a href="/detail?id=<?php echo $product['id']; ?>" class="text-decoration-none text-black">
                             <div class="card border-0">
                                 <img src="/uploads/<?php echo $product['image']; ?>" class="card-img-top" alt="404">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $product['name']; ?></h5>
+                                    <div class="d-flex justify-content-left small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
                                     <h5 class="card-title"><?php echo $product['price']; ?>$</h5>
                                 </div>
                             </div>
