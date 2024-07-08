@@ -78,4 +78,14 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/adminUser.php';
     }
+
+    public function adminCategory()
+    {
+        include __DIR__ . '/../../app/views/admin/adminCategory.php';
+    }
+
+    public function addCategory()
+    {
+        include __DIR__ . '/../../app/views/admin/add/addCategory.php';
+    }
 }

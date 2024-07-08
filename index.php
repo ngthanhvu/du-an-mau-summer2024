@@ -114,6 +114,20 @@ switch ($base_path) {
         $controllers = new AdminController();
         $controllers->deleteUser($_GET['id']);
         break;
+    case '/admin/category':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getCategory();
+        $controller->adminCategory();
+        break;
+    case '/admin/category/add':
+        $controller = new HomeController();
+        $controller->addCategory();
+        break;
+    case '/admin/category/addCategory':
+        $controllers = new AdminController();
+        $controllers->addCategory();
+        break;
         #end admin tempalte
 
     default:

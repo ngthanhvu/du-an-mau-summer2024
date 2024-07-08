@@ -69,6 +69,14 @@ class AdminController
         include_once __DIR__ . '/../../app/views/admin/adminProduct.php';
     }
 
+    public function getCategory()
+    {
+        include_once __DIR__ . '/../../app/models/Category.php';
+        $category = new Category();
+        $categories = $category->getCategory();
+        include_once __DIR__ . '/../../app/views/admin/adminCategory.php';
+    }
+
     public function getProductId($id)
     {
         include_once __DIR__ . '/../../app/models/Product.php';
@@ -112,5 +120,22 @@ class AdminController
         $product = new Product();
         $product->updateProduct($id, $data);
         header('Location: /admin/product');
+    }
+
+    public function addCategory()
+    {
+        $data = [
+            'name' => $_POST['name'] ?? '',
+            'image' => $_POST['image'] ?? '',
+        ];
+        include_once __DIR__ . '/../../app/models/Category.php';
+        $category = new Category();
+        $result = $category->addCategory($data);
+        if ($result['success']) {
+            header('Location: /admin/category');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/admin/add/addCategory.php';
+        }
     }
 }
