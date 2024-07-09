@@ -13,8 +13,8 @@
                 <th>Hình ảnh</th>
                 <th>Giá</th>
                 <th>Số lượng</th>
+                <th>Danh mục</th>
                 <th>Mô tả sản phẩm</th>
-                <!-- <th>Danh mục</th> -->
                 <th>Hành động</th>
             </tr>
         </thead>
@@ -27,6 +27,7 @@
                 echo "<td><img width='100' height='100' src='../uploads/$value[image]' alt='anh'></td>";
                 echo "<td>" . $value['price'] . " VNĐ</td>";
                 echo "<td>" . $value['quantity'] . "</td>";
+                echo "<td>" . $value['category_id'] . "</td>";
                 echo "<td>" . $value['description'] . "</td>";
                 echo "<td>
                 <a class='btn btn-danger' href='/admin/product/delete?id=$value[id]'><i class='bi bi-trash-fill'></i></a>

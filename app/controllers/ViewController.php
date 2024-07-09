@@ -17,5 +17,13 @@ class ViewController
         $detailProduct = $view->viewProductId($id);
         include __DIR__ . '/../../app/views/home/detail.php';
     }
+
+    public function viewCategory()
+    {
+        include __DIR__ . '/../../app/models/Views.php';
+        $view = new Views();
+        $categories = $view->viewCategory();
+        include __DIR__ . '/../../app/views/admin/add/addProduct.php';
+    }
 }
 ?>

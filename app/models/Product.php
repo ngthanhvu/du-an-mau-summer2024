@@ -54,6 +54,10 @@ class Product
                 $errors['description'] = "Mô tả sản phẩm không được để trống";
             }
 
+            if (empty($data['category_id'])) {
+                $errors['category_id'] = "Danh mục sản phẩm không được để trống";
+            }
+
             if (empty($_FILES['image']['name'][0])) {
                 $errors['image'] = "Hình ảnh sản phẩm không được để trống";
             } else {
@@ -96,14 +100,15 @@ class Product
 
             if (empty($errors)) {
                 try {
-                    $sql = "INSERT INTO products (name, price, quantity, description, image) VALUES (?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO products (name, price, quantity, description, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute([
                         $data['name'],
                         $data['price'],
                         $data['quantity'],
                         $data['description'],
-                        implode(',', $uploadedFile)
+                        implode(',', $uploadedFile),
+                        $data['category_id'],
                     ]);
                     return ['success' => true];
                 } catch (PDOException $e) {

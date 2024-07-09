@@ -85,6 +85,9 @@ switch ($base_path) {
         break;
     case '/admin/product/add':
         $controller = new HomeController();
+        $controllers = new ViewController();
+        $controllers->viewCategory();
+        break;
         $controller->addProduct();
         break;
     case '/admin/product/addProduct':

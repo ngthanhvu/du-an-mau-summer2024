@@ -31,4 +31,13 @@ class Views
         $result = $stmt->fetch();
         return $result;
     }
+
+    public function viewCategory()
+    {
+        $sql = "SELECT * FROM category";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

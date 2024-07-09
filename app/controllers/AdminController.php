@@ -93,6 +93,7 @@ class AdminController
             'quantity' => $_POST['quantity'] ?? '',
             'description' => $_POST['description'] ?? '',
             'image' => $_POST['image'] ?? '',
+            'category_id' => $_POST['category_id'] ?? '',
         ];
         include_once __DIR__ . '/../../app/models/Product.php';
         $product = new Product();
