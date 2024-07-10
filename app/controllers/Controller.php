@@ -62,6 +62,10 @@ class HomeController
         include __DIR__ . '/../../app/views/home/about.php';
     }
 
+    public function profile()
+    {
+        include __DIR__ . '/../../app/views/home/profile.php';
+    }
     # admin template controller
 
     public function adminProduct()

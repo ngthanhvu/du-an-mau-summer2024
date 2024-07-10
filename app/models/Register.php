@@ -51,7 +51,7 @@ class LoginRegister
                     $data['username'],
                     $data['email'],
                     $data['phone'],
-                    password_hash($data['password'], PASSWORD_DEFAULT)
+                    password_hash($data['password'], PASSWORD_DEFAULT),
                 ]);
                 return ['success' => true];
             } catch (PDOException $e) {

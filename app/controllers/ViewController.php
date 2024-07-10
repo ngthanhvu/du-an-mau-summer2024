@@ -33,5 +33,13 @@ class ViewController
         $cartss = $view->viewCart();
         include __DIR__ . '/../../app/views/home/cart.php';
     }
+
+    public function viewUserId($id)
+    {
+        include __DIR__ . '/../../app/models/Views.php';
+        $view = new Views();
+        $users = $view->viewUserId($id);
+        include __DIR__ . '/../../app/views/home/profile.php';
+    }
 }
 ?>

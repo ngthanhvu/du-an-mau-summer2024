@@ -35,6 +35,13 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->order();
         break;
+    case '/profile':
+        $controller = new HomeController();
+        $controllers = new ViewController();
+        $controllers->viewUserId($_GET['id']);
+        break;
+        $controller->profile();
+        break;
     case '/cart':
         $controller = new HomeController();
         $controllers = new ViewController();
@@ -77,7 +84,7 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->login();
         break;
-    
+
         #admin template
     case '/admin/product':
         $controller = new HomeController();
