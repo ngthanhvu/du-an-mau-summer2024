@@ -1,64 +1,60 @@
 <?php include_once "includes/header.php" ?>
+
 <section class="yourcart-section">
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8">
                 <h2>Giỏ hàng</h2>
                 <hr>
-                <div class="cart-item">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/100" alt="Natural Honey Bottle">
-                    </div>
-                    <div class="item-details">
-                        <h5>Natural Honey Bottle</h5>
-                        <p>Size: L</p>
-                        <p>Quantity: 1</p>
-                        <p>by Vendor Name</p>
-                    </div>
-                    <div class="item-price">
-                        <p>$99</p>
-                        <a href="#" class="btn btn-danger">Remove</a>
-                    </div>
-                </div>
+                <?php
+                // var_dump($cartss);
+                function formatVND($number)
+                {
+                    return number_format($number, 0, '', '.') . 'đ';
+                }
 
-                <div class="cart-item">
-                    <div class="image-placeholder">
-                        <img src="https://via.placeholder.com/100" alt="Natural Honey Bottle">
-                    </div>
-                    <div class="item-details">
-                        <h5>Natural Honey Bottle</h5>
-                        <p>Size: S</p>
-                        <p>Quantity: 1</p>
-                        <p>by Vendor Name</p>
-                    </div>
-                    <div class="item-price">
-                        <p>$89</p>
-                        <a href="#" class="btn btn-danger">Remove</a>
-                    </div>
-                </div>
+                // Check if $_SESSION['cart'] is set and not empty
+                if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                    $carts = $_SESSION['cart'];
+                    foreach ($carts as $cart) {
+                ?>
+                        <div class="cart-item">
+                            <div class="image-placeholder">
+                                <img src="/uploads/<?php echo $cart['image'] ?>" width="100" height="100" alt="Product Image">
+                            </div>
+                            <div class="item-details">
+                                <h5><?php echo $cart['name'] ?></h5>
+                                <p>Quantity: 1</p>
+                            </div>
+                            <div class="item-price">
+                                <p><?php echo formatVND($cart['price']) ?></p>
+                                <a href="#" class="btn btn-danger">Remove</a>
+                            </div>
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo '<p>Giỏ hàng của bạn đang trống. Ấn vào đây để mua hàng <a href="/product">Here</a></p>';
+                }
+                ?>
             </div>
-
             <div class="col-md-4">
                 <div class="order-summary">
-                    <h4>Order Summary</h4>
-                    <input type="text" class="form-control" placeholder="Enter coupon code here">
+                    <h4>Tóm tắt đơn hàng</h4>
+                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá ở đây">
                     <div class="d-flex justify-content-between">
-                        <p>Subtotal</p>
+                        <p>Tổng phụ</p>
                         <p>$188</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Shipping</p>
-                        <p>Calculated at the next step</p>
                     </div>
                     <div class="d-flex justify-content-between total">
-                        <p>Total</p>
+                        <p>Tổng cộng</p>
                         <p>$188</p>
                     </div>
-                    <button class="btn btn-dark btn-block">Continue to checkout</button>
+                    <button class="btn btn-dark btn-block">Tiếp tục đến trang thanh toán</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- end card  -->
+
 <?php include_once "includes/footer.php" ?>

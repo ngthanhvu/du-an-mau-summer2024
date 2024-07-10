@@ -37,6 +37,9 @@ switch ($base_path) {
         break;
     case '/cart':
         $controller = new HomeController();
+        $controllers = new ViewController();
+        $controllers->viewCart();
+        break;
         $controller->cart();
         break;
     case '/detail':
@@ -133,6 +136,10 @@ switch ($base_path) {
         break;
         #end admin tempalte
 
+    case '/add_to_cart':
+        $controller = new AdminController();
+        $controller->addCart();
+        break;
     default:
         http_response_code(404);
         include_once '404.html';

@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color: black;">
+                <a href="/product" style="text-decoration: none; color: black;">
                     <div class="card border-0">
                         <img src="https://pos.nvncdn.com/6a2bd9-54198/ps/20230804_fXS07knJQE.jpeg" alt="" class="img-thunbnail">
                         <h5 class="text-center mt-3">Giày đá bóng</h5>
@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color: black;">
+                <a href="/product" style="text-decoration: none; color: black;">
                     <div class="card border-0">
                         <img src="https://makan.vn/wp-content/uploads/2023/05/ao-bong-da-co-co-1.1.jpg" alt="" class="img-thunbnail">
                         <h5 class="text-center mt-3">Áo đá bóng</h5>
@@ -35,7 +35,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color: black;">
+                <a href="/product" style="text-decoration: none; color: black;">
                     <div class="card border-0">
                         <img src="https://gangtaytapgym.com/wp-content/uploads/2021/06/bang-co-tay-veidoorm-300x300.jpg" alt="" class="img-thunbnail">
                         <h5 class="text-center mt-3">Phụ kiện thể thao</h5>

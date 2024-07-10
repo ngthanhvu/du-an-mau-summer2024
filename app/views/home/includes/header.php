@@ -17,6 +17,12 @@
         echo "Về chúng tôi";
     } elseif ($url == "/admin") {
         echo "Admin - Dashboard";
+    } elseif ($url == '/cart') {
+        echo "Giỏ hàng";
+    } elseif ($url == '/checkout') {
+        echo "Thanh toán";
+    } elseif ($url == '/order') {
+        echo "Lịch sử đơn hàng";
     }
     ?>
     </title>

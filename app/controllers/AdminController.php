@@ -139,4 +139,31 @@ class AdminController
             include __DIR__ . '/../../app/views/admin/add/addCategory.php';
         }
     }
+
+    public function addCart()
+    {
+        $data = [
+            'user_id' => $_SESSION['user']['id'] ?? '',
+            'product_id' => $_POST['product_id'] ?? '',
+            'quantity' => $_POST['quantity'] ?? '',
+            'name' => $_POST['name'] ?? '',
+            'image' => $_POST['image'] ?? '',
+            'price' => $_POST['price'] ?? ''
+        ];
+
+        // Debugging output
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";
+
+        include_once __DIR__ . '/../../app/models/Cart.php';
+        $cart = new Cart();
+        $result = $cart->addCart($data);
+        if ($result['success']) {
+            header('Location: /cart');
+        } else {
+            $errors = $result['errors'];
+            echo 'Error: ' . $errors;
+        }
+    }
 }

@@ -40,4 +40,13 @@ class Views
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    public function viewCart()
+    {
+        $sql = "SELECT * FROM cart";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }
