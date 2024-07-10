@@ -14,7 +14,7 @@ header {
     width: 100%;
     justify-content: space-between;
     padding: 0px 18%;
-    background-color: #d81f19;
+    background-color: #eee;
     z-index: 10000;
 }
 
@@ -30,14 +30,14 @@ header {
 }
 
 .navmenu a {
-    color: #fff;
+    color: #333;
     font-size: 16px;
     font-weight: 500;
     margin-left: 25px;
     text-decoration: none;
 }
 .navmenu a:hover {
-    color: yellow;
+    color: #d81f19;
 }
 
 .navicon {
@@ -380,7 +380,7 @@ header {
 .ads-brand {
     height: auto;
     padding: 10px 0;
-    background-color: #eee;
+    background-color: #686666;
     /* margin-top: -122px; */
     margin-bottom: -50px;
 }

@@ -4,15 +4,18 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <?php
-            // var_dump($detailProduct);   
+            function formatVND($number)
+            {
+                return number_format($number, 0, '', '.',) . 'đ';
+            }
             ?>
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/uploads/<?php echo $detailProduct['image'] ?>" alt="..." /></div>
             <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
+                <div class="small mb-1">Category: <?php echo $detailProduct['category_id'] ?></div>
                 <h1 class="display-5 fw-bolder"><?php echo $detailProduct['name'] ?></h1>
                 <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">$45.00</span>
-                    <span>$<?php echo $detailProduct['price'] ?></span>
+                    <!-- <span class="text-decoration-line-through">$45.00</span> -->
+                    <span>Giá: <?php echo formatVND($detailProduct['price']) ?></span>
                 </div>
                 <p class="lead"><?php echo $detailProduct['description'] ?></p>
                 <div class="d-flex">

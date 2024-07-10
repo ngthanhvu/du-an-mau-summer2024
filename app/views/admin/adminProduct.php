@@ -20,12 +20,15 @@
         </thead>
         <tbody>
             <?php
+            function formatVND($number){
+                return number_format($number, 0, '', '.',) . 'đ';
+            }
             foreach ($products as $key => $value) {
                 echo "<tr>";
                 echo "<td>" . $key . "</td>";
                 echo "<td>" . $value['name'] . "</td>";
                 echo "<td><img width='100' height='100' src='../uploads/$value[image]' alt='anh'></td>";
-                echo "<td>" . $value['price'] . " VNĐ</td>";
+                echo "<td>" . formatVND($value['price']) . "</td>";
                 echo "<td>" . $value['quantity'] . "</td>";
                 echo "<td>" . $value['category_id'] . "</td>";
                 echo "<td>" . $value['description'] . "</td>";

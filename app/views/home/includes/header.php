@@ -4,7 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Store.</title>
+    <title>
+    <?php
+    $url = $_SERVER['REQUEST_URI'];
+    if ($url == "/") {
+        echo "Trang chủ";
+    } elseif ($url == "/product") {
+        echo "Sản phẩm";
+    } elseif ($url == "/contact") {
+        echo "Liên hệ";
+    } elseif ($url == "/about") {
+        echo "Về chúng tôi";
+    } elseif ($url == "/admin") {
+        echo "Admin - Dashboard";
+    }
+    ?>
+    </title>
     <link rel="stylesheet" href="../app/views/home/includes/css/style.css">
     <script src="https://kit.fontawesome.com/de27554dbd.js" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -29,13 +44,13 @@
             ?>
         </ul>
         <ul class="navicon">
-            <li><a style="color: #fff;" href="/cart"><i class="bi bi-bag"></i> <span>1</span></a></li>
+            <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>1</span></a></li>
             <?php
             if (empty($_SESSION['user'])) {
-                echo '<li><a style="color: #fff;" href="/login">Login</a></li>';
+                echo '<li><a style="color: #333;" href="/login">Login</a></li>';
             } else {
                 echo '<li class="nav-item dropdown">
-                <a style="color: #fff;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

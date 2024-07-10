@@ -39,10 +39,11 @@ html, body {
     text-decoration: none;
     padding: 10px;
     display: block;
+    border-radius: 20px;
 }
 
 .sidebar a:hover {
-    background-color: #495057;
+    background-color: #fff;
 }
 
 .main-content {

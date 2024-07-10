@@ -48,6 +48,9 @@ include_once "includes/header.php";
             </div>
             <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
                 <?php
+                function formatVND($number){
+                    return number_format($number, 0, '', '.',) . 'đ';
+                }
                 foreach ($sanpham as $product) {
                 ?>
                     <div class="col">
@@ -63,7 +66,7 @@ include_once "includes/header.php";
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                     </div>
-                                    <h5 class="card-title"><?php echo $product['price']; ?>$</h5>
+                                    <h5 class="card-title"><?php echo formatVND($product['price']); ?></h5>
                                 </div>
                             </div>
                         </a>
