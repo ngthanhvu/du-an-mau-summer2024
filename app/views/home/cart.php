@@ -7,34 +7,29 @@
                 <h2>Giỏ hàng</h2>
                 <hr>
                 <?php
-                // var_dump($cartss);
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
                 }
-
-                // Check if $_SESSION['cart'] is set and not empty
-                if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                    $carts = $_SESSION['cart'];
-                    foreach ($carts as $cart) {
+                // var_dump($_SESSION['cart']);    
+                
+                $carts = $cartss;
+                foreach ($carts as $cart) {
                 ?>
-                        <div class="cart-item">
-                            <div class="image-placeholder">
-                                <img src="/uploads/<?php echo $cart['image'] ?>" width="100" height="100" alt="Product Image">
-                            </div>
-                            <div class="item-details">
-                                <h5><?php echo $cart['name'] ?></h5>
-                                <p>Quantity: 1</p>
-                            </div>
-                            <div class="item-price">
-                                <p><?php echo formatVND($cart['price']) ?></p>
-                                <a href="#" class="btn btn-danger">Remove</a>
-                            </div>
+                    <div class="cart-item">
+                        <div class="image-placeholder">
+                            <img src="/uploads/<?php echo $cart['image'] ?>" width="100" height="100" alt="Product Image">
                         </div>
+                        <div class="item-details">
+                            <h5><?php echo $cart['name'] ?></h5>
+                            <p>Quantity: 1</p>
+                        </div>
+                        <div class="item-price">
+                            <p><?php echo formatVND($cart['price']) ?></p>
+                            <a href="/delete-cart?id=<?php echo $cart['id'] ?>" class="btn btn-danger">Remove</a>
+                        </div>
+                    </div>
                 <?php
-                    }
-                } else {
-                    echo '<p>Giỏ hàng của bạn đang trống. Ấn vào đây để mua hàng <a href="/product">Here</a></p>';
                 }
                 ?>
             </div>

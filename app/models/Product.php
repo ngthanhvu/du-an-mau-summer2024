@@ -209,4 +209,24 @@ class Product
             return ['success' => false, 'errors' => $errors, 'data' => $data];
         }
     }
+
+    public function recommendProduct($id)
+    {
+        $sql = "SELECT * FROM products WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        $category = $stmt->fetch();
+
+        if ($category) {
+            $category_id = $category['category_id'];
+
+            $sql = "SELECT * FROM products WHERE category_id = :category_id";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(['category_id' => $category_id]);
+            $recommendProducts = $stmt->fetchAll();
+            return $recommendProducts;
+        } else {
+            return [];
+        }
+    }
 }

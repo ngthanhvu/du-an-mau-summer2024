@@ -84,6 +84,13 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->login();
         break;
+    case '/test':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getUser();
+        break;
+        $controller->test();
+        break;
 
         #admin template
     case '/admin/product':
@@ -146,6 +153,10 @@ switch ($base_path) {
     case '/add_to_cart':
         $controller = new AdminController();
         $controller->addCart();
+        break;
+    case '/delete-cart':
+        $controller = new AdminController();
+        $controller->deleteCart($_GET['id']);
         break;
     default:
         http_response_code(404);

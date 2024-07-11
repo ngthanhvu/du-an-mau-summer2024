@@ -49,7 +49,12 @@ class AdminController
         include_once __DIR__ . '/../../app/models/User.php';
         $user = new User();
         $users = $user->getUser();
-        include_once __DIR__ . '/../../app/views/admin/adminUser.php';
+        $url = $_SERVER['REQUEST_URI'];
+        if ($url == '/admin/User') {
+            include_once __DIR__ . '/../../app/views/admin/adminUser.php';
+        } elseif ($url == '/test') {
+            include_once __DIR__ . '/../../app/views/home/test.php';
+        }
     }
 
     public function deleteUser($id)
@@ -83,6 +88,14 @@ class AdminController
         $product = new Product();
         $products = $product->getProductId($id);
         include_once __DIR__ . '/../../app/views/admin/update/updateProduct.php';
+    }
+
+    public function recommendProduct($id)
+    {
+        include_once __DIR__ . '/../../app/models/Product.php';
+        $product = new Product();
+        $recommendProduct = $product->recommendProduct($id);
+        include_once __DIR__ . '/../../app/views/home/detail.php';
     }
 
     public function addProducts()
@@ -150,12 +163,6 @@ class AdminController
             'image' => $_POST['image'] ?? '',
             'price' => $_POST['price'] ?? ''
         ];
-
-        // Debugging output
-        echo "<pre>";
-        var_dump($data);
-        echo "</pre>";
-
         include_once __DIR__ . '/../../app/models/Cart.php';
         $cart = new Cart();
         $result = $cart->addCart($data);
@@ -165,5 +172,13 @@ class AdminController
             $errors = $result['errors'];
             echo 'Error: ' . $errors;
         }
+    }
+
+    public function deleteCart($id)
+    {
+        include_once __DIR__ . '/../../app/models/Cart.php';
+        $cart = new Cart();
+        $cart->deleteCart($id);
+        header('Location: /cart');
     }
 }

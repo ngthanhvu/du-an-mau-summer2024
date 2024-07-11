@@ -13,8 +13,11 @@ class ViewController
     public function viewProductId($id)
     {
         include __DIR__ . '/../../app/models/Views.php';
+        include __DIR__ . '/../../app/models/Product.php';
         $view = new Views();
         $detailProduct = $view->viewProductId($id);
+        $product = new Product();
+        $recommendProduct = $product->recommendProduct($id);
         include __DIR__ . '/../../app/views/home/detail.php';
     }
 
@@ -42,4 +45,3 @@ class ViewController
         include __DIR__ . '/../../app/views/home/profile.php';
     }
 }
-?>

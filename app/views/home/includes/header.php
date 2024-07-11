@@ -39,6 +39,10 @@
 </head>
 
 <body>
+    <!-- <div class="loader" id="loader"></div> -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader"></div>
+    </div>
     <header>
         <a href="/" class="logo">
             <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">
@@ -56,7 +60,13 @@
             ?>
         </ul>
         <ul class="navicon">
-            <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>1</span></a></li>
+            <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>
+                        <?php if (isset($_SESSION['cart'])) {
+                            echo count($_SESSION['cart']);
+                        } else {
+                            echo "0";
+                        } ?>
+                    </span></a></li>
             <?php
             if (empty($_SESSION['user'])) {
                 echo '<li><a style="color: #333;" href="/login">Login</a></li>';

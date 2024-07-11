@@ -52,4 +52,17 @@ class Cart
         }
     }
 
+    public function deleteCart($id)
+    {
+        $sql = "DELETE FROM `cart` WHERE `id` = ?";
+        $stmt = $this->db->prepare($sql);
+        if ($stmt->execute([$id])) {
+            if (isset($_SESSION['cart'])) {
+                unset($_SESSION['cart']);
+            }
+            return ['success' => true];
+        } else {
+            return ['success' => false, 'errors' => $stmt->errorInfo()];
+        }
+    }
 }
