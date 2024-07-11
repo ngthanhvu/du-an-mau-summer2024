@@ -52,7 +52,7 @@ git push origin feature/improvement
 
 Tạo một Pull Request mới và mô tả các thay đổi bạn đã thực hiện.
 
-## Tác giả
+## Tác giả (Auth)
 
 [Thanh vũ](https://facebook.com/thanhvu.user) |
 [Nguyễn vũ](https://facebook.com/) |
