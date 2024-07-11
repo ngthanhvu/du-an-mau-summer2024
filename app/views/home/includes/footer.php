@@ -38,6 +38,13 @@
         </div>
     </footer>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById('loaderOverlay').style.display = 'none';
+            }, 500); // 1000ms = 1 giây
+        });
+    </script>
 </body>
 
 </html>

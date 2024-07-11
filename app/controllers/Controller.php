@@ -92,4 +92,10 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/add/addCategory.php';
     }
+
+
+    public function test()
+    {
+        include __DIR__ . '/../../app/views/home/test.php';
+    }
 }
