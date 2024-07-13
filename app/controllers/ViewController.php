@@ -34,7 +34,10 @@ class ViewController
         include __DIR__ . '/../../app/models/Views.php';
         $view = new Views();
         $cartss = $view->viewCart();
-        include __DIR__ . '/../../app/views/home/cart.php';
+        $url = $_SERVER['REQUEST_URI'];
+        if ($url == '/cart') {
+            include __DIR__ . '/../../app/views/home/cart.php';
+        }
     }
 
     public function viewUserId($id)

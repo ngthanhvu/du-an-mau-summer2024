@@ -10,7 +10,7 @@ class Cart
         try {
             $this->db = db_connect();
         } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
+            die("Kết nối thất bại: " . $e->getMessage());
         }
     }
 
@@ -26,28 +26,47 @@ class Cart
     public function addCart($data)
     {
         try {
-            $sql = "INSERT INTO `cart` (`product_id`, `user_id`, `quantity`, `name`, `image`, `price`) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "SELECT * FROM `cart` WHERE `product_id` = ? AND `user_id` = ?";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([
-                $data['product_id'],
-                $data['user_id'],
-                $data['quantity'],
-                $data['name'],
-                $data['image'],
-                $data['price']
-            ]);
+            $stmt->execute([$data['product_id'], $data['user_id']]);
+            $existingCart = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
+            if ($existingCart) {
+                $newQuantity = $existingCart['quantity'] + $data['quantity'];
+                $sql = "UPDATE `cart` SET `quantity` = ? WHERE `id` = ?";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([$newQuantity, $existingCart['id']]);
+
+                foreach ($_SESSION['cart'] as &$item) {
+                    if ($item['product_id'] == $data['product_id'] && $item['user_id'] == $data['user_id']) {
+                        $item['quantity'] = $newQuantity;
+                        break;
+                    }
+                }
+            } else {
+                $sql = "INSERT INTO `cart` (`product_id`, `user_id`, `quantity`, `name`, `image`, `price`) VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([
+                    $data['product_id'],
+                    $data['user_id'],
+                    $data['quantity'],
+                    $data['name'],
+                    $data['image'],
+                    $data['price']
+                ]);
+
+                $data['id'] = $this->db->lastInsertId();
+
+                if (!isset($_SESSION['cart'])) {
+                    $_SESSION['cart'] = [];
+                }
+                $_SESSION['cart'][] = $data;
             }
-
-            $_SESSION['cart'][] = $data;
             return ['success' => true];
         } catch (PDOException $e) {
-            // Log the SQL query for debugging
-            error_log("SQL Error: " . $e->getMessage());
-            error_log("SQL Query: " . $sql);
-            error_log("Parameters: " . json_encode($data));
+            error_log("Lỗi SQL: " . $e->getMessage());
+            error_log("Câu lệnh SQL: " . $sql);
+            error_log("Tham số: " . json_encode($data));
             return ['success' => false, 'errors' => $e->getMessage()];
         }
     }
@@ -58,11 +77,37 @@ class Cart
         $stmt = $this->db->prepare($sql);
         if ($stmt->execute([$id])) {
             if (isset($_SESSION['cart'])) {
-                unset($_SESSION['cart']);
+                foreach ($_SESSION['cart'] as $key => $item) {
+                    if ($item['id'] == $id) {
+                        unset($_SESSION['cart'][$key]);
+                        break;
+                    }
+                }
+            }
+
+            return ['success' => true];
+        } else {
+            return ['success' => false, 'errors' => $stmt->errorInfo()];
+        }
+    }
+
+    public function deleteCartUserId($user_id)
+    {
+        $sql = "DELETE FROM `cart` WHERE `user_id` = ?";
+        $stmt = $this->db->prepare($sql);
+        if ($stmt->execute([$user_id])) {
+            if (isset($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $key => $item) {
+                    if ($item['user_id'] == $user_id) {
+                        unset($_SESSION['cart'][$key]);
+                        break;
+                    }
+                }
             }
             return ['success' => true];
         } else {
             return ['success' => false, 'errors' => $stmt->errorInfo()];
         }
     }
+
 }

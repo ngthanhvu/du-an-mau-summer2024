@@ -29,4 +29,14 @@ class User
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+
+    public function getUserId($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
 }

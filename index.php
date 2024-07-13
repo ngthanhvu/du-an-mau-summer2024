@@ -25,6 +25,9 @@ switch ($base_path) {
         break;
     case '/checkout':
         $controller = new HomeController();
+        $get = new AdminController();
+        $get->order_detail($_GET['id']);
+        break;
         $controller->checkout();
         break;
     case '/contact':
@@ -157,6 +160,10 @@ switch ($base_path) {
     case '/delete-cart':
         $controller = new AdminController();
         $controller->deleteCart($_GET['id']);
+        break;
+    case '/add-order':
+        $controller = new AdminController();
+        $controller->addOrder();
         break;
     default:
         http_response_code(404);

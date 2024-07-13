@@ -25,6 +25,8 @@
             echo "Lịch sử đơn hàng";
         } elseif ($url == '/profile') {
             echo "Hồ sơ cá nhân";
+        } elseif ($url == '/detail?id=' . $_GET['id']) {
+            echo "Chi tiết sản phẩm";
         } else {
             echo "Mini Store.";
         }
