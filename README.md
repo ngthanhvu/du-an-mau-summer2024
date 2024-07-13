@@ -7,7 +7,7 @@ Dự án này nhằm xây dựng một website bán hàng đơn giản nhưng đ
 
 ## Các tính năng chính
 Đăng nhập và Đăng ký: Người dùng có thể đăng nhập vào tài khoản của họ hoặc đăng ký một tài khoản mới.
-kbfskfkasnkasfjbsf
+siuuuuuuu hahaahhahs
 Danh mục sản phẩm: Hiển thị các danh mục sản phẩm và cho phép người dùng duyệt qua các sản phẩm theo danh mục.
 
 Tìm kiếm: Cung cấp chức năng tìm kiếm để người dùng có thể tìm kiếm sản phẩm theo từ khoá.
