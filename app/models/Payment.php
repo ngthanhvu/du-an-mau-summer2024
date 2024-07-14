@@ -14,17 +14,22 @@ class Payment
         }
     }
 
-    public function updateOrderStatus($orderId, $status)
-    {
-        $sql = "UPDATE orders SET status = ? WHERE id = ?";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$status, $orderId]);
-    }
-
     public function createBill($fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id)
     {
         $sql = "INSERT INTO bill (full_name, email, phone, address, order_id, product_name, total, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id]);
+    }
+
+    public function updateOrderStatus($order_id, $status)
+    {
+        try {
+            $updated_at = date('Y-m-d H:i:s');
+            $sql = "UPDATE `orders` SET `status` = ?, `updated_at` = ? WHERE `id` = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$status, $updated_at, $order_id]);
+        } catch (PDOException $e) {
+            die("Lỗi khi cập nhật trạng thái đơn hàng: " . $e->getMessage());
+        }
     }
 }

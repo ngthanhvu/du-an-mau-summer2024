@@ -211,37 +211,14 @@ class AdminController
         header('Location: /cart');
     }
 
-    // public function addOrder()
-    // {
-    //     $data = [
-    //         'carts' => $_POST['carts'] ?? [],
-    //         'user_id' => $_SESSION['user']['id'] ?? '',
-    //         'total' => $_POST['total'] ?? '',
-    //         'status' => $_POST['status'] ?? '',
-    //         'name' => $_POST['name'] ?? '',
-    //         'address' => $_POST['address'] ?? '',
-    //         'phone' => $_POST['phone'] ?? '',
-    //     ];
-    //     include_once __DIR__ . '/../../app/models/Order.php';
-    //     $order = new Order();
-    //     $result = $order->addOrder($data);
-
-    //     if ($result['success']) {
-    //         $order_details = $order->order_detail($data['user_id']);
-    //         include __DIR__ . '/../../app/views/home/checkout.php';
-    //     } else {
-    //         $errors = $result['errors'];
-    //         echo 'Lỗi: ' . $errors;
-    //     }
-    // }
-
     public function addOrder()
     {
+        $errors = [];
         $data = [
             'carts' => $_POST['carts'] ?? [],
             'user_id' => $_SESSION['user']['id'] ?? '',
             'total' => $_POST['total'] ?? '',
-            'status' => $_POST['status'] ?? '',
+            'status' => $_POST['status'] ?? '1', // Đặt mặc định là chưa thanh toán (1)
             'name' => $_POST['name'] ?? '',
             'address' => $_POST['address'] ?? '',
             'phone' => $_POST['phone'] ?? '',
@@ -252,12 +229,10 @@ class AdminController
         $result = $order->addOrder($data);
 
         if ($result['success']) {
-            // Lưu thông tin đơn hàng vào session hoặc một biến khác nếu cần
-            $_SESSION['order_id'] = $result['order_id']; // Giả định rằng bạn nhận được order_id
+            $_SESSION['order_id'] = $result['order_id'];
 
-            // Chuyển hướng tới trang checkout
-            header("Location: /checkout?id=" . $_SESSION['user']['id']); // Hoặc sử dụng order_id nếu cần
-            exit; // Kết thúc script sau khi chuyển hướng
+            header("Location: /checkout?id=" . $_SESSION['user']['id']);
+            exit;
         } else {
             $errors = $result['errors'];
             echo 'Lỗi: ' . $errors;
@@ -317,8 +292,8 @@ class AdminController
             $userId = $_GET['id'];
             $fullName = $_POST['full_name'];
             $address = $_POST['address'];
-            $email = $_POST['email'];
             $productName = $_POST['product_name'];
+            $email = $_POST['email'];
             $phone = $_POST['phone'];
             $user_id = $_POST['user_id'];
             $paymentMethod = $_POST['payment'];
@@ -326,23 +301,51 @@ class AdminController
 
             include_once __DIR__ . '/../../app/models/Order.php';
             $order = new Order();
-            $orderId = $order->getOrderIdByUserId($userId);
 
-            if (!$orderId) {
-                die("Không tìm thấy đơn hàng cho người dùng này.");
+            // Tạo đơn hàng mới
+            $orderData = [
+                'carts' => $_SESSION['cart'],
+                'user_id' => $user_id,
+                'total' => $total,
+                'status' => 1, // Chưa thanh toán
+                'name' => $fullName,
+                'address' => $address,
+                'phone' => $phone,
+            ];
+            $result = $order->addOrder($orderData);
+
+            if (!$result['success']) {
+                die("Lỗi khi tạo đơn hàng.");
             }
+
+            $orderId = $result['order_id'];
 
             include_once __DIR__ . '/../../app/models/Payment.php';
             $payment = new Payment();
 
             if ($paymentMethod === 'cod') {
-                $status = '1';
+                $status = '1'; // Chưa thanh toán
                 $payment->updateOrderStatus($orderId, $status);
                 $payment->createBill($fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id);
 
                 include_once __DIR__ . '/../../app/models/Cart.php';
                 $cart = new Cart();
                 $cart->deleteCartUserId($user_id);
+
+                // Gửi email xác nhận
+                include_once __DIR__ . '/../../app/models/Mail.php';
+                $mail = new Mail();
+                $orderDetails = $order->getOrderDetailsByOrderId($orderId);
+
+                $emailResult = $mail->sendOrderConfirmation(
+                    $email,
+                    $fullName,
+                    $orderDetails
+                );
+
+                if (!$emailResult['success']) {
+                    echo 'Lỗi khi gửi email: ' . $emailResult['error'];
+                }
 
                 header("Location: /order?id=" . $user_id);
                 exit;
@@ -352,6 +355,8 @@ class AdminController
             }
         }
     }
+
+
 
     private function processVnPayPayment($orderId, $total)
     {

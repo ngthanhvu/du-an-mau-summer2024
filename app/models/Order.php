@@ -46,6 +46,8 @@ class Order
             $user_id = $_SESSION['user']['id'];
             $total = 0;
             $cartSummary = [];
+            $created_at = date('Y-m-d H:i:s');
+            $updated_at = $created_at;
 
             foreach ($data['carts'] as $cart) {
                 $productId = $cart['product_id'];
@@ -64,35 +66,32 @@ class Order
 
             $status = '1'; // Trạng thái đơn hàng
 
-            $sql = "INSERT INTO `orders` (`user_id`, `total`, `status`) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO `orders` (`user_id`, `total`, `status`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([$user_id, $total, $status]);
+            $stmt->execute([$user_id, $total, $status, $created_at, $updated_at]);
             $order_id = $this->db->lastInsertId();
 
             foreach ($cartSummary as $productId => $item) {
-                $sql = "INSERT INTO `order_details` (`order_id`, `product_id`, `quantity`, `price`) VALUES (?, ?, ?, ?)";
+                $sql = "INSERT INTO `order_details` (`order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->execute([$order_id, $productId, $item['quantity'], $item['price']]);
+                $stmt->execute([$order_id, $productId, $item['quantity'], $item['price'], $created_at, $updated_at]);
             }
 
-            return ['success' => true];
+            return ['success' => true, 'order_id' => $order_id];
         } catch (PDOException $e) {
             die("Lỗi khi thêm đơn hàng: " . $e->getMessage());
         }
     }
-
 
     public function deleteOrder($id)
     {
         try {
             $this->db->beginTransaction();
 
-            // Xóa các chi tiết đơn hàng trước
             $sql = "DELETE FROM `order_details` WHERE `order_id` = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$id]);
 
-            // Sau đó xóa đơn hàng
             $sql = "DELETE FROM `orders` WHERE `id` = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$id]);
@@ -161,10 +160,10 @@ class Order
 
     public function getOrderIdByUserId($userId)
     {
-        $sql = "SELECT id FROM orders WHERE user_id = ? LIMIT 1";
+        $sql = "SELECT id FROM orders WHERE user_id = ? AND status = 1";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$userId]);
-        return $stmt->fetchColumn();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
     public function getTotalByOrderId($orderId)
@@ -173,5 +172,16 @@ class Order
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$orderId]);
         return $stmt->fetchColumn();
+    }
+
+    public function getOrderDetailsByOrderId($orderId)
+    {
+        $sql = "SELECT p.name as product_name, od.quantity, od.price
+            FROM order_details od
+            JOIN products p ON od.product_id = p.id
+            WHERE od.order_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$orderId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
