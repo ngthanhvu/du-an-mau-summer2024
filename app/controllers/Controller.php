@@ -102,4 +102,9 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/home/test.php';
     }
+
+    public function adminBill()
+    {
+        include __DIR__ . '/../../app/views/admin/adminBill.php';
+    }
 }

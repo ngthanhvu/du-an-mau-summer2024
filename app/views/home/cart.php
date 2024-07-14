@@ -7,7 +7,6 @@
                 <h2>Giỏ hàng</h2>
                 <hr>
                 <?php
-                var_dump($_SESSION['user']['id']);
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
@@ -55,7 +54,7 @@
                         <p>Tổng cộng</p>
                         <p><?php echo formatVND($subtotal) ?></p>
                     </div>
-                    <form action="/add-order" method="post">
+                    <form action="/add-order?id=<?php echo $_SESSION['user']['id'] ?>" method="post">
                         <?php
                         foreach ($carts as $index => $cart) {
                         ?>

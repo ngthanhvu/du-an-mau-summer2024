@@ -41,6 +41,11 @@
                         <i class="bi bi-bag-heart-fill"></i> Đặt hàng
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/bill">
+                        <i class="bi bi-receipt"></i> Đơn hàng
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

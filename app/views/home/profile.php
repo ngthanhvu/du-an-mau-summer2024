@@ -23,22 +23,51 @@
                     // var_dump($users);
                     echo "</pre>";
                     ?>
-                    <form method="POST" action="/update-profile">
+                    <form action="/update-profile?id=<?php echo $users['id'] ?>" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Tên đăng nhập</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter your username" value="<?php echo $users['username'] ?>">
+                            <input name="username" type="text" class="form-control" id="username" placeholder="Enter your username" value="<?php echo $users['username'] ?>">
+                            <?php
+                            if(isset($errors['username'])) {
+                                echo "<div class='text-danger'>" . $errors['username'] . "</div>";
+                            }
+                            ?>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" value="<?php echo $users['email'] ?>">
+                            <input name="email" type="email" class="form-control" id="email" placeholder="Enter your email" value="<?php echo $users['email'] ?>">
+                            <?php
+                            if(isset($errors['email'])) {
+                                echo "<div class='text-danger'>" . $errors['email'] . "</div>";
+                            }
+                            ?>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Họ tên</label>
+                            <input type="text" class="form-control" id="fullname" name="full_name" placeholder="Enter your full name" value="<?php echo $users['full_name'] ?>">
+                        <?php
+                        if(isset($errors['full_name'])) {
+                            echo "<div class='text-danger'>" . $errors['full_name'] . "</div>";
+                        }
+                        ?>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" value="<?php echo $users['phone'] ?>">
+                            <input name="phone" type="text" class="form-control" id="phone" placeholder="Enter your phone number" value="<?php echo $users['phone'] ?>">
+                            <?php
+                            if(isset($errors['phone'])) {
+                                echo "<div class='text-danger'>" . $errors['phone'] . "</div>";
+                            }
+                            ?>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control" id="address" rows="3" placeholder="Điền địa chỉ của bạn" value="<?php echo $users['address'] ?>">
+                            <input name="address" type="text" class="form-control" id="address" rows="3" placeholder="Điền địa chỉ của bạn" value="<?php echo $users['address'] ?>">
+                            <?php
+                            if(isset($errors['address'])) {
+                                echo "<div class='text-danger'>" . $errors['address'] . "</div>";
+                            }
+                            ?>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Lưu chỉnh sửa</button>
                     </form>

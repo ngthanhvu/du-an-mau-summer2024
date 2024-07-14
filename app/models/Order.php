@@ -24,6 +24,14 @@ class Order
         return $stmt->fetchAll();
     }
 
+    public function getOrderById($id)
+    {
+        $sql = "SELECT * FROM `orders` WHERE `id` = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch();
+    }
+
     public function getTotalOrders()
     {
         $sql = "SELECT COUNT(*) as count FROM `orders`";
@@ -37,26 +45,42 @@ class Order
         try {
             $user_id = $_SESSION['user']['id'];
             $total = 0;
+            $cartSummary = [];
+
             foreach ($data['carts'] as $cart) {
-                $total += $cart['price'] * $cart['quantity'];
+                $productId = $cart['product_id'];
+                if (!isset($cartSummary[$productId])) {
+                    $cartSummary[$productId] = [
+                        'quantity' => 0,
+                        'price' => $cart['price']
+                    ];
+                }
+                $cartSummary[$productId]['quantity'] += $cart['quantity'];
             }
-            $status = '1';
+
+            foreach ($cartSummary as $item) {
+                $total += $item['price'] * $item['quantity'];
+            }
+
+            $status = '1'; // Trạng thái đơn hàng
 
             $sql = "INSERT INTO `orders` (`user_id`, `total`, `status`) VALUES (?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$user_id, $total, $status]);
             $order_id = $this->db->lastInsertId();
 
-            foreach ($data['carts'] as $cart) {
+            foreach ($cartSummary as $productId => $item) {
                 $sql = "INSERT INTO `order_details` (`order_id`, `product_id`, `quantity`, `price`) VALUES (?, ?, ?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->execute([$order_id, $cart['product_id'], $cart['quantity'], $cart['price']]);
+                $stmt->execute([$order_id, $productId, $item['quantity'], $item['price']]);
             }
+
             return ['success' => true];
         } catch (PDOException $e) {
             die("Lỗi khi thêm đơn hàng: " . $e->getMessage());
         }
     }
+
 
     public function deleteOrder($id)
     {
@@ -133,5 +157,21 @@ class Order
         } catch (Exception $e) {
             die($e->getMessage());
         }
+    }
+
+    public function getOrderIdByUserId($userId)
+    {
+        $sql = "SELECT id FROM orders WHERE user_id = ? LIMIT 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$userId]);
+        return $stmt->fetchColumn();
+    }
+
+    public function getTotalByOrderId($orderId)
+    {
+        $sql = "SELECT total FROM orders WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$orderId]);
+        return $stmt->fetchColumn();
     }
 }

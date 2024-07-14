@@ -92,22 +92,19 @@ class Cart
     }
 
     public function deleteCartUserId($user_id)
-    {
-        $sql = "DELETE FROM `cart` WHERE `user_id` = ?";
-        $stmt = $this->db->prepare($sql);
-        if ($stmt->execute([$user_id])) {
-            if (isset($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $key => $item) {
-                    if ($item['user_id'] == $user_id) {
-                        unset($_SESSION['cart'][$key]);
-                        break;
-                    }
-                }
-            }
-            return ['success' => true];
-        } else {
-            return ['success' => false, 'errors' => $stmt->errorInfo()];
+{
+    $sql = "DELETE FROM `cart` WHERE `user_id` = ?";
+    $stmt = $this->db->prepare($sql);
+    
+    if ($stmt->execute([$user_id])) {
+        if (isset($_SESSION['cart'])) {
+            unset($_SESSION['cart']);
         }
+        return ['success' => true];
+    } else {
+        return ['success' => false, 'errors' => $stmt->errorInfo()];
     }
+}
+
 
 }

@@ -90,7 +90,7 @@ class AdminController
         $offset = ($currentPage - 1) * $recordsPerPage;
 
         $products = $product->getProduct($offset, $recordsPerPage);
-        
+
         include_once __DIR__ . '/../../app/views/admin/adminProduct.php';
     }
 
@@ -211,6 +211,30 @@ class AdminController
         header('Location: /cart');
     }
 
+    // public function addOrder()
+    // {
+    //     $data = [
+    //         'carts' => $_POST['carts'] ?? [],
+    //         'user_id' => $_SESSION['user']['id'] ?? '',
+    //         'total' => $_POST['total'] ?? '',
+    //         'status' => $_POST['status'] ?? '',
+    //         'name' => $_POST['name'] ?? '',
+    //         'address' => $_POST['address'] ?? '',
+    //         'phone' => $_POST['phone'] ?? '',
+    //     ];
+    //     include_once __DIR__ . '/../../app/models/Order.php';
+    //     $order = new Order();
+    //     $result = $order->addOrder($data);
+
+    //     if ($result['success']) {
+    //         $order_details = $order->order_detail($data['user_id']);
+    //         include __DIR__ . '/../../app/views/home/checkout.php';
+    //     } else {
+    //         $errors = $result['errors'];
+    //         echo 'Lỗi: ' . $errors;
+    //     }
+    // }
+
     public function addOrder()
     {
         $data = [
@@ -222,23 +246,24 @@ class AdminController
             'address' => $_POST['address'] ?? '',
             'phone' => $_POST['phone'] ?? '',
         ];
+
         include_once __DIR__ . '/../../app/models/Order.php';
         $order = new Order();
         $result = $order->addOrder($data);
 
         if ($result['success']) {
-            include_once __DIR__ . '/../models/Cart.php';
-            $cart = new Cart();
-            $cart->deleteCartUserId($data['user_id']);
+            // Lưu thông tin đơn hàng vào session hoặc một biến khác nếu cần
+            $_SESSION['order_id'] = $result['order_id']; // Giả định rằng bạn nhận được order_id
 
-            $order_details = $order->order_detail($data['user_id']);
-
-            include __DIR__ . '/../../app/views/home/checkout.php';
+            // Chuyển hướng tới trang checkout
+            header("Location: /checkout?id=" . $_SESSION['user']['id']); // Hoặc sử dụng order_id nếu cần
+            exit; // Kết thúc script sau khi chuyển hướng
         } else {
             $errors = $result['errors'];
             echo 'Lỗi: ' . $errors;
         }
     }
+
 
     public function order_detail($id)
     {
@@ -265,6 +290,14 @@ class AdminController
         include __DIR__ . '/../../app/views/admin/adminOrder.php';
     }
 
+    public function getBill()
+    {
+        include_once __DIR__ . '/../../app/models/Bill.php';
+        $bill = new Bill();
+        $bills = $bill->getBill();
+        include __DIR__ . '/../../app/views/admin/adminBill.php';
+    }
+
     public function deleteOrder($id)
     {
         include_once __DIR__ . '/../../app/models/Order.php';
@@ -276,5 +309,62 @@ class AdminController
             $errors = $result['errors'];
             echo 'Lỗi: ' . $errors;
         }
+    }
+
+    public function payment()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userId = $_GET['id'];
+            $fullName = $_POST['full_name'];
+            $address = $_POST['address'];
+            $email = $_POST['email'];
+            $productName = $_POST['product_name'];
+            $phone = $_POST['phone'];
+            $user_id = $_POST['user_id'];
+            $paymentMethod = $_POST['payment'];
+            $total = $_POST['total'];
+
+            include_once __DIR__ . '/../../app/models/Order.php';
+            $order = new Order();
+            $orderId = $order->getOrderIdByUserId($userId);
+
+            if (!$orderId) {
+                die("Không tìm thấy đơn hàng cho người dùng này.");
+            }
+
+            include_once __DIR__ . '/../../app/models/Payment.php';
+            $payment = new Payment();
+
+            if ($paymentMethod === 'cod') {
+                $status = '1';
+                $payment->updateOrderStatus($orderId, $status);
+                $payment->createBill($fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id);
+
+                include_once __DIR__ . '/../../app/models/Cart.php';
+                $cart = new Cart();
+                $cart->deleteCartUserId($user_id);
+
+                header("Location: /order?id=" . $user_id);
+                exit;
+            } elseif ($paymentMethod === 'vnpay') {
+                // Xử lý thanh toán với VNPAY
+                $this->processVnPayPayment($orderId, $total);
+            }
+        }
+    }
+
+    private function processVnPayPayment($orderId, $total)
+    {
+        // Logic xử lý thanh toán VNPAY
+        // Thực hiện gọi API hoặc chuyển hướng đến trang thanh toán của VNPAY
+        // ...
+    }
+
+    public function userBill($id)
+    {
+        include_once __DIR__ . '/../../app/models/Bill.php';
+        $bill = new Bill();
+        $bills = $bill->userBill($id);
+        include __DIR__ . '/../../app/views/home/order.php';
     }
 }
