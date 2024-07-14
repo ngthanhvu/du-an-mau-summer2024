@@ -41,6 +41,14 @@
             ?>
         </tbody>
     </table>
+    <!-- Hiển thị các nút phân trang -->
+    <ul class="pagination">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+        <?php endfor; ?>
+    </ul>
 </main>
 
 

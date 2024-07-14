@@ -26,7 +26,7 @@ switch ($base_path) {
     case '/checkout':
         $controller = new HomeController();
         $get = new AdminController();
-        $get->order_detail($_GET['id']);
+        $get->order_detail(isset($_GET['id']) ? $_GET['id'] : null);
         break;
         $controller->checkout();
         break;
@@ -151,6 +151,17 @@ switch ($base_path) {
         $controllers = new AdminController();
         $controllers->addCategory();
         break;
+    case '/admin/order':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getOrder();
+        break;
+        $controller->adminOrder();
+        break;
+    case '/admin/order/delete':
+        $controllers = new AdminController();
+        $controllers->deleteOrder($_GET['id']);
+        break;
         #end admin tempalte
 
     case '/add_to_cart':
@@ -164,6 +175,10 @@ switch ($base_path) {
     case '/add-order':
         $controller = new AdminController();
         $controller->addOrder();
+        break;
+    case '/update-profile':
+        $controller = new AdminController();
+        $controller->updateProfile($_GET['id'], $_POST);
         break;
     default:
         http_response_code(404);

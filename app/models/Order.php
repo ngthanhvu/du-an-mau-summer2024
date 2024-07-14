@@ -10,8 +10,26 @@ class Order
         try {
             $this->db = db_connect();
         } catch (PDOException $e) {
-            die("Kết nối thất bị: " . $e->getMessage());
+            die("Kết nối thất bại: " . $e->getMessage());
         }
+    }
+
+    public function getOrder($offset = 0, $limit = 10)
+    {
+        $sql = "SELECT * FROM `orders` LIMIT :offset, :limit";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function getTotalOrders()
+    {
+        $sql = "SELECT COUNT(*) as count FROM `orders`";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 
     public function addOrder($data)
@@ -22,11 +40,7 @@ class Order
             foreach ($data['carts'] as $cart) {
                 $total += $cart['price'] * $cart['quantity'];
             }
-            # 3 trạng thái:
-            # 1: Chưa thanh toán
-            # 2: Đã thanh toán
-            # 3: Hủy thanh toán
-            $status = 'Chưa thanh toán';
+            $status = '1';
 
             $sql = "INSERT INTO `orders` (`user_id`, `total`, `status`) VALUES (?, ?, ?)";
             $stmt = $this->db->prepare($sql);
@@ -44,10 +58,33 @@ class Order
         }
     }
 
+    public function deleteOrder($id)
+    {
+        try {
+            $this->db->beginTransaction();
+
+            // Xóa các chi tiết đơn hàng trước
+            $sql = "DELETE FROM `order_details` WHERE `order_id` = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+
+            // Sau đó xóa đơn hàng
+            $sql = "DELETE FROM `orders` WHERE `id` = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+
+            $this->db->commit();
+
+            return ['success' => true];
+        } catch (PDOException $e) {
+            $this->db->rollBack();
+            die("Lỗi khi xóa đơn hàng: " . $e->getMessage());
+        }
+    }
+
     public function order_detail($user_id)
     {
         try {
-            // Lấy thông tin người dùng từ `user_id`
             $sql = "SELECT * FROM `users` WHERE `id` = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$user_id]);
@@ -57,8 +94,7 @@ class Order
                 throw new Exception("Người dùng không tồn tại.");
             }
 
-            // Lấy thông tin các đơn hàng chưa thanh toán từ `user_id`
-            $sql = "SELECT * FROM `orders` WHERE `user_id` = ? AND `status` = 'Chưa thanh toán'";
+            $sql = "SELECT * FROM `orders` WHERE `user_id` = ? AND `status` = 1";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$user_id]);
             $orders = $stmt->fetchAll();
@@ -69,14 +105,12 @@ class Order
 
             $order_details = [];
             foreach ($orders as $order) {
-                // Lấy thông tin chi tiết đơn hàng từ `order_id` trong bảng `order_details`
                 $order_id = $order['id'];
                 $sql = "SELECT * FROM `order_details` WHERE `order_id` = ?";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([$order_id]);
                 $details = $stmt->fetchAll();
 
-                // Lấy thông tin sản phẩm từ `product_id` trong bảng `products`
                 foreach ($details as &$detail) {
                     $product_id = $detail['product_id'];
                     $sql = "SELECT * FROM `products` WHERE `id` = ?";

@@ -23,12 +23,18 @@
             echo "Thanh toán";
         } elseif ($url == '/order') {
             echo "Lịch sử đơn hàng";
-        } elseif ($url == '/profile') {
-            echo "Hồ sơ cá nhân";
-        } elseif ($url == '/detail?id=' . $_GET['id']) {
-            echo "Chi tiết sản phẩm";
+        } elseif ($url == '/checkout') {
+            echo "Thanh toán";
+        } elseif ($url == '/add-order') {
+            echo "Thanh toán đơn hàng";
         } else {
-            echo "Mini Store.";
+            if ($url == '/detail?id=' . $_GET['id']) {
+                echo "Chi tiết sản phẩm";
+            } elseif ($url == '/profile?id=' . $_GET['id']) {
+                echo "Thông tin cá nhân";
+            } else {
+                echo "MiniStore.";
+            }
         }
         ?>
     </title>
@@ -42,9 +48,9 @@
 
 <body>
     <!-- <div class="loader" id="loader"></div> -->
-    <div class="loader-overlay" id="loaderOverlay">
+    <!-- <div class="loader-overlay" id="loaderOverlay">
         <div class="loader"></div>
-    </div>
+    </div> -->
     <header>
         <a href="/" class="logo">
             <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">

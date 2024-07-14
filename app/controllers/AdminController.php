@@ -79,9 +79,18 @@ class AdminController
     #product
     public function getProduct()
     {
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $recordsPerPage = 8; //chỉnh sửa số lượng nội dung hiển thị trên 1 trang
+
         include_once __DIR__ . '/../../app/models/Product.php';
         $product = new Product();
-        $products = $product->getProduct();
+        $totalProducts = $product->getTotalProducts();
+        $totalPages = ceil($totalProducts / $recordsPerPage);
+
+        $offset = ($currentPage - 1) * $recordsPerPage;
+
+        $products = $product->getProduct($offset, $recordsPerPage);
+        
         include_once __DIR__ . '/../../app/views/admin/adminProduct.php';
     }
 
@@ -147,6 +156,14 @@ class AdminController
         header('Location: /admin/product');
     }
 
+    public function updateProfile($id, $data)
+    {
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $user->updateProfile($id, $data);
+        header('Location: /profile?id=' . $id);
+    }
+
     public function addCategory()
     {
         $data = [
@@ -163,27 +180,6 @@ class AdminController
             include __DIR__ . '/../../app/views/admin/add/addCategory.php';
         }
     }
-
-    // public function addCart()
-    // {
-    //     $data = [
-    //         'user_id' => $_SESSION['user']['id'] ?? '',
-    //         'product_id' => $_POST['product_id'] ?? '',
-    //         'quantity' => $_POST['quantity'] ?? '',
-    //         'name' => $_POST['name'] ?? '',
-    //         'image' => $_POST['image'] ?? '',
-    //         'price' => $_POST['price'] ?? ''
-    //     ];
-    //     include_once __DIR__ . '/../../app/models/Cart.php';
-    //     $cart = new Cart();
-    //     $result = $cart->addCart($data);
-    //     if ($result['success']) {
-    //         header('Location: /cart');
-    //     } else {
-    //         $errors = $result['errors'];
-    //         echo 'Error: ' . $errors;
-    //     }
-    // }
 
     public function addCart()
     {
@@ -214,7 +210,7 @@ class AdminController
         $cart->deleteCart($id);
         header('Location: /cart');
     }
-    
+
     public function addOrder()
     {
         $data = [
@@ -231,15 +227,12 @@ class AdminController
         $result = $order->addOrder($data);
 
         if ($result['success']) {
-            // Xóa giỏ hàng sau khi tạo đơn hàng thành công
             include_once __DIR__ . '/../models/Cart.php';
             $cart = new Cart();
             $cart->deleteCartUserId($data['user_id']);
 
-            // Lấy chi tiết đơn hàng
             $order_details = $order->order_detail($data['user_id']);
 
-            // Truyền chi tiết đơn hàng vào view
             include __DIR__ . '/../../app/views/home/checkout.php';
         } else {
             $errors = $result['errors'];
@@ -253,5 +246,35 @@ class AdminController
         $order = new Order();
         $order_details = $order->order_detail($id);
         include __DIR__ . '/../../app/views/home/checkout.php';
+    }
+
+    public function getOrder()
+    {
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $recordsPerPage = 8; //chỉnh sửa số lượng nội dung hiển thị trên 1 trang
+
+        include_once __DIR__ . '/../../app/models/Order.php';
+        $order = new Order();
+        $totalOrders = $order->getTotalOrders();
+        $totalPages = ceil($totalOrders / $recordsPerPage);
+
+        $offset = ($currentPage - 1) * $recordsPerPage;
+
+        $orders = $order->getOrder($offset, $recordsPerPage);
+
+        include __DIR__ . '/../../app/views/admin/adminOrder.php';
+    }
+
+    public function deleteOrder($id)
+    {
+        include_once __DIR__ . '/../../app/models/Order.php';
+        $order = new Order();
+        $result = $order->deleteOrder($id);
+        if ($result['success']) {
+            header('Location: /admin/order');
+        } else {
+            $errors = $result['errors'];
+            echo 'Lỗi: ' . $errors;
+        }
     }
 }

@@ -18,7 +18,12 @@
                     <h5 class="card-title">Chi tiết hồ sơ</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <?php
+                    echo "<pre>";
+                    // var_dump($users);
+                    echo "</pre>";
+                    ?>
+                    <form method="POST" action="/update-profile">
                         <div class="mb-3">
                             <label for="username" class="form-label">Tên đăng nhập</label>
                             <input type="text" class="form-control" id="username" placeholder="Enter your username" value="<?php echo $users['username'] ?>">
@@ -33,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Địa chỉ</label>
-                            <textarea class="form-control" id="address" rows="3" placeholder="Điền địa chỉ của bạn"></textarea>
+                            <input type="text" class="form-control" id="address" rows="3" placeholder="Điền địa chỉ của bạn" value="<?php echo $users['address'] ?>">
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Lưu chỉnh sửa</button>
                     </form>
@@ -60,36 +65,3 @@
         </div>
     </div>
 </div>
-
-<!-- Edit Profile Modal
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="modalUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="modalUsername" value="User Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="modalEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="modalEmail" value="user@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="modalPhone" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" id="modalPhone" value="123-456-7890">
-                    </div>
-                    <div class="mb-3">
-                        <label for="modalAddress" class="form-label">Address</label>
-                        <textarea class="form-control" id="modalAddress" rows="3">123 Main St, Anytown, USA</textarea>
-                    </div>
-                    <button type="button" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->

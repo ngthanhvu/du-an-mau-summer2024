@@ -93,6 +93,10 @@ class HomeController
         include __DIR__ . '/../../app/views/admin/add/addCategory.php';
     }
 
+    public function adminOrder()
+    {
+        include __DIR__ . '/../../app/views/admin/adminOrder.php';
+    }
 
     public function test()
     {

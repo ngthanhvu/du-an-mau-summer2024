@@ -13,13 +13,23 @@ class Product
         }
     }
 
-    public function getProduct()
+    public function getProduct($offset = 0, $limit = 10)
     {
-        $sql = "SELECT * FROM products";
+        $sql = "SELECT * FROM products LIMIT :offset, :limit";
         $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    public function getTotalProducts()
+    {
+        $sql = "SELECT COUNT(*) as count FROM `products`";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 
     public function getProductId($id)

@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/">Admin Dashboard</a>
+    <a class="navbar-brand ml-3" href="/">Admin Dashboard</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,7 +36,11 @@
                             <i class="bi bi-tags-fill"></i> Danh mục
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/order">
+                        <i class="bi bi-bag-heart-fill"></i> Đặt hàng
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

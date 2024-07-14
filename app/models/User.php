@@ -39,4 +39,13 @@ class User
         $result = $stmt->fetch();
         return $result;
     }
+
+    public function updateProfile($id, $data)
+    {
+        $sql = "UPDATE users SET address = :address WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':address', $data['address']);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
 }
