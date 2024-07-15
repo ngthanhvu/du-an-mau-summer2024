@@ -176,10 +176,11 @@ class Order
 
     public function getOrderDetailsByOrderId($orderId)
     {
-        $sql = "SELECT p.name as product_name, od.quantity, od.price
-            FROM order_details od
+        $sql = "SELECT o.total, p.name as product_name, od.quantity, od.price
+            FROM orders o
+            JOIN order_details od ON o.id = od.order_id
             JOIN products p ON od.product_id = p.id
-            WHERE od.order_id = ?";
+            WHERE o.id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$orderId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

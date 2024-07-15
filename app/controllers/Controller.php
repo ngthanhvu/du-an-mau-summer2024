@@ -107,4 +107,9 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/adminBill.php';
     }
+
+    public function vnpayReturn()
+    {
+        include __DIR__ . '/../../app/models/Vnpay_return.php';
+    }
 }

@@ -85,4 +85,14 @@ class User
             return ['success' => false, 'errors' => $errors, 'data' => $data];
         }
     }
+
+    public function getUserByOrderId($orderId) {
+        $sql = "SELECT u.id, u.email, u.full_name, u.phone, u.address FROM users u 
+                JOIN orders o ON u.id = o.user_id 
+                WHERE o.id = :orderId";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['orderId' => $orderId]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }

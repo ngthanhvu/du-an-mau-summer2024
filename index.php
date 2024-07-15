@@ -194,6 +194,10 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->payment();
         break;
+    case '/vnpay_return':
+        $controller = new HomeController();
+        $controller->vnpayReturn();
+        break;
     default:
         http_response_code(404);
         include_once '404.html';
