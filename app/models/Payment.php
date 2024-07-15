@@ -14,11 +14,11 @@ class Payment
         }
     }
 
-    public function createBill($fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id)
+    public function createBill($fullName, $email, $phone, $address, $orderId, $productDetails, $total, $status, $user_id)
     {
         $sql = "INSERT INTO bill (full_name, email, phone, address, order_id, product_name, total, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id]);
+        return $stmt->execute([$fullName, $email, $phone, $address, $orderId, $productDetails, $total, $status, $user_id]);
     }
 
     public function updateOrderStatus($order_id, $status)

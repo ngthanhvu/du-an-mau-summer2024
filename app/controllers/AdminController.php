@@ -422,8 +422,6 @@ class AdminController
         exit();
     }
 
-
-
     public function userBill($id)
     {
         include_once __DIR__ . '/../../app/models/Bill.php';
