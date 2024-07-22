@@ -429,4 +429,32 @@ class AdminController
         $bills = $bill->userBill($id);
         include __DIR__ . '/../../app/views/home/order.php';
     }
+
+    public function addComment()
+    {
+        include_once __DIR__ . '/../../app/models/Comment.php';
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $product_id = $_POST['product_id'];
+            $user_id = $_POST['user_id'];
+            $username = trim($_POST['username']);
+            $comment = trim($_POST['comment']);
+
+            if (!empty($username) && !empty($comment)) {
+                $commentModel = new Comment();
+                $commentModel->addComment($product_id, $user_id, $username, $comment);
+            }
+
+            header("Location: /detail?id=$product_id");
+            exit();
+        }
+    }
+
+    public function getCommentsByProductId($id)
+    {
+        include_once __DIR__ . '/../../app/models/Comment.php';
+        $comment = new Comment();
+        $comments = $comment->getCommentsByProductId($id);
+        include __DIR__ . '/../../app/views/home/detail.php';
+    }
 }

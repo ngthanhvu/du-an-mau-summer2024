@@ -204,6 +204,10 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->vnpayReturn();
         break;
+    case '/add-comment':
+        $controller = new AdminController();
+        $controller->addComment();
+        break;
     default:
         http_response_code(404);
         include_once '404.html';

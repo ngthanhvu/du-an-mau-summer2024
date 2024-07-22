@@ -22,10 +22,13 @@ class ViewController
     {
         include __DIR__ . '/../../app/models/Views.php';
         include __DIR__ . '/../../app/models/Product.php';
+        include __DIR__ . '/../../app/models/Comment.php';
         $view = new Views();
         $detailProduct = $view->viewProductId($id);
         $product = new Product();
         $recommendProduct = $product->recommendProduct($id);
+        $comment = new Comment();
+        $comments = $comment->getCommentsByProductId($id);
         include __DIR__ . '/../../app/views/home/detail.php';
     }
     public function viewCategory()
@@ -52,4 +55,5 @@ class ViewController
         $users = $view->viewUserId($id);
         include __DIR__ . '/../../app/views/home/profile.php';
     }
+    
 }

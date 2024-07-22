@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <div class="small mb-1">Category: <?php echo $detailProduct['category_id'] ?></div>
                 <h1 class="display-5 fw-bolder"><?php echo $detailProduct['product_name'] ?></h1>
-                <div class="fs-5 mb-5">
+                <div class="fs-5 mb-3">
                     <span>Giá: <?php echo formatVND($detailProduct['price']) ?></span>
                 </div>
                 <p class="lead"><?php echo $detailProduct['description'] ?></p>
@@ -38,6 +38,40 @@
     </div>
 </section>
 
+<!-- Comments Section -->
+<section>
+    <div class="container px-4 px-lg-5 my-5">
+        <h2 class="fw-bolder mb-4">Bình luận</h2>
+        <?php if (!empty($comments)) : ?>
+            <?php foreach ($comments as $comment) : ?>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($comment['username']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($comment['text']); ?></p>
+                        <p class="card-text"><small class="text-muted">Ngày: <?php echo date('d/m/Y', strtotime($comment['date'])); ?></small></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>Chưa có bình luận nào.</p>
+        <?php endif; ?>
+
+        <h3 class="fw-bolder mt-4">Thêm bình luận</h3>
+        <form action="/add-comment" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên của bạn</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên của bạn" required>
+            </div>
+            <div class="mb-3">
+                <label for="commentText" class="form-label">Bình luận của bạn</label>
+                <textarea class="form-control" id="commentText" name="comment" rows="3" placeholder="Nhập bình luận..." required></textarea>
+            </div>
+            <input type="hidden" name="product_id" value="<?php echo $detailProduct['id']; ?>">
+            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id'] ?? ''; ?>">
+            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+        </form>
+    </div>
+</section>
 <!-- Related items section-->
 
 <section class="py-5 bg-light">
