@@ -12,7 +12,7 @@
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/uploads/<?php echo $detailProduct['image'] ?>" alt="..." /></div>
             <div class="col-md-6">
                 <div class="small mb-1">Category: <?php echo $detailProduct['category_id'] ?></div>
-                <h1 class="display-5 fw-bolder"><?php echo $detailProduct['name'] ?></h1>
+                <h1 class="display-5 fw-bolder"><?php echo $detailProduct['product_name'] ?></h1>
                 <div class="fs-5 mb-5">
                     <span>Giá: <?php echo formatVND($detailProduct['price']) ?></span>
                 </div>
@@ -24,7 +24,7 @@
                                                                         echo ($_SESSION['user']['id']);
                                                                     } ?>">
                         <input type="hidden" name="image" value="<?php echo $detailProduct['image']; ?>">
-                        <input type="hidden" name="name" value="<?php echo $detailProduct['name']; ?>">
+                        <input type="hidden" name="name" value="<?php echo $detailProduct['product_name']; ?>">
                         <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
                         <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem" />
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
@@ -54,7 +54,7 @@
                             <img class="card-img-top" src="/uploads/<?php echo $value['image'] ?>" alt="..." />
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <h5 class="fw-bolder"><?php echo $value['name'] ?></h5>
+                                    <h5 class="fw-bolder"><?php echo $value['product_name'] ?></h5>
                                     <?php echo $value['price'] ?>
                                 </div>
                             </div>

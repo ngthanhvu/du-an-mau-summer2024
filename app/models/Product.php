@@ -48,8 +48,8 @@ class Product
         $uploadedFile = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($data['name'])) {
-                $errors['name'] = "Tên sản phẩm không được để trống";
+            if (empty($data['product_name'])) {
+                $errors['product_name'] = "Tên sản phẩm không được để trống";
             }
 
             if (empty($data['price'])) {
@@ -110,10 +110,10 @@ class Product
 
             if (empty($errors)) {
                 try {
-                    $sql = "INSERT INTO products (name, price, quantity, description, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO products (product_name, price, quantity, description, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute([
-                        $data['name'],
+                        $data['product_name'],
                         $data['price'],
                         $data['quantity'],
                         $data['description'],
@@ -143,8 +143,8 @@ class Product
         $uploadedFile = [];
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (empty($data['name'])) {
-                $errors['name'] = "Tên sản phẩm không được để trống";
+            if (empty($data['product_name'])) {
+                $errors['product_name'] = "Tên sản phẩm không được để trống";
             }
 
             if (empty($data['price'])) {
@@ -203,7 +203,7 @@ class Product
                     $sql = "UPDATE products SET name = ?, price = ?, quantity = ?, description = ?, image = ? WHERE id = ?";
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute([
-                        $data['name'],
+                        $data['product_name'],
                         $data['price'],
                         $data['quantity'],
                         $data['description'],
@@ -230,7 +230,7 @@ class Product
         if ($category) {
             $category_id = $category['category_id'];
 
-            $sql = "SELECT * FROM products WHERE category_id = :category_id";
+            $sql = "SELECT * FROM products WHERE category_id = :category_id LIMIT 4";
             $stmt = $this->db->prepare($sql);
             $stmt->execute(['category_id' => $category_id]);
             $recommendProducts = $stmt->fetchAll();
@@ -238,5 +238,13 @@ class Product
         } else {
             return [];
         }
+    }
+
+    public function select ($categoris_id)
+    {
+        $sql = "SELECT products.id, products.product_name, products.image, products.price, products.quantity, products.description, category.name FROM products INNER JOIN category on products.category_id = category.id WHERE category.id = $categoris_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 }

@@ -1,6 +1,6 @@
 <?php include_once "includes/header.php" ?>
 
-<div class="container mt-5">
+<div class="container profile-section">
     <div class="row mb-5">
         <div class="col-md-4">
             <div class="card">

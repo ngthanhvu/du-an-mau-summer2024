@@ -26,7 +26,7 @@
             foreach ($products as $key => $value) {
                 echo "<tr>";
                 echo "<td>" . $key . "</td>";
-                echo "<td>" . $value['name'] . "</td>";
+                echo "<td>" . $value['product_name'] . "</td>";
                 echo "<td><img width='100' height='100' src='../uploads/$value[image]' alt='anh'></td>";
                 echo "<td>" . formatVND($value['price']) . "</td>";
                 echo "<td>" . $value['quantity'] . "</td>";

@@ -176,7 +176,7 @@ class Order
 
     public function getOrderDetailsByOrderId($orderId)
     {
-        $sql = "SELECT o.total, p.name as product_name, od.quantity, od.price
+        $sql = "SELECT o.total, p.product_name as product_name, od.quantity, od.price
             FROM orders o
             JOIN order_details od ON o.id = od.order_id
             JOIN products p ON od.product_id = p.id

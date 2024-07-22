@@ -46,6 +46,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </head>
 
+<style>
+    .navmenu a {
+        color: #000;
+    }
+    <?php
+    $url = $_SERVER['REQUEST_URI'];
+    if ($url == "/") {
+        echo '.navmenu a {color: #fff;}';
+        echo '.navicon i {color: #fff;}';
+        echo '.login-buton {color: #fff;}';
+    } else {
+        echo '
+        .navmenu a:hover {color: #000;}
+        .navicon a {color: #000;}';
+    }
+    ?>
+</style>
+
 <body>
     <!-- <div class="loader" id="loader"></div> -->
     <!-- <div class="loader-overlay" id="loaderOverlay">
@@ -53,7 +71,7 @@
     </div> -->
     <header>
         <a href="/" class="logo">
-            <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">
+            <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="">
         </a>
         <ul class="navmenu">
             <li><a href="/">Trang Chủ</a></li>
@@ -77,17 +95,17 @@
                     </span></a></li>
             <?php
             if (empty($_SESSION['user'])) {
-                echo '<li><a style="color: #333;" href="/login">Login</a></li>';
+                echo '<li><a href="/login" class="login-buton">Login</a></li>';
             } else {
                 echo '<li class="nav-item dropdown">
                 <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/checkout">Checkout</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/logout">Logout</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
 
                 </ul>
             </li>';

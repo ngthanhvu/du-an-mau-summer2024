@@ -12,10 +12,10 @@ var_dump($_POST);
     <form action="/admin/product/addProduct" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="productName" class="form-label">Tên sản phẩm</label>
-            <input name="name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
+            <input name="product_name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
             <?php
-            if (isset($errors['name'])) {
-                echo '<p class="text-danger">' . $errors['name'] . '</p>';
+            if (isset($errors['product_name'])) {
+                echo '<p class="text-danger">' . $errors['product_name'] . '</p>';
             }
             ?>
         </div>

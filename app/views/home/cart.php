@@ -1,4 +1,5 @@
-<?php include_once "includes/header.php" ?>
+<?php 
+include_once "includes/header.php"; ?>
 
 <section class="yourcart-section">
     <div class="container mt-5">
@@ -54,7 +55,7 @@
                         <p>Tổng cộng</p>
                         <p><?php echo formatVND($subtotal) ?></p>
                     </div>
-                    <form action="/add-order?id=<?php echo $_SESSION['user']['id'] ?>" method="post">
+                    <form action="/add-order?id=<?php echo isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 'No user ID found'; ?>" method="post">
                         <?php
                         foreach ($carts as $index => $cart) {
                         ?>
@@ -64,6 +65,9 @@
                             <input type="hidden" name="carts[<?php echo $index; ?>][price]" value="<?php echo $cart['price']; ?>">
                             <!-- <input type="hidden" name="carts[<?php echo $index; ?>][image]" value="<?php echo $cart['image']; ?>"> -->
                         <?php
+                        }
+                        if(empty($carts)){
+                            echo "<p class='text-center'>Giỏ hàng trống</p>";
                         }
                         ?>
                         <button class="btn btn-dark btn-block" type="submit">Tiếp tục đến trang thanh toán</button>

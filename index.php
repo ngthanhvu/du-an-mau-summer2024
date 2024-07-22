@@ -7,13 +7,18 @@ require_once 'app/controllers/AdminController.php';
 require_once 'app/controllers/ViewController.php';
 
 
+
 $request_uri = $_SERVER['REQUEST_URI'];
 $base_path = parse_url($request_uri, PHP_URL_PATH);
 
 
 switch ($base_path) {
     case '/':
+        include_once 'app/models/Product.php';
         $controller = new HomeController();
+        $viewcontroller = new ViewController();
+        $viewcontroller->index();
+        break;
         $controller->index();
         break;
     case '/product':
@@ -144,6 +149,7 @@ switch ($base_path) {
         $controller = new HomeController();
         $controllers = new AdminController();
         $controllers->getCategory();
+        break;
         $controller->adminCategory();
         break;
     case '/admin/category/add':

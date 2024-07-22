@@ -121,7 +121,7 @@ class AdminController
     public function addProducts()
     {
         $data = [
-            'name' => $_POST['name'] ?? '',
+            'product_name' => $_POST['product_name'] ?? '',
             'price' => $_POST['price'] ?? '',
             'quantity' => $_POST['quantity'] ?? '',
             'description' => $_POST['description'] ?? '',
