@@ -8,6 +8,9 @@ include_once "includes/header.php"; ?>
                 <h2>Giỏ hàng</h2>
                 <hr>
                 <?php
+                echo "<pre>";
+                // var_dump($_SESSION['cart']);
+                echo "</pre>";
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
@@ -24,6 +27,7 @@ include_once "includes/header.php"; ?>
                             <div class="item-details">
                                 <h5><?php echo $cart['name'] ?></h5>
                                 <p>Số lượng: <?php echo $cart['quantity'] ?></p>
+                                <p>Size: <?php echo $cart['size'] ?></p>
                             </div>
                             <div class="item-price">
                                 <p><?php echo formatVND($cart['price']) ?></p>
@@ -63,6 +67,7 @@ include_once "includes/header.php"; ?>
                             <input type="hidden" name="carts[<?php echo $index; ?>][name]" value="<?php echo $cart['name']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][quantity]" value="<?php echo $cart['quantity']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][price]" value="<?php echo $cart['price']; ?>">
+                            <input type="hidden" name="carts[<?php echo $index; ?>][size]" value="<?php echo $cart['size']; ?>">
                             <!-- <input type="hidden" name="carts[<?php echo $index; ?>][image]" value="<?php echo $cart['image']; ?>"> -->
                         <?php
                         }
@@ -70,7 +75,8 @@ include_once "includes/header.php"; ?>
                             echo "<p class='text-center'>Giỏ hàng trống</p>";
                         }
                         ?>
-                        <button class="btn btn-dark btn-block" type="submit">Tiếp tục đến trang thanh toán</button>
+                        <button class="btn btn-dark" type="submit">Tiếp tục đến trang thanh toán <i class="bi bi-arrow-right"></i></button>
+                        <a href="/product" class="btn btn-danger mt-2"><i class="bi bi-arrow-left"></i> Quay lại mua hàng</a>
                     </form>
                 </div>
             </div>

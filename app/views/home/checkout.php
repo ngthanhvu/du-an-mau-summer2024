@@ -17,15 +17,17 @@ foreach ($carts as $productId => $product) {
     $groupedProducts[$productId] = [
         'product' => $product,
         'quantity' => $product['quantity'],
-        'total_price' => $product['price'] * $product['quantity']
+        'total_price' => $product['price'] * $product['quantity'],
+        'size' => $product['size'],
     ];
     
     $total += $groupedProducts[$productId]['total_price'];
     $product_names[] = $product['name'];
+    $product_size[] = $product['size'];
 }
 ?>
 
-<div class="container mt-5" style="min-height: 34.25rem;">
+<div class="container checkout-section" style="min-height: 34.25rem;">
     <div class="row">
         <div class="col-md-6">
             <h2>Xác nhận thanh toán</h2>
@@ -58,6 +60,7 @@ foreach ($carts as $productId => $product) {
                         <input type="hidden" name="product_name" value="<?php echo htmlspecialchars(implode(', ', $product_names)); ?>">
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
                         <input type="hidden" name="total" value="<?php echo $total; ?>">
+                        <input type="hidden" name="size" value="<?php echo implode(', ', $product_size); ?>">
                         <div class="mt-3">
                             <div class="d-block my-3">
                                 <div class="custom-control custom-radio">
@@ -88,6 +91,7 @@ foreach ($carts as $productId => $product) {
                                 <img src="/uploads/<?php echo htmlspecialchars($product['image']); ?>" alt="Product Image" class="img-fluid border" style="width: 50px;">
                                 <span><?php echo htmlspecialchars($product['name']); ?></span><br>
                                 <span class="text-muted d-block mt-2">Số lượng: <?php echo $productInfo['quantity']; ?></span>
+                                <span class="text-muted d-block mt-2">Size: <?php echo $productInfo['product']['size']; ?></span>
                             </div>
                             <span class="text-muted d-block mt-2"><b><?php echo formatVND($productInfo['total_price']); ?></b></span>
                         </div>

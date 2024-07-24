@@ -11,6 +11,7 @@
                 <th class="text-center">Địa chỉ</th>
                 <th class="text-center">ID đơn hàng</th>
                 <th class="text-center">Tên sản phẩm</th>
+                <th class="text-center">Kích cỡ</th>
                 <th class="text-center">Giá tiền</th>
                 <th class="text-center">Trạng thái</th>
                 <th class="text-center">Hành động</th>
@@ -30,6 +31,7 @@
                 echo "<td class='text-center'>" . $value['address'] . "</td>";
                 echo "<td class='text-center'>" . $value['order_id'] . "</td>";
                 echo "<td class='text-center'>" . $value['product_name'] . "</td>";
+                echo "<td class='text-center'>" . $value['size'] . "</td>";
                 echo "<td class='text-center'>" . formatVND($value['total']) . "</td>";
                 echo "<td class='text-center'>" . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>')) . "</td>";
                 echo "<td class='text-center'>

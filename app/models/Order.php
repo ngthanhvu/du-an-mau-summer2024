@@ -54,7 +54,8 @@ class Order
                 if (!isset($cartSummary[$productId])) {
                     $cartSummary[$productId] = [
                         'quantity' => 0,
-                        'price' => $cart['price']
+                        'price' => $cart['price'],
+                        'size' => $cart['size']
                     ];
                 }
                 $cartSummary[$productId]['quantity'] += $cart['quantity'];
@@ -72,9 +73,9 @@ class Order
             $order_id = $this->db->lastInsertId();
 
             foreach ($cartSummary as $productId => $item) {
-                $sql = "INSERT INTO `order_details` (`order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO `order_details` (`order_id`, `product_id`,`size`, `quantity`, `price`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $this->db->prepare($sql);
-                $stmt->execute([$order_id, $productId, $item['quantity'], $item['price'], $created_at, $updated_at]);
+                $stmt->execute([$order_id, $productId, $item['size'], $item['quantity'], $item['price'], $created_at, $updated_at]);
             }
 
             return ['success' => true, 'order_id' => $order_id];

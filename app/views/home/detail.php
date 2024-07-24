@@ -1,14 +1,13 @@
 <?php include_once "includes/header.php" ?>
-
-<section class="py-5">
+<?php
+function formatVND($number)
+{
+    return number_format($number, 0, '', '.',) . 'đ';
+}
+?>
+<!-- <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <?php
-            function formatVND($number)
-            {
-                return number_format($number, 0, '', '.',) . 'đ';
-            }
-            ?>
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/uploads/<?php echo $detailProduct['image'] ?>" alt="..." /></div>
             <div class="col-md-6">
                 <div class="small mb-1">Category: <?php echo $detailProduct['category_id'] ?></div>
@@ -36,7 +35,67 @@
             </div>
         </div>
     </div>
+</section> -->
+
+<section class="py-5 bg-light section-detail">
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/uploads/<?php echo $detailProduct['image'] ?>" class="product-image11" alt="BDN Home Jersey">
+            </div>
+            <div class="col-md-6">
+                <h2><?php echo $detailProduct['product_name'] ?></h2>
+                <p>Hãng: Đang cập nhật</p>
+                <div class="mb-3">
+                    <label for="size" class="form-label">Size:</label>
+                    <div id="size" class="d-flex size-option">
+                        <?php
+                        $sizes = explode(',', $detailProduct['size']);
+                        foreach ($sizes as $s) {
+                            echo '<input type="radio" name="size" id="size' . $s . '" value="' . $s . '">
+                            <label for="size' . $s . '">' . $s . '</label>';
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="mo-ta" class="form-label">Mô tả:</label>
+                    <p class="text-muted"><?php echo $detailProduct['description'] ?></p>
+                </div>
+                <div class="mt-3">
+                    <p><b>Giá tiền:</b><strong class="text-danger text-nowrap fs-5"> <?php echo formatVND($detailProduct['price']) ?></strong></p>
+                    <form action="/add_to_cart" method="post">
+                        <div class="d-flex">
+                            <input type="hidden" name="product_id" value="<?php echo $detailProduct['id']; ?>">
+                            <input type="hidden" name="user_id" value="<?php if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) {
+                                                                            echo ($_SESSION['user']['id']);
+                                                                        } ?>">
+                            <input type="hidden" name="image" value="<?php echo $detailProduct['image']; ?>">
+                            <input type="hidden" name="name" value="<?php echo $detailProduct['product_name']; ?>">
+                            <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
+                            <input type="hidden" name="size" id="selectedSize" value="">
+                            <label for="inputQuantity" class="form-label me-3 text-center">Số lượng:</label>
+                            <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem" /><br>
+                        </div>
+                        <div>
+                            <button class="btn btn-danger mt-3" type="submit">
+                                Thêm Vào Giỏ Hàng <i class="bi bi-basket2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+document.querySelectorAll('input[name="size"]').forEach(function(sizeInput) {
+    sizeInput.addEventListener('change', function() {
+        document.getElementById('selectedSize').value = this.value;
+    });
+});
+</script>
 
 <!-- Comments Section -->
 <section>
@@ -55,7 +114,6 @@
         <?php else : ?>
             <p>Chưa có bình luận nào.</p>
         <?php endif; ?>
-
         <h3 class="fw-bolder mt-4">Thêm bình luận</h3>
         <form action="/add-comment" method="post">
             <div class="mb-3">
@@ -88,13 +146,16 @@
                             <img class="card-img-top" src="/uploads/<?php echo $value['image'] ?>" alt="..." />
                             <div class="card-body p-4">
                                 <div class="text-center">
+                                    <div class="star-rating" style="color: orange;">
+                                        &#9733; &#9733; &#9733; &#9733; &#9733;
+                                    </div>
                                     <h5 class="fw-bolder"><?php echo $value['product_name'] ?></h5>
-                                    <?php echo $value['price'] ?>
+                                    <?php echo formatVND($value['price']) ?>
                                 </div>
                             </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div>
+                            </div> -->
                         </div>
                     </a>
                 </div>

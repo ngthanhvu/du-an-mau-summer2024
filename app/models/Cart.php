@@ -44,7 +44,7 @@ class Cart
                     }
                 }
             } else {
-                $sql = "INSERT INTO `cart` (`product_id`, `user_id`, `quantity`, `name`, `image`, `price`) VALUES (?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO `cart` (`product_id`, `user_id`, `quantity`, `name`, `image`, `price`, `size`) VALUES (?,?, ?, ?, ?, ?, ?)";
                 $stmt = $this->db->prepare($sql);
                 $stmt->execute([
                     $data['product_id'],
@@ -52,7 +52,8 @@ class Cart
                     $data['quantity'],
                     $data['name'],
                     $data['image'],
-                    $data['price']
+                    $data['price'],
+                    $data['size'],
                 ]);
 
                 $data['id'] = $this->db->lastInsertId();

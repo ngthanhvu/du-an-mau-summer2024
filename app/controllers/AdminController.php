@@ -189,7 +189,8 @@ class AdminController
             'quantity' => $_POST['quantity'] ?? '',
             'name' => $_POST['name'] ?? '',
             'image' => $_POST['image'] ?? '',
-            'price' => $_POST['price'] ?? ''
+            'price' => $_POST['price'] ?? '',
+            'size' => $_POST['size'] ?? '',
         ];
         include_once __DIR__ . '/../../app/models/Cart.php';
         $cart = new Cart();
@@ -222,6 +223,7 @@ class AdminController
             'name' => $_POST['name'] ?? '',
             'address' => $_POST['address'] ?? '',
             'phone' => $_POST['phone'] ?? '',
+            'size' => $_POST['size'] ?? '',
         ];
 
         include_once __DIR__ . '/../../app/models/Order.php';
@@ -298,6 +300,7 @@ class AdminController
             $user_id = $_POST['user_id'];
             $paymentMethod = $_POST['payment'];
             $total = $_POST['total'];
+            $size = $_POST['size'];
 
             include_once __DIR__ . '/../../app/models/Order.php';
             $order = new Order();
@@ -311,6 +314,7 @@ class AdminController
                 'name' => $fullName,
                 'address' => $address,
                 'phone' => $phone,
+                'size' => $size
             ];
             $result = $order->addOrder($orderData);
 
@@ -326,7 +330,7 @@ class AdminController
             if ($paymentMethod === 'cod') {
                 $status = '1'; // Chưa thanh toán
                 $payment->updateOrderStatus($orderId, $status);
-                $payment->createBill($fullName, $email, $phone, $address, $orderId, $productName, $total, $status, $user_id);
+                $payment->createBill($fullName, $email, $phone, $address, $orderId, $productName, $size, $total, $status, $user_id);
 
                 include_once __DIR__ . '/../../app/models/Cart.php';
                 $cart = new Cart();

@@ -586,3 +586,44 @@ footer .footer .logo {
 .product-card1:hover img {
     transform: scale(1.1);
 }
+
+.product-image11 {
+    width: 100%;
+}
+
+.size-option input[type="radio"] {
+    display: none;
+}
+
+.size-option label {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.size-option input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.quantity-control input {
+    text-align: center;
+    width: 50px;
+}
+
+.section-detail {
+    margin-top: 80px;
+}
+
+.checkout-section {
+    margin-top: 100px;
+}
