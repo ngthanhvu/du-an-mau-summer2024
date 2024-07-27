@@ -247,4 +247,11 @@ class Product
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public function selectByCategory($categoris_id)
+    {
+        $sql = "SELECT * FROM products WHERE category_id = $categoris_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

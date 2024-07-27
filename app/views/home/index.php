@@ -4,6 +4,7 @@
         <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_1.jpg?1720275862057" alt="">
     </div>
 </section>
+
 <section class="section-2 mt-5">
     <div class="container">
         <div class="row">
@@ -28,78 +29,63 @@
         </div>
     </div>
 </section>
-<?php
-function formatVND($number)
-{
-    return number_format($number, 0, '', '.',) . 'đ';
-}
-$product = new Product();
-$sp = $product->select(3);
-$sp2 = $product->select(4);
-$sp3 = $product->select(5);
-?>
-<section class="section-3">
+
+<section class="section-3 mt-5">
     <div class="container">
-        <h2 class="my-4"><?php echo $sp[0]['name'] ?></h2>
         <div class="row">
             <?php
-            foreach ($sp as $key => $value) {
-
-            ?>
-                <div class="col-md-2">
-                    <a href="/detail?id=<?php echo $value['id'] ?>" class="text-decoration-none text-black">
-                        <div class="card border-0">
-                            <img src="/uploads/<?php echo $value['image'] ?>" class="border">
-                            <div class="card-body">
-                                <div class="rating">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                                <p class="card-title text-left"><?php echo $value['product_name'] ?></p>
-                                <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
-                                    <span class="text-danger"><?php echo formatVND($value['price']) ?></span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <?php
+            function formatVND($number)
+            {
+                return number_format($number, 0, '', '.',) . 'đ';
             }
+            foreach ($danhmuc as $category) {
+                $categoryId = $category['id'];
+                $categoryName = $category['name'];
+                $product = new Product();
+                $products = $product->selectByCategory($categoryId);
             ?>
-
-        </div>
-    </div>
-</section>
-
-<section class="section-4">
-    <div class="container">
-        <h2 class="my-4"><?php echo $sp2[0]['name']  ?></h2>
-        <div class="row">
-            <?php
-            foreach ($sp2 as $key => $value) {
-            ?>
-                <div class="col-md-2">
-                    <a class="text-decoration-none text-black" href="/detail?id=<?php echo $value['id'] ?>">
-                        <div class="card border-0">
-                            <img src="/uploads/<?php echo $value['image'] ?>" class="border">
-                            <div class="card-body">
-                                <div class="rating">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                                <p class="card-title text-left"><?php echo $value['product_name'] ?></p>
-                                <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
-                                    <span class="text-danger"><?php echo formatVND($value['price']) ?></span>
-                                </p>
+                <div class="col-md-12 mb-4">
+                    <h2><?php echo $categoryName ?></h2>
+                    <div class="row">
+                        <?php
+                        foreach ($products as $product) {
+                        ?>
+                            <div class="col-md-2">
+                                <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
+                                    <div class="card border-0">
+                                        <img src="/uploads/<?php echo $product['image'] ?>" class="border">
+                                        <div class="card-body">
+                                            <div class="rating">
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                            </div>
+                                            <p class="card-title text-left"><?php echo $product['product_name'] ?></p>
+                                            <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
+                                                <span class="text-danger"><?php echo formatVND($product['price']) ?></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    </a>
+                            <!-- <div class="col-md-4">
+                                <div class="product-card">
+                                    <div class="product-info">
+                                        <h3><?php echo $product['product_name'] ?></h3>
+                                        <p>Áo bóng đá, giày bóng đá, tất bóng đá,...</p>
+                                        <a href="#" class="btn btn-custom">Mua Ngay</a>
+                                    </div>
+                                    <div class="product-image">
+                                        <img src="/uploads/<?php echo $product['image'] ?>" alt="Đồ bóng đá">
+                                    </div>
+                                </div>
+                            </div> -->
+                        <?php
+                        }
+                        ?>
+                    </div>
                 </div>
             <?php
             }
@@ -108,39 +94,6 @@ $sp3 = $product->select(5);
     </div>
 </section>
 
-<section class="section-5">
-    <div class="container">
-        <h2 class="my-4"><?php echo $sp3[0]['name']  ?></h2>
-        <div class="row">
-            <?php
-            foreach ($sp3 as $key => $value) {
-            ?>
-                <div class="col-md-2">
-                    <a class="text-decoration-none text-black" href="/detail?id=<?php echo $value['id'] ?>">
-                        <div class="card border-0">
-                            <img src="/uploads/<?php echo $value['image'] ?>" class="border">
-                            <div class="card-body">
-                                <div class="rating">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                </div>
-                                <p class="card-title text-left"><?php echo $value['product_name'] ?></p>
-                                <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
-                                    <span class="text-danger"><?php echo formatVND($value['price']) ?></span>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-    </div>
-</section>
 <section class="section-6 mt-5">
     <div class="home-two-banner">
         <div class="container">
