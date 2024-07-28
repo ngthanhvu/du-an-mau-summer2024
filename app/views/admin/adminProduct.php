@@ -7,7 +7,7 @@
     <a href="/admin/product/add" class="btn btn-primary mb-3"><i class="bi bi-plus-circle"></i> Thêm sản phẩm</a>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
                 <th>#</th>
                 <th>Tên sản phẩm</th>
                 <th>Hình ảnh</th>
@@ -36,6 +36,11 @@
                 <a class='btn btn-danger' href='/admin/product/delete?id=$value[id]'><i class='bi bi-trash-fill'></i></a>
                 <a class='btn btn-primary' href='/admin/product/update?id=$value[id]'><i class='bi bi-pencil-square'></i></a>
                 </td>";
+                echo "</tr>";
+            }
+            if(empty($products)) {
+                echo "<tr>";
+                echo "<td class='text-center' colspan='11'>Không tìm thấy sản phẩm</td>";
                 echo "</tr>";
             }
             ?>

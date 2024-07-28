@@ -90,4 +90,12 @@ class Category
             return ['success' => false, 'errors' => $errors, 'data' => $data];
         }
     }
+
+    public function deleteCategory($id)
+    {
+        $sql = "DELETE FROM `category` WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }

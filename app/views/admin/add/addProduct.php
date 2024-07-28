@@ -53,6 +53,16 @@ var_dump($_POST);
             ?>
         </div>
         <div class="mb-3">
+            <label for="size" class="form-label">Size:</label>
+            <input type="text" class="form-control" id="size" name="size" placeholder="Nhập size (ví dụ: X, S, M, L, XL)">
+            <small class="form-text text-muted">Cách nhau bởi dấu phẩy</small>
+            <?php
+            if (isset($errors['size'])) {
+                echo '<p class="text-danger">' . $errors['size'] . '</p>';
+            }
+            ?>
+        </div>
+        <div class="mb-3">
             <label for="productImage" class="form-label">Hình ảnh sản phẩm</label>
             <div id="previewImages" class="mb-3"></div>
             <input name="image[]" class="form-control" type="file" id="productImage" placeholder="Nhập link hình ảnh" multiple>

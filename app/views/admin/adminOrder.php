@@ -6,7 +6,7 @@
     <p>Chào mừng đến trang quản trị!</p>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
                 <th>#</th>
                 <th>ID khách hàng</th>
                 <th>Tổng cộng</th>

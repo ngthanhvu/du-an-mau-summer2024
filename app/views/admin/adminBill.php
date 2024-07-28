@@ -6,7 +6,7 @@
     <p>Chào mừng đến trang quản trị!</p>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
                 <th class="text-center">#</th>
                 <th class="text-center">ID người dùng</th>
                 <th class="text-center">Họ tên</th>
@@ -40,9 +40,14 @@
                 echo "<td class='text-center'>" . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>')) . "</td>";
                 // echo "<td>" . $value['status'] . "</td>";
                 echo "<td class='text-center'>
-                 <a class='btn btn-danger' href='/admin/product/delete?id=$value[id]'><i class='bi bi-trash-fill'></i></a>
+                 <a class='btn btn-danger' href='/delete-bill?id=$value[id]'><i class='bi bi-trash-fill'></i></a>
                  <a class='btn btn-primary' href='/admin/product/update?id=$value[id]'><i class='bi bi-pencil-square'></i></a>
                  </td>";
+                echo "</tr>";
+            }
+            if(empty($bills)) {
+                echo "<tr>";
+                echo "<td class='text-center' colspan='11'>Không tìm thấy đơn hàng</td>";
                 echo "</tr>";
             }
             ?>

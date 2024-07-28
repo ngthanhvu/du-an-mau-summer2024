@@ -127,6 +127,7 @@ class AdminController
             'description' => $_POST['description'] ?? '',
             'image' => $_POST['image'] ?? '',
             'category_id' => $_POST['category_id'] ?? '',
+            'size' => $_POST['size'] ?? '',
         ];
         include_once __DIR__ . '/../../app/models/Product.php';
         $product = new Product();
@@ -439,6 +440,9 @@ class AdminController
 
     public function addComment()
     {
+        if(empty($_SESSION['user']['id'])){
+            header('Location: /login');
+        }
         include_once __DIR__ . '/../../app/models/Comment.php';
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -471,5 +475,21 @@ class AdminController
         $comment = new Comment();
         $comment->deleteComment($id);
         header("Location: /detail?id=$product_id");
+    }
+    
+    public function deleteBill($id)
+    {
+        include_once __DIR__ . '/../../app/models/Bill.php';
+        $bill = new Bill();
+        $bill->deleteBill($id);
+        header("Location: /admin/bill");
+    }
+
+    public function deleteCategory($id)
+    {
+        include_once __DIR__ . '/../../app/models/Category.php';
+        $category = new Category();
+        $category->deleteCategory($id);
+        header("Location: /admin/category");
     }
 }

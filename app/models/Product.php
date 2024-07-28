@@ -68,6 +68,10 @@ class Product
                 $errors['category_id'] = "Danh mục sản phẩm không được để trống";
             }
 
+            if (empty($data['size'])) {
+                $errors['size'] = "Kích thước sản phẩm không được để trống";
+            }
+
             if (empty($_FILES['image']['name'][0])) {
                 $errors['image'] = "Hình ảnh sản phẩm không được để trống";
             } else {
@@ -110,7 +114,7 @@ class Product
 
             if (empty($errors)) {
                 try {
-                    $sql = "INSERT INTO products (product_name, price, quantity, description, image, category_id) VALUES (?, ?, ?, ?, ?, ?)";
+                    $sql = "INSERT INTO products (product_name, price, quantity, description, image, category_id, size) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute([
                         $data['product_name'],
@@ -119,6 +123,7 @@ class Product
                         $data['description'],
                         implode(',', $uploadedFile),
                         $data['category_id'],
+                        $data['size'],
                     ]);
                     return ['success' => true];
                 } catch (PDOException $e) {
@@ -240,7 +245,7 @@ class Product
         }
     }
 
-    public function select ($categoris_id)
+    public function select($categoris_id)
     {
         $sql = "SELECT products.id, products.product_name, products.image, products.price, products.quantity, products.description, category.name FROM products INNER JOIN category on products.category_id = category.id WHERE category.id = $categoris_id";
         $stmt = $this->db->prepare($sql);

@@ -30,4 +30,12 @@ class Bill
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function deleteBill($id)
+    {
+        $sql = "DELETE FROM `bill` WHERE `id` = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 }
