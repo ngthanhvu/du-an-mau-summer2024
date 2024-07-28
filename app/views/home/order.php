@@ -35,7 +35,8 @@
                 echo "<td class='text-center'>" . formatVND($value['total']) . "</td>";
                 echo "<td class='text-center'>" . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>')) . "</td>";
                 echo "<td class='text-center'>
-                     <a class='btn btn-danger' href='/admin/product/delete?id=$value[id]'><i class='bi bi-trash-fill'></i></a>
+                     <a class='btn btn-danger btn-sm' href='?id=$value[id]'><i class='bi bi-x'></i>Hủy</a>
+                     <a class='btn btn-primary btn-sm' href='/product'><i class='bi bi-arrow-return-left'></i> Mua lại</a>
                      </td>";
                 echo "</tr>";
             }

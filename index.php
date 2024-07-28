@@ -84,6 +84,7 @@ switch ($base_path) {
         $controller->logout();
         break;
     case '/admin':
+        include_once 'app/models/Count.php';
         $controller = new HomeController();
         $controller->admin();
         break;

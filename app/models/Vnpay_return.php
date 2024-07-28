@@ -58,7 +58,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
             $status = '2'; // Trạng thái đã thanh toán
             $payment->updateOrderStatus($orderId, $status);
 
-            $payment->createBill($userFullName, $userEmail, $userPhone, $userAddress, $orderId, $productDetails, $total, $status, $userId);
+            $payment->createBill($userFullName, $userEmail, $userPhone, $userAddress, $orderId, $productDetails, $size, $total, $status, $userId);
 
             $emailResult = $mail->sendOrderConfirmation(
                 $userEmail,
