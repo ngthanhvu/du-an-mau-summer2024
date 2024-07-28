@@ -183,6 +183,9 @@ class AdminController
 
     public function addCart()
     {
+        if (empty($_SESSION['user']['id'])) {
+            header('Location: /login');
+        }
         $data = [
             'user_id' => $_SESSION['user']['id'] ?? '',
             'product_id' => $_POST['product_id'] ?? '',
@@ -460,5 +463,13 @@ class AdminController
         $comment = new Comment();
         $comments = $comment->getCommentsByProductId($id);
         include __DIR__ . '/../../app/views/home/detail.php';
+    }
+
+    public function deleteComment($id, $product_id)
+    {
+        include_once __DIR__ . '/../../app/models/Comment.php';
+        $comment = new Comment();
+        $comment->deleteComment($id);
+        header("Location: /detail?id=$product_id");
     }
 }

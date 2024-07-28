@@ -27,6 +27,10 @@
             echo "Thanh toán";
         } elseif ($url == '/add-order') {
             echo "Thanh toán đơn hàng";
+        } elseif ($url == '/login') {
+            echo "Đăng nhập";
+        } elseif ($url == '/register') {
+            echo "Đăng ký";
         } else {
             if ($url == '/detail?id=' . $_GET['id']) {
                 echo "Chi tiết sản phẩm";

@@ -33,4 +33,12 @@ class Comment
         $stmt->bindParam(':text', $text, PDO::PARAM_STR);
         return $stmt->execute();
     }
+
+    public function deleteComment($id)
+    {
+        $sql = "DELETE FROM comments WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }

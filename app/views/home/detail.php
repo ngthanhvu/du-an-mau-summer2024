@@ -90,11 +90,11 @@ function formatVND($number)
 </section>
 
 <script>
-document.querySelectorAll('input[name="size"]').forEach(function(sizeInput) {
-    sizeInput.addEventListener('change', function() {
-        document.getElementById('selectedSize').value = this.value;
+    document.querySelectorAll('input[name="size"]').forEach(function(sizeInput) {
+        sizeInput.addEventListener('change', function() {
+            document.getElementById('selectedSize').value = this.value;
+        });
     });
-});
 </script>
 
 <!-- Comments Section -->
@@ -107,7 +107,8 @@ document.querySelectorAll('input[name="size"]').forEach(function(sizeInput) {
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($comment['username']); ?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($comment['text']); ?></p>
-                        <p class="card-text"><small class="text-muted">Ngày: <?php echo date('d/m/Y', strtotime($comment['date'])); ?></small></p>
+                        <span class="card-text"><small class="text-muted">Ngày: <?php echo date('d/m/Y', strtotime($comment['date'])); ?></small></span>
+                        <span><a href="/delete-comment?id=<?php echo $comment['id'] ?>&product_id=<?php echo $detailProduct['id'] ?>" class="btn btn-danger btn-sm float-end"><i class="bi bi-trash"></i></a></span>
                     </div>
                 </div>
             <?php endforeach; ?>

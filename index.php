@@ -208,6 +208,10 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->addComment();
         break;
+    case '/delete-comment':
+        $controller = new AdminController();
+        $controller->deleteComment($_GET['id'], $_GET['product_id']);
+        break;
     default:
         http_response_code(404);
         include_once '404.html';

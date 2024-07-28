@@ -70,18 +70,6 @@
                                     </div>
                                 </a>
                             </div>
-                            <!-- <div class="col-md-4">
-                                <div class="product-card">
-                                    <div class="product-info">
-                                        <h3><?php echo $product['product_name'] ?></h3>
-                                        <p>Áo bóng đá, giày bóng đá, tất bóng đá,...</p>
-                                        <a href="#" class="btn btn-custom">Mua Ngay</a>
-                                    </div>
-                                    <div class="product-image">
-                                        <img src="/uploads/<?php echo $product['image'] ?>" alt="Đồ bóng đá">
-                                    </div>
-                                </div>
-                            </div> -->
                         <?php
                         }
                         ?>
