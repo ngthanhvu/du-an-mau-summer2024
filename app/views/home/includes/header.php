@@ -7,9 +7,10 @@
     <title>
         <?php
         $url = $_SERVER['REQUEST_URI'];
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if ($url == "/") {
             echo "Trang chủ";
-        } elseif ($url == "/product") {
+        } elseif ($url == "/product" || $url == "/product?page=". $page) {
             echo "Sản phẩm";
         } elseif ($url == "/contact") {
             echo "Liên hệ";

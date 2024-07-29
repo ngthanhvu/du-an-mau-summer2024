@@ -627,3 +627,7 @@ footer .footer .logo {
 .checkout-section {
     margin-top: 100px;
 }
+
+.main-product {
+    min-height: 50vh;
+}

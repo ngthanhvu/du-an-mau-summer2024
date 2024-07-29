@@ -59,4 +59,24 @@ class Views
         $result = $stmt->fetch();
         return $result;
     }
+
+    #page product
+    public function getPageProduct($offset = 0, $limit = 10)
+    {
+        $sql = "SELECT * FROM products LIMIT :offset, :limit";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function getTotalPageProduct()
+    {
+        $sql = "SELECT COUNT(*) as count FROM `products`";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 }

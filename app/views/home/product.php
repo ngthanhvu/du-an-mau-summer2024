@@ -53,28 +53,24 @@ include_once "includes/header.php";
 </section>
 
 <div class="container">
-    <!-- <h1 class="mt-4">Áo Bóng Đá</h1> -->
     <div class="row">
         <div class="col-md-3 sidebar">
             <h5>Danh Mục</h5>
             <?php
             foreach ($danhmuc as $category) {
             ?>
-                <a href="/category?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black"><?php echo $category['name']; ?></a>
+                <a href="/category?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted""><?php echo $category['name']; ?></a>
             <?php
             }
             ?>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 main-product">
             <div class="row">
                 <?php
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.',) . 'đ';
                 }
-                echo "<pre>";
-                // var_dump($danhmuc);  
-                echo "</pre>";
                 foreach ($sanpham as $product) {
                 ?>
                     <div class="col-md-3 col-sm-6 mb-4">
@@ -85,12 +81,12 @@ include_once "includes/header.php";
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-left small text-warning mb-2">
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                            <div class="bi-star-fill"></div>
-                                        </div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
                                     <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
                                     <p class="card-text"><?php echo formatVND($product['price']); ?> <del class="text-decoration-line-through text-danger">385.000đ</del></p>
                                 </div>
@@ -100,8 +96,15 @@ include_once "includes/header.php";
                 <?php
                 }
                 ?>
-                <!-- Add more product cards here -->
             </div>
+            <!-- Hiển thị các nút phân trang -->
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <li class="page-item <?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                        <a class="page-link bg-danger border-danger text-white" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
         </div>
     </div>
 </div>
