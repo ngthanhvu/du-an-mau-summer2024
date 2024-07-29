@@ -158,7 +158,7 @@ header {
 .profile-section {
     position: relative;
     margin-top: 100px;
-    z-index: -1;
+    /* z-index: -1; */
 }
 
 /* order */
