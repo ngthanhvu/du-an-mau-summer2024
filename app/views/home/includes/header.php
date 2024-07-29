@@ -27,9 +27,9 @@
             echo "Thanh toán";
         } elseif ($url == '/add-order') {
             echo "Thanh toán đơn hàng";
-        } elseif ($url == '/login') {
+        } elseif ($url == '/login' || $url == '/admin/users/login') {   
             echo "Đăng nhập";
-        } elseif ($url == '/register') {
+        } elseif ($url == '/register' || $url == '/admin/users/register') {
             echo "Đăng ký";
         } else {
             if ($url == '/detail?id=' . $_GET['id']) {
@@ -43,7 +43,14 @@
         ?>
     </title>
     <link rel="icon" id="favicon" href="https://static.tacdn.com/favicon.ico?v2" type="image/x-icon">
-    <link rel="stylesheet" href="../app/views/home/includes/css/style.css">
+    <link rel="stylesheet" href="<?php
+        $geturl = $_SERVER['REQUEST_URI'];
+        if ($geturl == "/admin/users/login" || $geturl == "/admin/users/register") {
+            echo '/app/views/home/includes/css/style.css';
+        } else {
+            echo '../app/views/home/includes/css/style.css';
+        }
+    ?>">
     <script src="https://kit.fontawesome.com/de27554dbd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
