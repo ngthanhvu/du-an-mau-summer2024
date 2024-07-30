@@ -221,6 +221,15 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->deleteCategory($_GET['id']);
         break;
+        // Google OAuth routes
+    case '/login/google':
+        $controller = new AdminController();
+        $controller->googleLogin();
+        break;
+    case '/login/google/callback':
+        $controller = new AdminController();
+        $controller->googleCallback();
+        break;
     default:
         http_response_code(404);
         include_once '404.html';

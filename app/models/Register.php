@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . '/../../includes/database.php';
+require_once __DIR__ . '/../../google/vendor/autoload.php';
 class LoginRegister
 {
     protected $db;
@@ -12,7 +13,6 @@ class LoginRegister
             die("Connection failed: " . $e->getMessage());
         }
     }
-
     public function register($data)
     {
         $errors = [];
@@ -105,4 +105,5 @@ class LoginRegister
 
         return ['success' => false, 'errors' => $errors, 'data' => $data];
     }
+
 }

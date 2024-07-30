@@ -45,7 +45,7 @@ include_once "includes/header.php";
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                                 <hr>
-                                <a href="#" class="btn btn-danger w-100"><i class="bi bi-google"></i> Đăng nhập bằng google</a>
+                                <a href="/login/google" class="btn btn-danger w-100"><i class="bi bi-google"></i> Đăng nhập bằng google</a>
                             </form>
                         </div>
                         <div class="card-footer text-center">

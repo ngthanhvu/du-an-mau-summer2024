@@ -440,7 +440,7 @@ class AdminController
 
     public function addComment()
     {
-        if(empty($_SESSION['user']['id'])){
+        if (empty($_SESSION['user']['id'])) {
             header('Location: /login');
         }
         include_once __DIR__ . '/../../app/models/Comment.php';
@@ -476,7 +476,7 @@ class AdminController
         $comment->deleteComment($id);
         header("Location: /detail?id=$product_id");
     }
-    
+
     public function deleteBill($id)
     {
         include_once __DIR__ . '/../../app/models/Bill.php';
@@ -491,5 +491,18 @@ class AdminController
         $category = new Category();
         $category->deleteCategory($id);
         header("Location: /admin/category");
+    }
+    public function googleLogin()
+    {
+        include_once __DIR__ . '/../../app/models/google.php';
+        $google = new Google();
+        $google->googleLogin();
+    }
+
+    public function googleCallback()
+    {
+        include_once __DIR__ . '/../../app/models/google.php';
+        $google = new Google();
+        $google->googleCallback();
     }
 }

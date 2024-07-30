@@ -29,7 +29,9 @@
         </div>
     </div>
 </section>
-
+<?php
+// var_dump($_SESSION);
+?>
 <section class="section-3 mt-5">
     <div class="container">
         <div class="row">
