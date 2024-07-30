@@ -10,8 +10,8 @@ class Google
     public function __construct()
     {
         $this->client = new Google_Client();
-        $this->client->setClientId('253811960358-9pgd7ka0ilo8nl77o5jgo07227og6mqe.apps.googleusercontent.com');
-        $this->client->setClientSecret('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');
+        $this->client->setClientId('');
+        $this->client->setClientSecret('');
         $this->client->setRedirectUri('http://localhost:3000/login/google/callback');
         $this->client->addScope('email');
         $this->client->addScope('profile');
