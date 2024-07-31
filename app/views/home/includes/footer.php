@@ -1,10 +1,3 @@
-<!-- <script>
-       document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                document.getElementById('loaderOverlay').style.display = 'none';
-            }, 500); // 1000ms = 1 giây
-        });
-    </script> -->
 <footer class="footer mt-5">
     <div class="container">
         <div class="mid-footer row">
@@ -78,7 +71,6 @@
         </div>
     </div>
 </footer>
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> -->
 </body>
 
 </html>

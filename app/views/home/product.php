@@ -1,5 +1,15 @@
 <?php
 include_once "includes/header.php";
+// Lấy danh mục hiện tại từ URL
+$currentCategoryId = isset($_GET['id']) ? $_GET['id'] : null;
+
+// Lọc sản phẩm theo danh mục
+if ($currentCategoryId) {
+    $sanpham = array_filter($sanpham, function ($product) use ($currentCategoryId) {
+        return $product['category_id'] == $currentCategoryId;
+    });
+}
+// var_dump($sanpham);
 ?>
 <style>
     .product-card1 {
@@ -56,24 +66,30 @@ include_once "includes/header.php";
     <div class="row">
         <div class="col-md-3 sidebar">
             <h5>Danh Mục</h5>
-            <?php
-            foreach ($danhmuc as $category) {
-            ?>
-                <a href="/category?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted""><?php echo $category['name']; ?></a>
-            <?php
-            }
-            ?>
+            <?php foreach ($danhmuc as $category) { ?>
+                <a href="/product?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted"><?php echo $category['name']; ?></a>
+            <?php } ?>
         </div>
         <div class="col-md-9 main-product">
-            <div class="row">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="input-group" style="width: 60%;">
+                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                </div>
+                <select id="sortSelect" class="form-select" style="width: 20%;">
+                    <option value="">Sắp xếp</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
+            </div>
+            <div id="productContainer" class="row">
                 <?php
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.',) . 'đ';
                 }
-                foreach ($sanpham as $product) {
-                ?>
-                    <div class="col-md-3 col-sm-6 mb-4">
+                foreach ($sanpham as $product) { ?>
+                    <div class="col-md-3 col-sm-6 mb-4 product-item" data-name="<?php echo $product['product_name']; ?>">
                         <a href="/detail?id=<?php echo $product['id']; ?>" class="text-decoration-none text-black">
                             <div class="card product-card1">
                                 <div class="card-img-wrapper">
@@ -93,9 +109,7 @@ include_once "includes/header.php";
                             </div>
                         </a>
                     </div>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </div>
             <!-- Hiển thị các nút phân trang -->
             <ul class="pagination">
@@ -108,6 +122,36 @@ include_once "includes/header.php";
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+        const productContainer = document.getElementById("productContainer");
+        const products = Array.from(document.getElementsByClassName("product-item"));
+
+        function filterAndSortProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortValue = sortSelect.value;
+
+            let filteredProducts = products.filter(product => {
+                const productName = product.getAttribute("data-name").toLowerCase();
+                return productName.includes(searchTerm);
+            });
+
+            if (sortValue === "az") {
+                filteredProducts.sort((a, b) => a.getAttribute("data-name").localeCompare(b.getAttribute("data-name")));
+            } else if (sortValue === "za") {
+                filteredProducts.sort((a, b) => b.getAttribute("data-name").localeCompare(a.getAttribute("data-name")));
+            }
+
+            productContainer.innerHTML = "";
+            filteredProducts.forEach(product => productContainer.appendChild(product));
+        }
+
+        searchInput.addEventListener("input", filterAndSortProducts);
+        sortSelect.addEventListener("change", filterAndSortProducts);
+    });
+</script>
 
 <?php
 include_once "includes/footer.php";

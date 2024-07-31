@@ -10,7 +10,7 @@
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if ($url == "/") {
             echo "Trang chủ";
-        } elseif ($url == "/product" || $url == "/product?page=". $page) {
+        } elseif ($url == "/product" || $url == "/product?page=". $page || $url == "/product?id=" . $_GET['id']) {
             echo "Sản phẩm";
         } elseif ($url == "/contact") {
             echo "Liên hệ";
@@ -81,10 +81,6 @@
 </style>
 
 <body>
-    <!-- <div class="loader" id="loader"></div> -->
-    <!-- <div class="loader-overlay" id="loaderOverlay">
-        <div class="loader"></div>
-    </div> -->
     <header>
         <a href="/" class="logo">
             <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="">
