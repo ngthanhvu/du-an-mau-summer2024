@@ -41,7 +41,7 @@ include_once "includes/header.php";
                                 <div class="mb-3">
                                     <input type="checkbox" class="form-check-input">
                                     <label class="form-check-label">Ghi nhớ mật khẩu</label>
-                                    <a href="#" class="float-end">Quên mật khẩu</a>
+                                    <a href="/reset-password" class="float-end">Quên mật khẩu</a>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                                 <hr>

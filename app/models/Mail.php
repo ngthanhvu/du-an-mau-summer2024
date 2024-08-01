@@ -38,24 +38,6 @@ class Mail
         }
     }
 
-    // private function createEmailBody($fullName, $orderDetails)
-    // {
-    //     function formatVND($number)
-    //     {
-    //         return number_format($number, 0, '.', '.') . ' đ';
-    //     }
-
-    //     $body = "<h1>Chào $fullName,</h1>";
-    //     $body .= "<p>Cảm ơn bạn đã đặt hàng!</p>";
-    //     $body .= "<h2>Chi tiết đơn hàng:</h2>";
-    //     $body .= "<ul>";
-    //     foreach ($orderDetails as $detail) {
-    //         $total = $detail['price'] * $detail['quantity'];
-    //         $body .= "<li>{$detail['product_name']} - Số lượng: {$detail['quantity']} - Giá: " . formatVND($total) . "</li>";
-    //     }
-    //     $body .= "</ul>";
-    //     return $body;
-    // }
 
     private function createEmailBody($fullName, $orderDetails)
     {
@@ -137,5 +119,36 @@ class Mail
 </html>';
 
         return $body;
+    }
+
+    public function sendOtpMail($to, $otp)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngthanhvu205@gmail.com';
+            $mail->Password = 'ncyp agwy mzvc zrwk';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            // Người gửi và người nhận
+            $mail->setFrom('support@ministore.com', 'MiniStore');
+            $mail->addAddress($to);
+
+            // Nội dung email
+            $mail->isHTML(true);
+            $mail->Subject = 'OTP for Password Reset';
+            $mail->Body = 'Your OTP for password reset is: ' . $otp;
+            $mail->AltBody = 'Your OTP for password reset is: ' . $otp;
+
+            $mail->send();
+            return ['success' => true];
+        } catch (Exception $e) {
+            return ['success' => false, 'error' => $mail->ErrorInfo];
+        }
     }
 }

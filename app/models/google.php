@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../google/vendor/autoload.php';
 include_once __DIR__ . '/../../includes/database.php';
+include_once __DIR__ . '/../../config/config.php';
 
 class Google
 {
@@ -10,9 +11,9 @@ class Google
     public function __construct()
     {
         $this->client = new Google_Client();
-        $this->client->setClientId('');
-        $this->client->setClientSecret('');
-        $this->client->setRedirectUri('http://localhost:3000/login/google/callback');
+        $this->client->setClientId(CLIENT_ID);
+        $this->client->setClientSecret(CLIENT_SECRET);
+        $this->client->setRedirectUri(REDIRECT_URI);
         $this->client->addScope('email');
         $this->client->addScope('profile');
 

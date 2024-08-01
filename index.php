@@ -230,6 +230,31 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->googleCallback();
         break;
+    case '/reset-password':
+        $controller = new HomeController();
+        $controller->resetPassword();
+        break;
+    case '/send-otp':
+        $admincontroller = new AdminController();
+        var_dump($_POST);
+        $admincontroller->sendOtp($_POST['email']);
+        break;
+    case '/very-otp':
+        $controller = new HomeController();
+        $controller->otp();
+        break;
+    case '/check-otp':
+        $admincontroller = new AdminController();
+        $admincontroller->checkOtp($_POST);
+        break;
+    case '/update-password':
+        $controller = new HomeController();
+        $controller->update_password();
+        break;
+    case '/update-new-password':
+        $admincontroller = new AdminController();
+        $admincontroller->updateNewPassword();
+        break;
     default:
         http_response_code(404);
         include_once '404.html';

@@ -73,7 +73,7 @@ if ($currentCategoryId) {
         <div class="col-md-9 main-product">
             <div class="d-flex justify-content-between mb-3">
                 <div class="input-group" style="width: 60%;">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text bg-danger text-white border-danger" id="basic-addon1"><i class="bi bi-search"></i></span>
                     <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm">
                 </div>
                 <select id="sortSelect" class="form-select" style="width: 20%;">

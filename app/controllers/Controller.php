@@ -112,4 +112,19 @@ class HomeController
     {
         include __DIR__ . '/../../app/models/Vnpay_return.php';
     }
+
+    public function resetPassword()
+    {
+        include __DIR__ . '/../../app/views/home/forgotpassword.php';
+    }
+
+    public function otp()
+    {
+        include __DIR__ . '/../../app/views/home/otp.php';
+    }
+
+    public function update_password()
+    {
+        include __DIR__ . '/../../app/views/home/updatepassword.php';
+    }
 }

@@ -23,6 +23,26 @@ class AdminController
         }
     }
 
+
+    public function sendOtp($email)
+    {
+        $data = [
+            'email' => $email ?? '',
+        ];
+
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $result = $user->sendOtp($data);
+
+        if ($result['success']) {
+            $_SESSION['email'] = $data['email'];
+            header('Location: /very-otp');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/home/forgotpassword.php';
+        }
+    }
+
     public function login()
     {
         $data = [
@@ -504,5 +524,42 @@ class AdminController
         include_once __DIR__ . '/../../app/models/google.php';
         $google = new Google();
         $google->googleCallback();
+    }
+
+    public function checkOtp()
+    {
+        $data = [
+            'otp' => $_POST['otp'] ?? null,
+            'email' => $_POST['email'] ?? null,
+        ];
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $result = $user->checkOtp($data);
+
+        if ($result['success']) {
+            header('Location: /update-password?id=' . $result['user_id']);
+            exit();
+        } else {
+            echo $result['message'];
+        }
+    }
+
+    public function updateNewPassword()
+    {
+        $data = [
+            'password' => $_POST['password'] ?? null,
+            'id' => $_POST['id'] ?? null,
+            'confirm_password' => $_POST['confirm_password'] ?? null
+        ];
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $result = $user->updatePassword($data);
+
+        if ($result['success']) {
+            header('Location: /login');
+            exit();
+        } else {
+            echo $result['message'];
+        }
     }
 }
