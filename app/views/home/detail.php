@@ -4,38 +4,11 @@ function formatVND($number)
 {
     return number_format($number, 0, '', '.',) . 'đ';
 }
+echo "<pre>";
+// var_dump($detailProduct);
+echo "</pre>";
 ?>
-<!-- <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="/uploads/<?php echo $detailProduct['image'] ?>" alt="..." /></div>
-            <div class="col-md-6">
-                <div class="small mb-1">Category: <?php echo $detailProduct['category_id'] ?></div>
-                <h1 class="display-5 fw-bolder"><?php echo $detailProduct['product_name'] ?></h1>
-                <div class="fs-5 mb-3">
-                    <span>Giá: <?php echo formatVND($detailProduct['price']) ?></span>
-                </div>
-                <p class="lead"><?php echo $detailProduct['description'] ?></p>
-                <form action="/add_to_cart" method="post">
-                    <div class="d-flex">
-                        <input type="hidden" name="product_id" value="<?php echo $detailProduct['id']; ?>">
-                        <input type="hidden" name="user_id" value="<?php if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) {
-                                                                        echo ($_SESSION['user']['id']);
-                                                                    } ?>">
-                        <input type="hidden" name="image" value="<?php echo $detailProduct['image']; ?>">
-                        <input type="hidden" name="name" value="<?php echo $detailProduct['product_name']; ?>">
-                        <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
-                        <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem" />
-                        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Add to cart
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section> -->
+
 
 <section class="py-5 bg-light section-detail">
     <div class="container my-5">
@@ -61,6 +34,10 @@ function formatVND($number)
                 <div class="mb-3">
                     <label for="mo-ta" class="form-label">Mô tả:</label>
                     <p class="text-muted"><?php echo $detailProduct['description'] ?></p>
+                </div>
+                <div class="mb-3">
+                    <label for="soluongtrongkhi">Số lượng trong kho:</label>
+                    <input type="text" class="form-control bg-light" id="soluongtrongkhi" value="<?php echo $detailProduct['quantity'] ?>" style="max-width: 5rem" readonly>
                 </div>
                 <div class="mt-3">
                     <p><b>Giá tiền:</b><strong class="text-danger text-nowrap fs-5"> <?php echo formatVND($detailProduct['price']) ?></strong></p>

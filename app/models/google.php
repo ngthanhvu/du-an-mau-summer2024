@@ -3,6 +3,9 @@ require_once __DIR__ . '/../../google/vendor/autoload.php';
 include_once __DIR__ . '/../../includes/database.php';
 include_once __DIR__ . '/../../config/config.php';
 
+use Google\Client as Google_Client;
+use Google\Service\Oauth2 as Google_Service_Oauth2;
+
 class Google
 {
     private $client;
@@ -26,7 +29,6 @@ class Google
 
     public function googleLogin()
     {
-        // Create URL for Google OAuth authentication
         $authUrl = $this->client->createAuthUrl();
         var_dump($authUrl);
         header('Location: ' . $authUrl);
@@ -37,35 +39,30 @@ class Google
     {
         if (isset($_GET['code'])) {
             try {
-                // Exchange authorization code for access token
                 $token = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
                 $this->client->setAccessToken($token);
 
-                // Get user info from Google
                 $google_oauth = new Google_Service_Oauth2($this->client);
                 $google_account_info = $google_oauth->userinfo->get();
                 $email = $google_account_info->email;
                 $name = $google_account_info->name;
-                // $phone = $google_account_info->phone_number;
                 $google_id = $google_account_info->id;
 
-                // Check if user already exists in the database
                 $user = $this->getUserByEmail($email);
 
                 if ($user) {
-                    // User exists, log them in
                     $_SESSION['user'] = $user;
                     header('Location: /');
                     exit();
                 } else {
-                    // User does not exist, register them
+                    $radomUs = rand(1000, 9999);
+                    $usergg= 'GoogleUser' . $radomUs;
                     $data = [
-                        'username' => $name,
+                        'username' => $usergg,
                         'email' => $email,
-                        // 'phone' => $phone,
+                        'full_name' => $name,
                         'google_id' => $google_id,
                     ];
-                    // var_dump($data);
                     $result = $this->registerFromGoogle($data);
 
                     if ($result['success']) {
@@ -73,21 +70,17 @@ class Google
                         header('Location: /');
                         exit();
                     } else {
-                        // Log errors for debugging
                         error_log(print_r($result['errors'], true));
-                        // var_dump($result['errors']);
                         header('Location: /register');
                         exit();
                     }
                 }
             } catch (Exception $e) {
-                // Log any exceptions for debugging
                 error_log($e->getMessage());
                 header('Location: /login');
                 exit();
             }
         } else {
-            // Handle cases where 'code' is not set
             header('Location: /login');
             exit();
         }
@@ -106,14 +99,14 @@ class Google
         $errors = [];
 
         try {
-            $sql = "INSERT INTO users (username, email, google_id) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (username, email, full_name, google_id) VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([
                 $data['username'],
                 $data['email'],
+                $data['full_name'],
                 $data['google_id'],
             ]);
-            // Fetch the newly created user
             $user = $this->getUserByEmail($data['email']);
             return ['success' => true, 'user' => $user];
         } catch (PDOException $e) {

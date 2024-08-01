@@ -40,6 +40,12 @@
                      </td>";
                 echo "</tr>";
             }
+            
+            if(empty($bills)) {
+                echo "<tr>";
+                echo "<td class='text-center' colspan='11'>Không tìm thấy đơn hàng</td>";
+                echo "</tr>";
+            }
             ?>
         </tbody>
     </table>
