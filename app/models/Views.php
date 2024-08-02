@@ -79,4 +79,13 @@ class Views
         $stmt->execute();
         return $stmt->fetchColumn();
     }
+
+    public function viewCoupon()
+    {
+        $sql = "SELECT * FROM coupons";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

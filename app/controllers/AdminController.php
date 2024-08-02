@@ -562,4 +562,25 @@ class AdminController
             echo $result['message'];
         }
     }
+
+    public function addCoupon()
+    {
+        $data = [
+            'code' => $_POST['code'] ?? '',
+            'discount_amount' => $_POST['discount_amount'] ?? '',
+            'max_uses' => $_POST['max_use'] ?? '',
+            'end_date' => $_POST['end_date'] ?? ''
+        ];
+        include_once __DIR__ . '/../../app/models/Coupon.php';
+        $coupon = new Coupon();
+        $result = $coupon->addCoupon($data);
+
+        if ($result['success']) {
+            header('Location: /admin/coupon');
+            exit();
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/admin/add/addCoupon.php';
+        }
+    }
 }

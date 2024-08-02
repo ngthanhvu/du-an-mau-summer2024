@@ -127,4 +127,14 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/home/updatepassword.php';
     }
+
+    public function coupon()
+    {
+        include __DIR__ . '/../../app/views/admin/adminCoupon.php';
+    }
+
+    public function addCoupon()
+    {
+        include __DIR__ . '/../../app/views/admin/add/addCoupon.php';
+    }
 }

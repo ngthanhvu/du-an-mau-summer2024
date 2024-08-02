@@ -4,7 +4,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <form class="form-inline my-2 my-lg-0 ml-auto">
+    <form class="form-inline my-2 my-lg-0 ml-auto mr-3">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-primary" type="submit">Search</button>
     </form>
@@ -44,6 +44,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/bill">
                         <i class="bi bi-receipt"></i> Đơn hàng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/coupon">
+                        <i class="bi bi-ticket-detailed-fill"></i> Mã giảm giá
                         </a>
                     </li>
                 </ul>

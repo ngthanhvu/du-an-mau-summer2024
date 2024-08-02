@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body text-center">
                     <img src="https://hotprintdesign.com/wp-content/uploads/2019/02/Sani-Sebastian.png" class="rounded-circle mb-3" alt="Profile Picture" width="150">
-                    <h5 class="card-title"><?php echo $users['username'] ?></h5>
+                    <h5 class="card-title"><?php echo $users['username'] ?> <i class="bi bi-patch-check-fill text-primary"></i></h5>
                     <p class="card-text"><?php echo $users['email'] ?></p>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                         <i class="bi bi-person-circle"></i> Tài khoản khách hàng</button>

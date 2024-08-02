@@ -65,4 +65,12 @@ class ViewController
         $users = $view->viewUserId($id);
         include __DIR__ . '/../../app/views/home/profile.php';
     }
+
+    public function viewCoupon()
+    {
+        include __DIR__ . '/../../app/models/Views.php';
+        $view = new Views();
+        $coupon = $view->viewCoupon();
+        include __DIR__ . '/../../app/views/admin/adminCoupon.php';
+    }
 }

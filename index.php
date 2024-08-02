@@ -179,6 +179,22 @@ switch ($base_path) {
         break;
         $controller->adminBill();
         break;
+    case '/admin/coupon':
+        $controller = new HomeController();
+        $viewController = new ViewController();
+        $viewController->viewCoupon();
+        break;
+        $controller->coupon();
+        break;
+    case '/admin/coupon/add':
+        $controller = new HomeController();
+        $controller->addCoupon();
+        break;
+    case '/admin/coupon/addCoupon':
+        $controller = new AdminController();
+        var_dump($_POST);
+        $controller->addCoupon();
+        break;
         #end admin tempalte
 
     case '/add_to_cart':

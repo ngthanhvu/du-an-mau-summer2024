@@ -18,9 +18,9 @@ echo "</pre>";
             </div>
             <div class="col-md-6">
                 <h2><?php echo $detailProduct['product_name'] ?></h2>
-                <p>Hãng: Đang cập nhật</p>
+                <p><b>Hãng:</b> Đang cập nhật</p>
                 <div class="mb-3">
-                    <label for="size" class="form-label">Size:</label>
+                    <label for="size" class="form-label"><b>Size:</b></label>
                     <div id="size" class="d-flex size-option">
                         <?php
                         $sizes = explode(',', $detailProduct['size']);
@@ -32,12 +32,11 @@ echo "</pre>";
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="mo-ta" class="form-label">Mô tả:</label>
+                    <label for="mo-ta" class="form-label"><b>Mô tả:</b></label>
                     <p class="text-muted"><?php echo $detailProduct['description'] ?></p>
                 </div>
                 <div class="mb-3">
-                    <label for="soluongtrongkhi">Số lượng trong kho:</label>
-                    <input type="text" class="form-control bg-light" id="soluongtrongkhi" value="<?php echo $detailProduct['quantity'] ?>" style="max-width: 5rem" readonly>
+                    <label for="soluongtrongkhi"><b>Số lượng trong kho:</b> <span class="badge text-bg-danger"><?php echo $detailProduct['quantity'] ?></span></label>
                 </div>
                 <div class="mt-3">
                     <p><b>Giá tiền:</b><strong class="text-danger text-nowrap fs-5"> <?php echo formatVND($detailProduct['price']) ?></strong></p>
@@ -51,7 +50,7 @@ echo "</pre>";
                             <input type="hidden" name="name" value="<?php echo $detailProduct['product_name']; ?>">
                             <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
                             <input type="hidden" name="size" id="selectedSize" value="">
-                            <label for="inputQuantity" class="form-label me-3 text-center">Số lượng:</label>
+                            <label for="inputQuantity" class="form-label me-3 text-center"><b>Số lượng:</b></label>
                             <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem" /><br>
                         </div>
                         <div>
