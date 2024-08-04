@@ -356,6 +356,11 @@ class AdminController
                 $payment->updateOrderStatus($orderId, $status);
                 $payment->createBill($fullName, $email, $phone, $address, $orderId, $productName, $size, $total, $status, $user_id);
 
+                // Cập nhật số lượng sản phẩm sau khi thanh toán thành công
+                foreach ($_SESSION['cart'] as $cartItem) {
+                    $order->updateProductQuantity($cartItem['product_id'], $cartItem['quantity']);
+                }
+
                 include_once __DIR__ . '/../../app/models/Cart.php';
                 $cart = new Cart();
                 $cart->deleteCartUserId($user_id);

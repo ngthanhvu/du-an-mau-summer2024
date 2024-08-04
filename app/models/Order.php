@@ -187,4 +187,12 @@ class Order
         $stmt->execute([$orderId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function updateProductQuantity($productId, $quantity)
+{
+    $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$quantity, $productId]);
+}
+
 }

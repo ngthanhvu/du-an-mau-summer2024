@@ -118,11 +118,9 @@
                     <i class="bi bi-person-circle"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
-
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Hồ sơ</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Lịch sử mua hàng</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Đăng xuất</a></li>
                 </ul>
             </li>';
             }
