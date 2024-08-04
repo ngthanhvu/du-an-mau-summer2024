@@ -8,6 +8,7 @@ class Order
     public function __construct()
     {
         try {
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
             $this->db = db_connect();
         } catch (PDOException $e) {
             die("Kết nối thất bại: " . $e->getMessage());
@@ -177,7 +178,7 @@ class Order
 
     public function getOrderDetailsByOrderId($orderId)
     {
-        $sql = "SELECT o.total, p.product_name as product_name, od.quantity, od.price
+        $sql = "SELECT o.total, p.product_name as product_name, od.quantity, od.price, od.coupon
             FROM orders o
             JOIN order_details od ON o.id = od.order_id
             JOIN products p ON od.product_id = p.id

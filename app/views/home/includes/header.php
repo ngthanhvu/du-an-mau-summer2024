@@ -104,6 +104,7 @@
             <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>
                         <?php if (isset($_SESSION['cart'])) {
                             echo count($_SESSION['cart']);
+                            // var_dump($_SESSION['cart']);
                         } else {
                             echo "0";
                         } ?>

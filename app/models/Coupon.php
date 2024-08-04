@@ -53,4 +53,33 @@ class Coupon
             return ['success' => false, 'errors' => $errors, 'data' => $data];
         }
     }
+
+    public function activeCoupon($data)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            try {
+                $sql = "SELECT * FROM coupons WHERE code = ? AND end_date > NOW()";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([
+                    $data['code']
+                ]);
+                $coupon = $stmt->fetch();
+                if ($coupon) {
+                    if ($coupon['max_uses'] > 0) {
+                        $sql = "UPDATE coupons SET max_uses = max_uses - 1 WHERE code = ?";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->execute([
+                            $data['code']
+                        ]);
+                    }
+                    $_SESSION['coupon'] = $coupon;
+                    return ['success' => true, 'coupon' => $coupon];
+                } else {
+                    return ['success' => false, 'message' => 'Không tiếm được giảm giá'];
+                }
+            } catch (PDOException $e) {
+                return ['success' => false, 'message' => 'Không tiếm được giảm giá: ' . $e->getMessage()];
+            }
+        }
+    }
 }

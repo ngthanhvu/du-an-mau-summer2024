@@ -81,6 +81,8 @@ class Cart
                 foreach ($_SESSION['cart'] as $key => $item) {
                     if ($item['id'] == $id) {
                         unset($_SESSION['cart'][$key]);
+                        unset($_SESSION['cart']['subtotal']);
+                        unset($_SESSION['coupon']);
                         break;
                     }
                 }

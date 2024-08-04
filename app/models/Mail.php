@@ -32,94 +32,12 @@ class Mail
             $mail->AltBody = 'Đơn hàng đã được đặt thành công.';
 
             $mail->send();
+            unset($_SESSION['coupon']);
             return ['success' => true];
         } catch (Exception $e) {
             return ['success' => false, 'error' => $mail->ErrorInfo];
         }
     }
-
-
-    //     private function createEmailBody($fullName, $orderDetails)
-    //     {
-    //         // Hàm định dạng số tiền sang đơn vị VND
-    //         function formatVND($number)
-    //         {
-    //             return number_format($number, 0, '.', '.') . ' đ';
-    //         }
-
-    //         // Tính tổng số tiền thanh toán
-    //         $totalAmount = array_reduce($orderDetails, function ($carry, $item) {
-    //             return $carry + ($item['price'] * $item['quantity']);
-    //         }, 0);
-
-    //         $body = '<!DOCTYPE html>
-    // <html lang="vi">
-    // <head>
-    //     <meta charset="UTF-8">
-    //     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    //     <title>Chi tiết đơn hàng</title>
-    //     <style>
-    //         body {
-    //             font-family: Arial, sans-serif;
-    //             line-height: 1.6em;
-    //             background-color: #f0f0f0;
-    //             padding: 20px;
-    //             color: #333;
-    //         }
-    //         .container {
-    //             max-width: 600px;
-    //             margin: 0 auto;
-    //             background-color: #fff;
-    //             padding: 20px;
-    //             border-radius: 5px;
-    //             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    //         }
-    //         .header {
-    //             color: #007bff;
-    //         }
-    //         .order-details {
-    //             color: #007bff;
-    //         }
-    //         .order-item {
-    //             margin-bottom: 10px;
-    //             border-bottom: 1px solid #ccc;
-    //             padding-bottom: 10px;
-    //         }
-    //         .order-item strong {
-    //             color: #333;
-    //         }
-    //         .order-item span {
-    //             color: #666;
-    //         }
-    //     </style>
-    // </head>
-    // <body>
-    //     <div class="container">
-    //         <h1 class="header">Chào ' . $fullName . ',</h1>
-    //         <p>Cảm ơn bạn đã đặt hàng!</p>
-    //         <h2 class="order-details">Chi tiết đơn hàng:</h2>
-    //         <ul style="list-style-type: none; padding: 0;">';
-
-    //         foreach ($orderDetails as $detail) {
-    //             $total = $detail['price'] * $detail['quantity'];
-    //             $body .= '
-    //         <li class="order-item">
-    //             <strong>' . $detail['product_name'] . '</strong><br>
-    //             <span>Số lượng: ' . $detail['quantity'] . '</span><br>
-    //             <span>Giá: ' . formatVND($total) . '</span>
-    //         </li>';
-    //         }
-
-    //         $body .= '
-    //             <strong>Tổng thanh toán:</strong><br>
-    //             <span>Giá: ' . formatVND($totalAmount) . '</span>
-    //         </ul>
-    //     </div>
-    // </body>
-    // </html>';
-
-    //         return $body;
-    //     }
 
     private function createEmailBody($fullName, $orderDetails)
     {
@@ -133,6 +51,10 @@ class Mail
         $totalAmount = array_reduce($orderDetails, function ($carry, $item) {
             return $carry + ($item['price'] * $item['quantity']);
         }, 0);
+
+        $coupon = isset($_SESSION['coupon']) ? $_SESSION['coupon'] : null;
+
+        $total_final = $coupon ? $totalAmount - $coupon['discount_amount'] : $totalAmount;
 
         // Thiết lập locale cho tiếng Việt
         setlocale(LC_TIME, 'vi_VN.UTF-8');
@@ -261,8 +183,12 @@ class Mail
 
         $body .= '
                     <tr class="total">
+                        <td>Giảm giá:</td>
+                        <td class="text-right">' . formatVND($coupon['discount_amount']) . '</td>
+                    </tr>
+                    <tr class="total">
                         <td>Tổng:</td>
-                        <td class="text-right">' . formatVND($totalAmount) . '</td>
+                        <td class="text-right">' . formatVND($total_final) . '</td>
                     </tr>
                 </tbody>
             </table>

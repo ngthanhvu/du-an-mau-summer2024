@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once "includes/header.php"; ?>
 
 <section class="yourcart-section">
@@ -9,13 +9,12 @@ include_once "includes/header.php"; ?>
                 <hr>
                 <?php
                 echo "<pre>";
-                // var_dump($_SESSION['cart']);
+                // var_dump($_SESSION);
                 echo "</pre>";
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
                 }
-
                 $carts = $cartss;
                 if ($carts) {
                     foreach ($carts as $cart) {
@@ -44,9 +43,12 @@ include_once "includes/header.php"; ?>
             <div class="col-md-4">
                 <div class="order-summary">
                     <h4>Tóm tắt đơn hàng</h4>
-                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá ở đây">
+                    <form action="/active-coupon" method="post" class="coupon-form">
+                        <input type="text" name="code" class="form-control" placeholder="Nhập mã giảm giá ở đây">
+                        <button type="submit" class="btn btn-dark">Áp dụng</button>
+                    </form>
                     <div class="d-flex justify-content-between">
-                        <p>Tổng phụ</p>
+                        <p>Tổng phụ:</p>
                         <p><?php
                             $subtotal = 0;
                             foreach ($carts as $cart) {
@@ -55,9 +57,22 @@ include_once "includes/header.php"; ?>
                             echo formatVND($subtotal);
                             ?></p>
                     </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Giảm giá:</p>
+                        <?php
+                        if (isset($_SESSION['coupon'])) {
+                            $subtotal -= $_SESSION['coupon']['discount_amount'];
+                            echo '<p>' . formatVND($_SESSION['coupon']['discount_amount']) . '</p>';
+                        } else {
+                            echo '<p>0đ</p>';
+                        }
+                        ?>
+                    </div>
                     <div class="d-flex justify-content-between total">
-                        <p>Tổng cộng</p>
-                        <p><?php echo formatVND($subtotal) ?></p>
+                        <p>Tổng cộng:</p>
+                        <p><?php
+                                echo formatVND($subtotal);
+                            ?></p>
                     </div>
                     <form action="/add-order?id=<?php echo isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 'No user ID found'; ?>" method="post">
                         <?php
@@ -68,10 +83,9 @@ include_once "includes/header.php"; ?>
                             <input type="hidden" name="carts[<?php echo $index; ?>][quantity]" value="<?php echo $cart['quantity']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][price]" value="<?php echo $cart['price']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][size]" value="<?php echo $cart['size']; ?>">
-                            <!-- <input type="hidden" name="carts[<?php echo $index; ?>][image]" value="<?php echo $cart['image']; ?>"> -->
                         <?php
                         }
-                        if(empty($carts)){
+                        if (empty($carts)) {
                             echo "<p class='text-center'>Giỏ hàng trống</p>";
                         }
                         ?>

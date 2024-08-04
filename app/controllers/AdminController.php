@@ -583,4 +583,23 @@ class AdminController
             include __DIR__ . '/../../app/views/admin/add/addCoupon.php';
         }
     }
+
+    public function getCoupon()
+    {
+        $errors = [];
+        $data = [
+            'code' => $_POST['code'] ?? '',
+        ];
+        include_once __DIR__ . '/../../app/models/Coupon.php';
+        $coupon = new Coupon();
+        $result = $coupon->activeCoupon($data);
+
+        if ($result['success']) {
+            header('Location: /cart');
+            exit();
+        } else {
+            echo $result['message'];
+            include __DIR__ . '/../../app/views/home/cart.php';
+        }
+    }
 }

@@ -631,3 +631,19 @@ footer .footer .logo {
 .main-product {
     min-height: 50vh;
 }
+.coupon-form {
+    display: flex;
+    align-items: center;
+}
+
+.coupon-form input[type="text"] {
+    flex: 1;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.coupon-form button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-bottom: 15px;
+}
