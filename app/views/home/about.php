@@ -7,14 +7,14 @@
             <div class="row align-items-center py-5">
                 <div class="col-md-8">
                     <h1>Về Chúng Tôi</h1>
-                    <p class="lead mb-0" id="about">
+                    <p class="lead mb-0 text-muted" id="about">
                         Chào mừng bạn đến với SHOP MALL, điểm đến lý tưởng cho những ai đam mê thể thao và phong
                         cách sống năng động! Tại SHOP MALL, chúng tôi tự hào mang đến cho khách hàng những sản phẩm
                         thể thao chất lượng cao, đa dạng và phong phú.
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQesYch_0ua9spyTtwqukkJbzrX46d02o_95g&s">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ9OItwYmGuAQ2LDNYs0RHNitGd_JXkCWj5A&s">
                 </div>
             </div>
         </div>
