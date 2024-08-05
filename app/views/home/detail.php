@@ -9,15 +9,7 @@ echo "<pre>";
 echo "</pre>";
 ?>
 
-<<<<<<< HEAD
 
-=======
-<section class="shop2 text-left">
-    <a href="/" class="text-decoration-none">
-        <h1 class="text-left mt-5">Trang Chủ</h1>
-    </a>
-</section>
->>>>>>> feature
 <section class="py-5 bg-light section-detail">
     <div class="container my-5">
         <div class="row">
