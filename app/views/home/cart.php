@@ -1,6 +1,26 @@
 <?php
 include_once "includes/header.php"; ?>
+<style>
+    .coupon-form {
+        display: flex;
+        gap: 10px;
+    }
 
+    .coupon-form .form-control,
+    .coupon-form .btn {
+        height: 100%;
+        padding: 10px;
+    }
+
+    .coupon-form .form-control {
+        flex: 1;
+    }
+
+    .coupon-form .btn {
+        flex: none;
+        border: none;
+    }
+</style>
 <section class="yourcart-section">
     <div class="container mt-5">
         <div class="row">
@@ -47,7 +67,7 @@ include_once "includes/header.php"; ?>
                         <input type="text" name="code" class="form-control" placeholder="Nhập mã giảm giá ở đây">
                         <button type="submit" class="btn btn-dark">Áp dụng</button>
                     </form>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mt-3">
                         <p>Tổng phụ:</p>
                         <p><?php
                             $subtotal = 0;
@@ -71,7 +91,7 @@ include_once "includes/header.php"; ?>
                     <div class="d-flex justify-content-between total">
                         <p>Tổng cộng:</p>
                         <p><?php
-                                echo formatVND($subtotal);
+                            echo formatVND($subtotal);
                             ?></p>
                     </div>
                     <form action="/add-order?id=<?php echo isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 'No user ID found'; ?>" method="post">

@@ -81,7 +81,7 @@
             ?>
                 <div class="col-md-12 mb-4">
                     <h2><?php echo $categoryName ?></h2>
-                    
+
                     <div class="slider-container">
                         <div class="slider-wrapper">
                             <?php
@@ -115,10 +115,10 @@
                         <button class="slider-button-prev">❮</button>
                         <button class="slider-button-next">❯</button>
                     </div>
-                      <!-- Nút Xem thêm -->
-                      <div class="text-center mt-3">
+                    <!-- Nút Xem thêm -->
+                    <!-- <div class="text-center mt-3">
                         <button class="btn btn-primary view-more" data-category-id="<?php echo $categoryId ?>">Xem thêm</button>
-                    </div>
+                    </div> -->
                 </div>
             <?php
             }

@@ -34,7 +34,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
         $user = new User();
         $mail = new Mail();
         $cart = new Cart();
-        
+
         // Lấy thông tin đơn hàng và người dùng
         $orderDetails = $order->getOrderDetailsByOrderId($orderId);
         $userInfo = $user->getUserByOrderId($orderId);
@@ -44,9 +44,9 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
         $userPhone = $userInfo['phone'];
         $userAddress = $userInfo['address'];
         $size = $_SESSION['size_order'];
-        
+
         // Tính tổng giá trị đơn hàng
-        $total = array_reduce($orderDetails, function($carry, $item) {
+        $total = array_reduce($orderDetails, function ($carry, $item) {
             return $carry + ($item['price'] * $item['quantity']);
         }, 0);
 
@@ -54,7 +54,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
         $finalTotal = $coupon ? $total - $coupon['discount_amount'] : $total;
 
         // Ghép tên sản phẩm và số lượng thành chuỗi
-        $productDetails = implode(', ', array_map(function($item) {
+        $productDetails = implode(', ', array_map(function ($item) {
             return $item['product_name'] . ' (x' . $item['quantity'] . ')';
         }, $orderDetails));
 
@@ -74,6 +74,10 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
                 echo 'Lỗi khi gửi email: ' . $emailResult['error'];
             }
 
+            // Cập nhật số lượng sản phẩm sau khi thanh toán thành công
+            foreach ($_SESSION['cart'] as $cartItem) {
+                $order->updateProductQuantity($cartItem['product_id'], $cartItem['quantity']);
+            }
             // Xóa giỏ hàng
             $cart->deleteCartUserId($userId);
             unset($_SESSION['size_order']);
@@ -90,4 +94,3 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
 } else {
     echo "Thiếu các tham số bắt buộc!";
 }
-?>

@@ -78,49 +78,51 @@
 
 <body>
     <header style="z-index: 100;">
-        <div class="nav-mobile-button hidden-md hidden-lg">
-            <span onclick="openNav()" class="icon-search-normal-5"><i class="fas fa-bars"></i></span>
+        <div class="container head-container">
+            <div class="nav-mobile-button hidden-md hidden-lg">
+                <span onclick="openNav()" class="icon-search-normal-5"><i class="fas fa-bars"></i></span>
+            </div>
+            <a href="/" class="logo">
+                <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="Logo">
+            </a>
+            <ul class="navmenu">
+                <li><a href="/">Trang Chủ</a></li>
+                <li><a href="/product">Sản Phẩm</a></li>
+                <li><a href="/contact">Liên Hệ</a></li>
+                <li><a href="/about">Về Chúng tôi </a></li>
+                <?php
+                if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == "admin") {
+                    echo '<li><a href="/admin">Admin</a></li>';
+                }
+                ?>
+            </ul>
+            <ul class="navicon">
+                <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>
+                            <?php if (isset($_SESSION['cart'])) {
+                                echo count($_SESSION['cart']);
+                            } else {
+                                echo "0";
+                            } ?>
+                        </span></a></li>
+                <?php
+                if (empty($_SESSION['user'])) {
+                    echo '<li><a href="/login" class="login-buton">Login</a></li>';
+                } else {
+                    echo '<li class="nav-item dropdown">
+                    <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
+                    </ul>
+                </li>';
+                }
+                ?>
+            </ul>
         </div>
-        <a href="/" class="logo">
-            <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="Logo">
-        </a>
-        <ul class="navmenu">
-            <li><a href="/">Trang Chủ</a></li>
-            <li><a href="/product">Sản Phẩm</a></li>
-            <li><a href="/contact">Liên Hệ</a></li>
-            <li><a href="/about">Về Chúng tôi </a></li>
-            <?php
-            if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == "admin") {
-                echo '<li><a href="/admin">Admin</a></li>';
-            }
-            ?>
-        </ul>
-        <ul class="navicon">
-            <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>
-                        <?php if (isset($_SESSION['cart'])) {
-                            echo count($_SESSION['cart']);
-                        } else {
-                            echo "0";
-                        } ?>
-                    </span></a></li>
-            <?php
-            if (empty($_SESSION['user'])) {
-                echo '<li><a href="/login" class="login-buton">Login</a></li>';
-            } else {
-                echo '<li class="nav-item dropdown">
-                <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="bi bi-person-circle"></i>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
-                </ul>
-            </li>';
-            }
-            ?>
-        </ul>
     </header>
 
     <div id="mySidenav" class="sidenav menu_mobile hidden-md hidden-lg">

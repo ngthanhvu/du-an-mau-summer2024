@@ -6,24 +6,31 @@
     scroll-behavior: smooth;
     text-decoration: none;
 }
+body {
+    background-color: #fff;
+}
 
 header {
     position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.head-container {
     display: flex;
     align-items: center;
-    width: 100%;
     justify-content: space-between;
-    padding: 0px 350px;
+    padding: 0px 250px;
     background-color: transparent;
-    z-index: 0;
+    /* z-index: 0; */
     padding-top: 10px;
-    top: 0;
 }
 
 .logo {
     max-width: 120px;
     cursor: pointer;
     height: auto;
+    padding-left: 50px;
 }
 
 .logo img {
@@ -46,6 +53,7 @@ header {
 .navicon {
     display: flex;
     padding-top: 15px;
+    padding-right: 50px;
 }
 
 .navicon a {
