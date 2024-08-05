@@ -10,16 +10,20 @@
             </div>
             <div class="carousel-inner" style="z-index: -1;">
                 <div class="carousel-item active">
-                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_1.jpg?1720275862057" class="d-block w-100" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_1.jpg?1720275862057" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_1.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_2.jpg?1722078914172" class="d-block w-100" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_2.jpg?1722078914172" class="d-block w-100 desktop-img " alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_2.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_3.jpg?1722078914172" class="d-block w-100" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_3.jpg?1722078914172" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_3.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_4.jpg?1722078914172" class="d-block w-100" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_4.jpg?1722078914172" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_4.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -77,33 +81,43 @@
             ?>
                 <div class="col-md-12 mb-4">
                     <h2><?php echo $categoryName ?></h2>
-                    <div class="row">
-                        <?php
-                        foreach ($products as $product) {
-                        ?>
-                            <div class="col-md-2">
-                                <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
-                                    <div class="card border-0">
-                                        <img src="/uploads/<?php echo $product['image'] ?>" class="border">
-                                        <div class="card-body">
-                                            <div class="rating">
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star checked"></span>
-                                                <span class="fa fa-star"></span>
+                    
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <?php
+                            foreach ($products as $product) {
+                            ?>
+                                <div class="slider-slide">
+                                    <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
+                                        <div class="card border-0">
+                                            <img src="/uploads/<?php echo $product['image'] ?>" class="border">
+                                            <div class="card-body">
+                                                <div class="rating">
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                                <p class="card-title text-left"><?php echo $product['product_name'] ?></p>
+                                                <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
+                                                    <span class="text-danger"><?php echo formatVND($product['price']) ?></span>
+                                                </p>
                                             </div>
-                                            <p class="card-title text-left"><?php echo $product['product_name'] ?></p>
-                                            <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
-                                                <span class="text-danger"><?php echo formatVND($product['price']) ?></span>
-                                            </p>
                                         </div>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                                    </a>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <!-- điều hướng -->
+                        <button class="slider-button-prev">❮</button>
+                        <button class="slider-button-next">❯</button>
+                    </div>
+                      <!-- Nút Xem thêm -->
+                      <div class="text-center mt-3">
+                        <button class="btn btn-primary view-more" data-category-id="<?php echo $categoryId ?>">Xem thêm</button>
                     </div>
                 </div>
             <?php

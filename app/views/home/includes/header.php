@@ -11,21 +11,19 @@
         if ($url == "/") {
             echo "Trang chủ";
         } elseif ($url == "/product" || $url == "/product?page=" . $page) {
-            echo "Sản phẩm";
+            echo "Sản phẩm";
         } elseif ($url == "/contact") {
-            echo "Liên hệ";
+            echo "Liên hệ";
         } elseif ($url == "/about") {
-            echo "Về chúng tôi";
+            echo "Về chúng tôi";
         } elseif ($url == "/admin") {
             echo "Admin - Dashboard";
         } elseif ($url == '/cart') {
-            echo "Giỏ hàng";
-        } elseif ($url == '/checkout') {
-            echo "Thanh toán";
-        } elseif ($url == '/order') {
-            echo "Lịch sử đơn hàng";
+            echo "Giỏ hàng";
         } elseif ($url == '/checkout') {
             echo "Thanh toán";
+        } elseif ($url == '/order') {
+            echo "Lịch sử đơn hàng";
         } elseif ($url == '/add-order') {
             echo "Thanh toán đơn hàng";
         } elseif ($url == '/login' || $url == '/admin/users/login') {
@@ -38,31 +36,25 @@
             echo "Xác thực OTP";
         } else {
             if ($url == '/detail?id=' . $_GET['id']) {
-                echo "Chi tiết sản phẩm";
+                echo "Chi tiết sản phẩm";
             } elseif ($url == '/profile?id=' . $_GET['id']) {
                 echo "Thông tin cá nhân";
             } elseif ($url == "/product?id=" . $_GET['id']) {
-                echo "Sản phẩm";
+                echo "Sản phẩm";
             } else {
-                echo "MiniStore.";
+                echo "MiniStore";
             }
         }
         ?>
     </title>
     <link rel="icon" id="favicon" href="https://static.tacdn.com/favicon.ico?v2" type="image/x-icon">
-    <link rel="stylesheet" href="<?php
-                                    $geturl = $_SERVER['REQUEST_URI'];
-                                    if ($geturl == "/admin/users/login" || $geturl == "/admin/users/register") {
-                                        echo '/app/views/home/includes/css/style.css';
-                                    } else {
-                                        echo '../app/views/home/includes/css/style.css';
-                                    }
-                                    ?>">
+    <link rel="stylesheet" href="<?php echo $url == "/admin/users/login" || $url == "/admin/users/register" ? '/app/views/home/includes/css/style.css' : '../app/views/home/includes/css/style.css'; ?>">
+    <link rel="stylesheet" href="<?php echo $url == "/admin/users/login" || $url == "/admin/users/register" ? '/app/views/home/includes/css/responsive.css' : '../app/views/home/includes/css/responsive.css'; ?>">
     <script src="https://kit.fontawesome.com/de27554dbd.js" crossorigin="anonymous"></script>
-    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 
 <style>
@@ -86,8 +78,11 @@
 
 <body>
     <header style="z-index: 100;">
+        <div class="nav-mobile-button hidden-md hidden-lg">
+            <span onclick="openNav()" class="icon-search-normal-5"><i class="fas fa-bars"></i></span>
+        </div>
         <a href="/" class="logo">
-            <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="">
+            <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="Logo">
         </a>
         <ul class="navmenu">
             <li><a href="/">Trang Chủ</a></li>
@@ -104,7 +99,6 @@
             <li><a style="color: #333;" href="/cart"><i class="bi bi-bag"></i> <span>
                         <?php if (isset($_SESSION['cart'])) {
                             echo count($_SESSION['cart']);
-                            // var_dump($_SESSION['cart']);
                         } else {
                             echo "0";
                         } ?>
@@ -118,13 +112,33 @@
                     <i class="bi bi-person-circle"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Hồ sơ</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Lịch sử mua hàng</a></li>
-                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Đăng xuất</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
                 </ul>
             </li>';
             }
             ?>
-
         </ul>
     </header>
+
+    <div id="mySidenav" class="sidenav menu_mobile hidden-md hidden-lg">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="logo">
+            <a href="/" class="logo-wrapper">
+                <img src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1722078914172" width="88" height="37" alt="logo">
+            </a>
+        </div>
+        <div class="content_menu_mb">
+            <div class="link_list_mobile">
+                <ul class="ct-mobile hidden"></ul>
+                <ul class="ct-mobile">
+                    <li><a href="/">Trang Chủ</a></li>
+                    <li><a href="/product">Sản Phẩm</a></li>
+                    <li><a href="/contact">Liên Hệ</a></li>
+                    <li><a href="/about">Về Chúng tôi </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
