@@ -384,6 +384,7 @@ class AdminController
                 exit;
             } elseif ($paymentMethod === 'vnpay') {
                 // Xử lý thanh toán với VNPAY
+                $_SESSION['size_order'] = $size;
                 $this->processVnPayPayment($orderId, $total);
             }
         }

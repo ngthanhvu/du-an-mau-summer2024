@@ -43,11 +43,15 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
         $userId = $userInfo['id'];
         $userPhone = $userInfo['phone'];
         $userAddress = $userInfo['address'];
+        $size = $_SESSION['size_order'];
         
         // Tính tổng giá trị đơn hàng
         $total = array_reduce($orderDetails, function($carry, $item) {
             return $carry + ($item['price'] * $item['quantity']);
         }, 0);
+
+        $coupon = isset($_SESSION['coupon']) ? $_SESSION['coupon'] : null;
+        $finalTotal = $coupon ? $total - $coupon['discount_amount'] : $total;
 
         // Ghép tên sản phẩm và số lượng thành chuỗi
         $productDetails = implode(', ', array_map(function($item) {
@@ -58,7 +62,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
             $status = '2'; // Trạng thái đã thanh toán
             $payment->updateOrderStatus($orderId, $status);
 
-            $payment->createBill($userFullName, $userEmail, $userPhone, $userAddress, $orderId, $productDetails, $size, $total, $status, $userId);
+            $payment->createBill($userFullName, $userEmail, $userPhone, $userAddress, $orderId, $productDetails, $size, $finalTotal, $status, $userId);
 
             $emailResult = $mail->sendOrderConfirmation(
                 $userEmail,
@@ -72,6 +76,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
 
             // Xóa giỏ hàng
             $cart->deleteCartUserId($userId);
+            unset($_SESSION['size_order']);
             header("Location: /order?id=" . $userId);
             exit();
         } else {
