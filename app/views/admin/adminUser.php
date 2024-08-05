@@ -6,7 +6,7 @@
     <p>Chào mừng đến trang quản trị!</p>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
                 <th>#</th>
                 <th>Username</th>
                 <th>Email</th>
@@ -26,6 +26,11 @@
                 <a class='btn btn-danger' href='/admin/User/delete?id=" . $value['id'] . "'><i class='bi bi-trash-fill'></i></a>
                 <a class='btn btn-primary' href='#'><i class='bi bi-pencil-square'></i></a>
                 </td>";
+                echo "</tr>";
+            }
+            if(empty($users)) {
+                echo "<tr>";
+                echo "<td class='text-center' colspan='11'>Không tìm thấy người dùng</td>";
                 echo "</tr>";
             }
             ?>

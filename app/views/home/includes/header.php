@@ -7,45 +7,82 @@
     <title>
         <?php
         $url = $_SERVER['REQUEST_URI'];
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if ($url == "/") {
             echo "Trang chủ";
-        } elseif ($url == "/product") {
-            echo "Sản phẩm";
+        } elseif ($url == "/product" || $url == "/product?page=" . $page) {
+            echo "Sản phẩm";
         } elseif ($url == "/contact") {
-            echo "Liên hệ";
+            echo "Liên hệ";
         } elseif ($url == "/about") {
-            echo "Về chúng tôi";
+            echo "Về chúng tôi";
         } elseif ($url == "/admin") {
             echo "Admin - Dashboard";
         } elseif ($url == '/cart') {
-            echo "Giỏ hàng";
+            echo "Giỏ hàng";
         } elseif ($url == '/checkout') {
-            echo "Thanh toán";
+            echo "Thanh toán";
         } elseif ($url == '/order') {
             echo "Lịch sử đơn hàng";
-        } elseif ($url == '/profile') {
-            echo "Hồ sơ cá nhân";
+        } elseif ($url == '/add-order') {
+            echo "Thanh toán đơn hàng";
+        } elseif ($url == '/login' || $url == '/admin/users/login') {
+            echo "Đăng nhập";
+        } elseif ($url == '/register' || $url == '/admin/users/register') {
+            echo "Đăng ký";
+        } elseif ($url == '/reset-password') {
+            echo "Quên mật khẩu";
+        } elseif ($url == '/very-otp') {
+            echo "Xác thực OTP";
         } else {
-            echo "Mini Store.";
+            if ($url == '/detail?id=' . $_GET['id']) {
+                echo "Chi tiết sản phẩm";
+            } elseif ($url == '/profile?id=' . $_GET['id']) {
+                echo "Thông tin cá nhân";
+            } elseif ($url == "/product?id=" . $_GET['id']) {
+                echo "Sản phẩm";
+            } else {
+                echo "MiniStore";
+            }
         }
         ?>
     </title>
-    <link rel="stylesheet" href="../app/views/home/includes/css/style.css">
+    <link rel="icon" id="favicon" href="https://static.tacdn.com/favicon.ico?v2" type="image/x-icon">
+    <link rel="stylesheet" href="<?php echo $url == "/admin/users/login" || $url == "/admin/users/register" ? '/app/views/home/includes/css/style.css' : '../app/views/home/includes/css/style.css'; ?>">
+    <link rel="stylesheet" href="<?php echo $url == "/admin/users/login" || $url == "/admin/users/register" ? '/app/views/home/includes/css/responsive.css' : '../app/views/home/includes/css/responsive.css'; ?>">
     <script src="https://kit.fontawesome.com/de27554dbd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 
+<style>
+    .navmenu a {
+        color: #000;
+    }
+
+    <?php
+    $url = $_SERVER['REQUEST_URI'];
+    if ($url == "/") {
+        echo '.navmenu a {color: #fff;}';
+        echo '.navicon i {color: #fff;}';
+        echo '.login-buton {color: #fff;}';
+    } else {
+        echo '
+        .navmenu a:hover {color: #000;}
+        .navicon a {color: #000;}';
+    }
+    ?>
+</style>
+
 <body>
-    <!-- <div class="loader" id="loader"></div> -->
-    <div class="loader-overlay" id="loaderOverlay">
-        <div class="loader"></div>
-    </div>
-    <header>
+    <header style="z-index: 100;">
+        <div class="nav-mobile-button hidden-md hidden-lg">
+            <span onclick="openNav()" class="icon-search-normal-5"><i class="fas fa-bars"></i></span>
+        </div>
         <a href="/" class="logo">
-            <img src="https://themewagon.github.io/MiniStore/images/main-logo.png" alt="">
+            <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1720275862057" alt="Logo">
         </a>
         <ul class="navmenu">
             <li><a href="/">Trang Chủ</a></li>
@@ -56,7 +93,6 @@
             if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == "admin") {
                 echo '<li><a href="/admin">Admin</a></li>';
             }
-            // var_dump($_SESSION['user']['role']);
             ?>
         </ul>
         <ul class="navicon">
@@ -69,23 +105,40 @@
                     </span></a></li>
             <?php
             if (empty($_SESSION['user'])) {
-                echo '<li><a style="color: #333;" href="/login">Login</a></li>';
+                echo '<li><a href="/login" class="login-buton">Login</a></li>';
             } else {
                 echo '<li class="nav-item dropdown">
                 <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle"></i>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/order">Order</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/checkout">Checkout</a></li>
-                    <li><a class="dropdown-item" style="width: 80%;" href="/logout">Logout</a></li>
-
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
+                    <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
                 </ul>
             </li>';
             }
-            // session_destroy();
             ?>
-
         </ul>
     </header>
+
+    <div id="mySidenav" class="sidenav menu_mobile hidden-md hidden-lg">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="logo">
+            <a href="/" class="logo-wrapper">
+                <img src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1722078914172" width="88" height="37" alt="logo">
+            </a>
+        </div>
+        <div class="content_menu_mb">
+            <div class="link_list_mobile">
+                <ul class="ct-mobile hidden"></ul>
+                <ul class="ct-mobile">
+                    <li><a href="/">Trang Chủ</a></li>
+                    <li><a href="/product">Sản Phẩm</a></li>
+                    <li><a href="/contact">Liên Hệ</a></li>
+                    <li><a href="/about">Về Chúng tôi </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>

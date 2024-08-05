@@ -7,13 +7,18 @@ require_once 'app/controllers/AdminController.php';
 require_once 'app/controllers/ViewController.php';
 
 
+
 $request_uri = $_SERVER['REQUEST_URI'];
 $base_path = parse_url($request_uri, PHP_URL_PATH);
 
 
 switch ($base_path) {
     case '/':
+        include_once 'app/models/Product.php';
         $controller = new HomeController();
+        $viewcontroller = new ViewController();
+        $viewcontroller->index();
+        break;
         $controller->index();
         break;
     case '/product':
@@ -25,6 +30,9 @@ switch ($base_path) {
         break;
     case '/checkout':
         $controller = new HomeController();
+        $get = new AdminController();
+        $get->order_detail(isset($_GET['id']) ? $_GET['id'] : null);
+        break;
         $controller->checkout();
         break;
     case '/contact':
@@ -33,6 +41,9 @@ switch ($base_path) {
         break;
     case '/order':
         $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->userBill(isset($_GET['id']) ? $_GET['id'] : null);
+        break;
         $controller->order();
         break;
     case '/profile':
@@ -73,6 +84,7 @@ switch ($base_path) {
         $controller->logout();
         break;
     case '/admin':
+        include_once 'app/models/Count.php';
         $controller = new HomeController();
         $controller->admin();
         break;
@@ -138,6 +150,7 @@ switch ($base_path) {
         $controller = new HomeController();
         $controllers = new AdminController();
         $controllers->getCategory();
+        break;
         $controller->adminCategory();
         break;
     case '/admin/category/add':
@@ -148,6 +161,40 @@ switch ($base_path) {
         $controllers = new AdminController();
         $controllers->addCategory();
         break;
+    case '/admin/order':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getOrder();
+        break;
+        $controller->adminOrder();
+        break;
+    case '/admin/order/delete':
+        $controllers = new AdminController();
+        $controllers->deleteOrder($_GET['id']);
+        break;
+    case '/admin/bill':
+        $controller = new HomeController();
+        $controllers = new AdminController();
+        $controllers->getBill();
+        break;
+        $controller->adminBill();
+        break;
+    case '/admin/coupon':
+        $controller = new HomeController();
+        $viewController = new ViewController();
+        $viewController->viewCoupon();
+        break;
+        $controller->coupon();
+        break;
+    case '/admin/coupon/add':
+        $controller = new HomeController();
+        $controller->addCoupon();
+        break;
+    case '/admin/coupon/addCoupon':
+        $controller = new AdminController();
+        var_dump($_POST);
+        $controller->addCoupon();
+        break;
         #end admin tempalte
 
     case '/add_to_cart':
@@ -157,6 +204,72 @@ switch ($base_path) {
     case '/delete-cart':
         $controller = new AdminController();
         $controller->deleteCart($_GET['id']);
+        break;
+    case '/add-order':
+        $controller = new AdminController();
+        $controller->addOrder();
+        break;
+    case '/update-profile':
+        $controller = new AdminController();
+        $controller->updateProfile($_GET['id'], $_POST);
+        break;
+    case '/payment':
+        $controller = new AdminController();
+        $controller->payment();
+        break;
+    case '/vnpay_return':
+        $controller = new HomeController();
+        $controller->vnpayReturn();
+        break;
+    case '/add-comment':
+        $controller = new AdminController();
+        $controller->addComment();
+        break;
+    case '/delete-comment':
+        $controller = new AdminController();
+        $controller->deleteComment($_GET['id'], $_GET['product_id']);
+        break;
+    case '/delete-bill':
+        $controller = new AdminController();
+        $controller->deleteBill($_GET['id']);
+        break;
+    case '/delete-category':
+        $controller = new AdminController();
+        $controller->deleteCategory($_GET['id']);
+        break;
+        // Google OAuth routes
+    case '/login/google':
+        $controller = new AdminController();
+        $controller->googleLogin();
+        break;
+    case '/login/google/callback':
+        $controller = new AdminController();
+        $controller->googleCallback();
+        break;
+    case '/reset-password':
+        $controller = new HomeController();
+        $controller->resetPassword();
+        break;
+    case '/send-otp':
+        $admincontroller = new AdminController();
+        var_dump($_POST);
+        $admincontroller->sendOtp($_POST['email']);
+        break;
+    case '/very-otp':
+        $controller = new HomeController();
+        $controller->otp();
+        break;
+    case '/check-otp':
+        $admincontroller = new AdminController();
+        $admincontroller->checkOtp($_POST);
+        break;
+    case '/update-password':
+        $controller = new HomeController();
+        $controller->update_password();
+        break;
+    case '/update-new-password':
+        $admincontroller = new AdminController();
+        $admincontroller->updateNewPassword();
         break;
     default:
         http_response_code(404);

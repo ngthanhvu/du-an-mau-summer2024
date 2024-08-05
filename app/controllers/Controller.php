@@ -93,9 +93,48 @@ class HomeController
         include __DIR__ . '/../../app/views/admin/add/addCategory.php';
     }
 
+    public function adminOrder()
+    {
+        include __DIR__ . '/../../app/views/admin/adminOrder.php';
+    }
 
     public function test()
     {
         include __DIR__ . '/../../app/views/home/test.php';
+    }
+
+    public function adminBill()
+    {
+        include __DIR__ . '/../../app/views/admin/adminBill.php';
+    }
+
+    public function vnpayReturn()
+    {
+        include __DIR__ . '/../../app/models/Vnpay_return.php';
+    }
+
+    public function resetPassword()
+    {
+        include __DIR__ . '/../../app/views/home/forgotpassword.php';
+    }
+
+    public function otp()
+    {
+        include __DIR__ . '/../../app/views/home/otp.php';
+    }
+
+    public function update_password()
+    {
+        include __DIR__ . '/../../app/views/home/updatepassword.php';
+    }
+
+    public function coupon()
+    {
+        include __DIR__ . '/../../app/views/admin/adminCoupon.php';
+    }
+
+    public function addCoupon()
+    {
+        include __DIR__ . '/../../app/views/admin/add/addCoupon.php';
     }
 }

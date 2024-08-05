@@ -12,10 +12,10 @@ var_dump($_POST);
     <form action="/admin/product/addProduct" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="productName" class="form-label">Tên sản phẩm</label>
-            <input name="name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
+            <input name="product_name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
             <?php
-            if (isset($errors['name'])) {
-                echo '<p class="text-danger">' . $errors['name'] . '</p>';
+            if (isset($errors['product_name'])) {
+                echo '<p class="text-danger">' . $errors['product_name'] . '</p>';
             }
             ?>
         </div>
@@ -49,6 +49,16 @@ var_dump($_POST);
             <?php
             if (isset($errors['category_id'])) {
                 echo '<p class="text-danger">' . $errors['category_id'] . '</p>';
+            }
+            ?>
+        </div>
+        <div class="mb-3">
+            <label for="size" class="form-label">Size:</label>
+            <input type="text" class="form-control" id="size" name="size" placeholder="Nhập size (ví dụ: X, S, M, L, XL)">
+            <small class="form-text text-muted">Cách nhau bởi dấu phẩy</small>
+            <?php
+            if (isset($errors['size'])) {
+                echo '<p class="text-danger">' . $errors['size'] . '</p>';
             }
             ?>
         </div>

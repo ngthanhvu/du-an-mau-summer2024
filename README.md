@@ -1,13 +1,13 @@
 # Website Bán Hàng
 
 Đây là dự án website bán hàng được phát triển bằng HTML, CSS, JS và PHP.
-dhasasuishyshghfgghg
+
 ## Mục đích
 Dự án này nhằm xây dựng một website bán hàng đơn giản nhưng đầy đủ các tính năng cần thiết để người dùng có thể xem sản phẩm, đặt hàng và thanh toán trực tuyến.
-update useser
+
 ## Các tính năng chính
 Đăng nhập và Đăng ký: Người dùng có thể đăng nhập vào tài khoản của họ hoặc đăng ký một tài khoản mới.
-siuuuuuuu hahaahhahs
+
 Danh mục sản phẩm: Hiển thị các danh mục sản phẩm và cho phép người dùng duyệt qua các sản phẩm theo danh mục.
 
 Tìm kiếm: Cung cấp chức năng tìm kiếm để người dùng có thể tìm kiếm sản phẩm theo từ khoá.

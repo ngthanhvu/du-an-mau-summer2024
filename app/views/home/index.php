@@ -1,245 +1,166 @@
-<?php include_once "includes/header.php";
+<?php include_once "includes/header.php" ?>
+<section class="section-1">
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <div class="carousel-inner" style="z-index: -1;">
+                <div class="carousel-item active">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_1.jpg?1720275862057" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_1.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_2.jpg?1722078914172" class="d-block w-100 desktop-img " alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_2.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_3.jpg?1722078914172" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_3.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/slider_4.jpg?1722078914172" class="d-block w-100 desktop-img" alt="...">
+                    <img src="https://bizweb.dktcdn.net/100/483/998/themes/904984/assets/silde_m_4.png?1717181462123" class="d-block w-100 mobile-img" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="section-2 mt-5">
+    <div class="container">
+        <div class="row">
+            <?php
+            foreach ($danhmuc as $value) {
+            ?>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3><?php echo $value['name'] ?></h3>
+                            <p>Áo bóng đá, giày bóng đá, tất bóng đá,...</p>
+                            <a href="#" class="btn btn-custom">Mua Ngay</a>
+                        </div>
+                        <div class="product-image">
+                            <img src="/uploads/<?php echo $value['image'] ?>" alt="Đồ bóng đá">
+                        </div>
+                    </div>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+    </div>
+</section>
+<?php
+// var_dump($_SESSION);
 ?>
-<!-- start slider -->
-<section class="slider">
-    <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/slider_1.jpg?1719892831755" alt="">
-    <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/slider_2.jpg?1719892831755" alt="">
-    <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/slider_5.jpg?1719892831755" alt="">
-</section>
-<!-- end slider -->
-<!-- start category  -->
-<section class="category-section">
-    <div class="category-head">
-        <h3 class="text-center mt-5">Danh mục sản phẩm</h3>
-        <p class="text-center">
-            Các danh mục sản phẩm có tại shop
-        </p>
-        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
-    </div>
+<section class="section-3 mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <a href="/product" style="text-decoration: none; color: black;">
-                    <div class="card border-0">
-                        <img src="https://pos.nvncdn.com/6a2bd9-54198/ps/20230804_fXS07knJQE.jpeg" alt="" class="img-thunbnail">
-                        <h5 class="text-center mt-3">Giày đá bóng</h5>
+            <?php
+            function formatVND($number)
+            {
+                return number_format($number, 0, '', '.',) . 'đ';
+            }
+            foreach ($danhmuc as $category) {
+                $categoryId = $category['id'];
+                $categoryName = $category['name'];
+                $product = new Product();
+                $products = $product->selectByCategory($categoryId);
+            ?>
+                <div class="col-md-12 mb-4">
+                    <h2><?php echo $categoryName ?></h2>
+                    
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <?php
+                            foreach ($products as $product) {
+                            ?>
+                                <div class="slider-slide">
+                                    <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
+                                        <div class="card border-0">
+                                            <img src="/uploads/<?php echo $product['image'] ?>" class="border">
+                                            <div class="card-body">
+                                                <div class="rating">
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <span class="fa fa-star"></span>
+                                                </div>
+                                                <p class="card-title text-left"><?php echo $product['product_name'] ?></p>
+                                                <p class="card-text text-left"><span class="text-decoration-line-through">300.000đ</span>
+                                                    <span class="text-danger"><?php echo formatVND($product['price']) ?></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <!-- điều hướng -->
+                        <button class="slider-button-prev">❮</button>
+                        <button class="slider-button-next">❯</button>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/product" style="text-decoration: none; color: black;">
-                    <div class="card border-0">
-                        <img src="https://makan.vn/wp-content/uploads/2023/05/ao-bong-da-co-co-1.1.jpg" alt="" class="img-thunbnail">
-                        <h5 class="text-center mt-3">Áo đá bóng</h5>
+                      <!-- Nút Xem thêm -->
+                      <div class="text-center mt-3">
+                        <button class="btn btn-primary view-more" data-category-id="<?php echo $categoryId ?>">Xem thêm</button>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/product" style="text-decoration: none; color: black;">
-                    <div class="card border-0">
-                        <img src="https://gangtaytapgym.com/wp-content/uploads/2021/06/bang-co-tay-veidoorm-300x300.jpg" alt="" class="img-thunbnail">
-                        <h5 class="text-center mt-3">Phụ kiện thể thao</h5>
-                    </div>
-                </a>
-            </div>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     </div>
 </section>
-<!-- end category  -->
-<!-- start ads  -->
-<section class="ads-banner">
-    <div class="container mt-5">
-        <div class="feature-row">
-            <div class="feature-box">
-                <i class="bi bi-truck"></i>
-                <div class="feature-text">
-                    <h6>Vận chuyển SIÊU TỐC</h6>
-                    <p>Khu vực TOÀN QUỐC</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="bi bi-shield-check"></i>
-                <div class="feature-text">
-                    <h6>Cam kết CHÍNH HÃNG</h6>
-                    <p>Sản phẩm TRỌN ĐỜI</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="bi bi-credit-card"></i>
-                <div class="feature-text">
-                    <h6>Tiến hành THANH TOÁN</h6>
-                    <p>Với nhiều PHƯƠNG THỨC</p>
-                </div>
-            </div>
-            <div class="feature-box">
-                <i class="bi bi-arrow-repeat"></i>
-                <div class="feature-text">
-                    <h6>100% HOÀN TIỀN</h6>
-                    <p>Nếu sản phẩm lỗi</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="ads-banner2">
-    <img src="https://bizweb.dktcdn.net/100/485/982/themes/918620/assets/banner_index.jpg?1719910370853" alt="404">
-</section>
-<!-- end ads  -->
-<!-- star view shop  -->
-<section class="viewshop-section">
-    <div class="viewshop-head">
-        <h3 class="text-center mt-5">Các sản phẩm mới nhất của chúng tôi</h3>
-        <p class="text-center">Sản phẩm được cập nhật tháng 7 năm 2024</p>
-        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
-    </div>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4 mt-5">
-                <div class="card">
-                    <img class="img-thunbnail" src="https://www.sporter.vn/wp-content/uploads/2017/07/Ao-doi-tuyen-bo-dau-nha-san-khach-1.jpg" alt="" height="400">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="img-thunbnail" src="https://www.sport9.vn/images/uploaded/tin-tuc/giay%20nike/giay-da-bong-.jpg" alt="" height="350">
-                </div>
-            </div>
-            <div class="col-md-4 mt-5">
-                <div class="card">
-                    <img class="img-thunbnail" src="https://zocker.vn/pic/Product/gang-tay-thu-mon-zocker-becker-den_6290_HasThumb_Thumb.webp" alt="" height="400">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- end view shop  -->
-<!-- start ads 3  -->
-<section class="ads-brands-3">
-    <img class="img-fluid mx-auto" src="https://contents.mediadecathlon.com/s1073411/k$1f80f98207b9b5a55851725a88adfb5c/app-mab-web-vi.webp" alt="404">
-</section>
-<!-- end ads 3  -->
-<!-- start our product  -->
-<section class="ourproduct-section">
-    <div class="ourproduct-head">
-        <h3 class="text-center mt-5">Sản phẩm bán chạy</h3>
-        <p class="text-center">Các sản phẩm được mua nhiều nhất
-        </p>
-        <!-- <a class="btn btn-outline-secondary">Xem tất cả</a> -->
-    </div>
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color:black;">
-                    <div class="card border-0">
-                        <img class="img-thunbnail" src="https://www.sport9.vn/images/thumbs/002/0021481_bo-quan-ao-bong-da-doi-tuyen-quoc-gia-duc-mau-xam.jpeg?preset=large&watermark=default" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">500$</p>
+
+<section class="section-6 mt-5">
+    <div class="home-two-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content_banner">
+                    <div class="title_banner">
+                        <h3>
+                            ĐẶT IN ÁO LIÊN HỆ NGAY
+                        </h3>
+                        <span>Khách hàng có nhu cầu IN TÊN SỐ, đặt đội hoặc mua số lượng lớn từ 7 bộ vui lòng inbox
+                            để SHOP hỗ trợ với giá tốt nhất cùng nhiều ưu đãi quà tặng đặc biệt</span>
+                    </div>
+
+                    <div class="group-banner">
+                        <a class="banner-1" href="#" title="ĐẶT IN ÁO LIÊN HỆ NGAY">
+                            <img class="img-responsive lazyload loaded" src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/twobanner_1.png?1720275862057" data-src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/twobanner_1.png?1720275862057" width="350" height="204" alt="Handmade" data-was-processed="true">
+                        </a>
+                        <div class="des">
+                            <a href="#" class="lien-he btn btn-danger mb-4 btn-lg" title="Xem thêm">Liên hệ ngay</a>
+                            <p>Hỗ trợ, tư vấn ngay qua messenger FB hoặc qua SĐT: 0528503503
+                            </p>
                         </div>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color:black;">
-                    <div class="card border-0">
-                        <img class="img-thunbnail" src="https://www.sport9.vn/images/thumbs/002/0021493_bo-quan-ao-bong-da-doi-tuyen-quoc-gia-anh-woncup-2022.jpeg?preset=large&watermark=default" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">500$</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="#" style="text-decoration: none; color:black;">
-                    <div class="card border-0">
-                        <img class="img-thunbnail" src="https://www.sport9.vn/images/thumbs/002/0020426_bo-quan-ao-bong-da-doi-tuyen-quoc-gia-argentina-trang-xanh.jpeg?preset=large&watermark=default" alt="">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">500$</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-</section>
 
-<!-- logo nhà tài trợ -->
-<section class="ads-brand mt-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-2">
-                <div class="card border-0">
-                    <img height="100" width="100%" src="https://i3.wp.com/pngfre.com/wp-content/uploads/nike-logo-18.png?ssl=1" alt="Brand 1">
                 </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="card border-0">
-                    <img height="100" width="100%" src="https://avashoppingpark.rs/wp-content/uploads/2022/05/Puma-logo.png" alt="Brand 2">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="card border-0">
-                    <img height="100" width="100%" src="https://static.vecteezy.com/system/resources/previews/019/766/237/non_2x/adidas-logo-adidas-icon-transparent-free-png.png" alt="Brand 3">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="card border-0">
-                    <img height="100" width="100%" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/New_balance.png" alt="Brand 4">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content_banner_2">
+                    <a href="#" title="">
+                        <img class="img-responsive lazyload loaded" src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/twobanner_2.png?1720275862057" data-src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/twobanner_2.png?1720275862057" alt="Hang Thể Thao" data-was-processed="true" width="100%">
+                    </a>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
-<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top"><i class="bi bi-arrow-up-circle"></i></button>
-<!-- kết thúc section logo nhà tài trợ -->
-<!-- end our product  -->
-<!-- start footer  -->
-<script>
-    let currentIndex = 0;
-    const images = document.querySelectorAll('.slider img');
 
-    function showSlide(index) {
-        images.forEach((img, i) => {
-            img.classList.toggle('active', i === index);
-        });
-    }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % images.length;
-        showSlide(currentIndex);
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        showSlide(currentIndex);
-    }
-
-    showSlide(currentIndex);
-
-    setInterval(nextSlide, 3000);
-
-
-
-    // Hàm cuộn lên đầu trang
-    function scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-
-    // Hiển thị hoặc ẩn nút scroll top khi người dùng cuộn trang
-    window.onscroll = function() {
-        scrollFunction();
-    };
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("scrollToTopBtn").style.display = "block";
-        } else {
-            document.getElementById("scrollToTopBtn").style.display = "none";
-        }
-    }
-</script>
 <?php include_once "includes/footer.php" ?>

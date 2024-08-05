@@ -1,6 +1,59 @@
 <?php
 include_once "includes/header.php";
+// Lấy danh mục hiện tại từ URL
+$currentCategoryId = isset($_GET['id']) ? $_GET['id'] : null;
+
+// Lọc sản phẩm theo danh mục
+if ($currentCategoryId) {
+    $sanpham = array_filter($sanpham, function ($product) use ($currentCategoryId) {
+        return $product['category_id'] == $currentCategoryId;
+    });
+}
+// var_dump($sanpham);
 ?>
+<style>
+    .product-card1 {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-card1 img {
+        transition: transform 0.3s ease;
+    }
+
+    .product-card1:hover img {
+        transform: scale(1.1);
+    }
+
+    .sidebar {
+        border-right: 1px solid #ddd;
+        padding-right: 15px;
+    }
+
+    .sidebar h5 {
+        margin-top: 20px;
+    }
+
+    .sidebar a {
+        text-decoration: none;
+        color: #000;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .sidebar a:hover {
+        color: #007bff;
+    }
+
+    .card-img-wrapper {
+        overflow: hidden;
+        height: 200px;
+    }
+
+    .card {
+        height: 300px;
+    }
+</style>
 
 <section class="shop1 text-center">
     <h1 class="text-center mt-5">Sản phẩm</h1>
@@ -8,57 +61,60 @@ include_once "includes/header.php";
         Các sản phẩm có tại website của chúng tôi.
     </p>
 </section>
+<!-- Mobile -->
+<section class="shop2 text-left">
+    <a href="/" class="text-decoration-none">
+        <h1 class="text-left mt-5">Trang Chủ</h1>
+    </a>
+    <h2 id="past-category">Tên danh mục</h2>
+</section>
 
+
+
+<button id="toggleSidebarBtn" class="btn-filter-sidebar"><i class="fa-solid fa-sliders"></i></button>
+
+<div class="filter-mobile-sidebar">
+    <button class="btn-close-sidebar-mb">&times;</button>
+    <h5>Danh Mục</h5>
+    <?php foreach ($danhmuc as $category) { ?>
+        <a href="/product?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted"><?php echo $category['name']; ?></a>
+    <?php } ?>
+</div>
+<!-- end mobile -->
 <div class="container">
     <div class="row">
-        <div class="col-2">
-            <!-- Filters -->
-            <h5>Filters</h5>
-            <div>
-                <h6>Categories</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck1">
-                    <label class="form-check-label" for="flexCheck1">Jar</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck2">
-                    <label class="form-check-label" for="flexCheck2">Kettle</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck3">
-                    <label class="form-check-label" for="flexCheck3">Cup</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheck4">
-                    <label class="form-check-label" for="flexCheck4">Tools</label>
-                </div>
-            </div>
+        <div class="col-md-3 sidebar">
+            <h5>Danh Mục</h5>
+            <?php foreach ($danhmuc as $category) { ?>
+                <a href="/product?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted"><?php echo $category['name']; ?></a>
+            <?php } ?>
         </div>
-        <div class="col-10">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <label for="sort" class="form-label">Sort by:</label>
-                    <select class="form-select" id="sort">
-                        <option selected>Popular</option>
-                        <option value="1">Price: Low to High</option>
-                        <option value="2">Price: High to Low</option>
-                    </select>
+        <div class="col-md-9 main-product">
+            <div class="d-flex justify-content-between mb-3">
+                <div class="input-group" style="width: 60%;">
+                    <span class="input-group-text bg-danger text-white border-danger" id="basic-addon1"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm">
                 </div>
-                <div>Showing 1033 Products</div>
+                <select id="sortSelect" class="form-select" style="width: 20%;">
+                    <option value="">Sắp xếp</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
             </div>
-            <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
+            <div id="productContainer" class="row">
                 <?php
-                function formatVND($number){
+                function formatVND($number)
+                {
                     return number_format($number, 0, '', '.',) . 'đ';
                 }
-                foreach ($sanpham as $product) {
-                ?>
-                    <div class="col">
+                foreach ($sanpham as $product) { ?>
+                    <div class="col-md-3 col-sm-6 mb-4 product-item" data-name="<?php echo $product['product_name']; ?>">
                         <a href="/detail?id=<?php echo $product['id']; ?>" class="text-decoration-none text-black">
-                            <div class="card border-0">
-                                <img src="/uploads/<?php echo $product['image']; ?>" class="card-img-top" alt="404">
+                            <div class="card product-card1">
+                                <div class="card-img-wrapper">
+                                    <img src="/uploads/<?php echo $product['image']; ?>" class="card-img-top" alt="Product 1" width="100%">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $product['name']; ?></h5>
                                     <div class="d-flex justify-content-left small text-warning mb-2">
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
@@ -66,21 +122,65 @@ include_once "includes/header.php";
                                         <div class="bi-star-fill"></div>
                                         <div class="bi-star-fill"></div>
                                     </div>
-                                    <h5 class="card-title"><?php echo formatVND($product['price']); ?></h5>
+                                    <h5 class="card-title"><?php echo $product['product_name']; ?></h5>
+                                    <p class="card-text"><?php echo formatVND($product['price']); ?> <del class="text-decoration-line-through text-danger">385.000đ</del></p>
                                 </div>
                             </div>
                         </a>
                     </div>
-                <?php
-                }
-                ?>
+                <?php } ?>
             </div>
-            <!-- <button class="btn btn-primary mt-4">Load more products</button> -->
+            <!-- Hiển thị các nút phân trang -->
+            <ul class="pagination">
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <li class="page-item <?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                        <a class="page-link bg-danger border-danger text-white" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+            </ul>
         </div>
     </div>
 </div>
-<!-- end shop -->
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+        const productContainer = document.getElementById("productContainer");
+        const products = Array.from(document.getElementsByClassName("product-item"));
+
+        function filterAndSortProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortValue = sortSelect.value;
+
+            let filteredProducts = products.filter(product => {
+                const productName = product.getAttribute("data-name").toLowerCase();
+                return productName.includes(searchTerm);
+            });
+
+            if (sortValue === "az") {
+                filteredProducts.sort((a, b) => a.getAttribute("data-name").localeCompare(b.getAttribute("data-name")));
+            } else if (sortValue === "za") {
+                filteredProducts.sort((a, b) => b.getAttribute("data-name").localeCompare(a.getAttribute("data-name")));
+            }
+
+            productContainer.innerHTML = "";
+            filteredProducts.forEach(product => productContainer.appendChild(product));
+        }
+
+        searchInput.addEventListener("input", filterAndSortProducts);
+        sortSelect.addEventListener("change", filterAndSortProducts);
+    });
+</script>
+<script>
+    document.getElementById('toggleSidebarBtn').addEventListener('click', function() {
+        document.querySelector('.filter-mobile-sidebar').classList.toggle('open');
+    });
+
+    document.querySelector('.btn-close-sidebar-mb').addEventListener('click', function() {
+        document.querySelector('.filter-mobile-sidebar').classList.remove('open');
+    });
+</script>
 <?php
 include_once "includes/footer.php";
 ?>

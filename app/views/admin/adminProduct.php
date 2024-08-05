@@ -7,7 +7,7 @@
     <a href="/admin/product/add" class="btn btn-primary mb-3"><i class="bi bi-plus-circle"></i> Thêm sản phẩm</a>
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="bg-primary text-white">
                 <th>#</th>
                 <th>Tên sản phẩm</th>
                 <th>Hình ảnh</th>
@@ -26,7 +26,7 @@
             foreach ($products as $key => $value) {
                 echo "<tr>";
                 echo "<td>" . $key . "</td>";
-                echo "<td>" . $value['name'] . "</td>";
+                echo "<td>" . $value['product_name'] . "</td>";
                 echo "<td><img width='100' height='100' src='../uploads/$value[image]' alt='anh'></td>";
                 echo "<td>" . formatVND($value['price']) . "</td>";
                 echo "<td>" . $value['quantity'] . "</td>";
@@ -38,9 +38,22 @@
                 </td>";
                 echo "</tr>";
             }
+            if(empty($products)) {
+                echo "<tr>";
+                echo "<td class='text-center' colspan='11'>Không tìm thấy sản phẩm</td>";
+                echo "</tr>";
+            }
             ?>
         </tbody>
     </table>
+    <!-- Hiển thị các nút phân trang -->
+    <ul class="pagination">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+            </li>
+        <?php endfor; ?>
+    </ul>
 </main>
 
 
