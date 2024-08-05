@@ -127,7 +127,7 @@
 
     <div id="mySidenav" class="sidenav menu_mobile hidden-md hidden-lg">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="logo">
+        <div class="logo-mb">
             <a href="/" class="logo-wrapper">
                 <img src="//bizweb.dktcdn.net/100/483/998/themes/904984/assets/logo.png?1722078914172" width="88" height="37" alt="logo">
             </a>

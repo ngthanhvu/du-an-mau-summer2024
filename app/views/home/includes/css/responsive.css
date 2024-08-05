@@ -64,10 +64,14 @@
     .logo img {
         width: 70px;
         display: block;
-        margin: -32px 33px auto;
+        margin: -1px -342px auto;
 
     }
-
+    .logo-mb img{
+        width: 90px;
+        display: block;
+        margin: -50px 28px auto;
+    }
     .navicon a {
         margin: 2px 11px auto;
         font-size: 17px;
@@ -105,6 +109,7 @@
         margin-right: 30px;
         align-items: center;
         color: #B7B7B7;
+        margin: -17px -42px auto;
     }
 
     /* header end */
@@ -284,7 +289,7 @@
 
     .nav-mobile-button {
         font-size: 1.3rem;
-        margin: 10px 0px auto;
+        margin: 2px -17px auto;
         display: block !important;
     }
 
