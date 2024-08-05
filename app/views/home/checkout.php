@@ -10,6 +10,7 @@ function formatVND($number)
 $total = 0;
 $groupedProducts = [];
 $product_names = [];
+<<<<<<< HEAD
 $product_size = [];
 
 // Kiểm tra $_SESSION['cart'] và khởi tạo nếu không phải là mảng
@@ -45,6 +46,24 @@ echo "<pre>";
 echo "</pre>";
 ?>
 
+=======
+
+$carts = $_SESSION['cart'] ?? [];
+
+foreach ($carts as $productId => $product) {
+    $groupedProducts[$productId] = [
+        'product' => $product,
+        'quantity' => $product['quantity'],
+        'total_price' => $product['price'] * $product['quantity'],
+        'size' => $product['size'],
+    ];
+    
+    $total += $groupedProducts[$productId]['total_price'];
+    $product_names[] = $product['name'];
+    $product_size[] = $product['size'];
+}
+?>
+>>>>>>> feature
 <div class="container checkout-section" style="min-height: 34.25rem;">
     <div class="row">
         <div class="col-md-6">
@@ -58,7 +77,11 @@ echo "</pre>";
             </ul>
             <div class="tab-content" id="checkoutTabsContent">
                 <div class="tab-pane fade show active" id="address" role="tabpanel" aria-labelledby="address-tab">
+<<<<<<< HEAD
                     <form class="mt-3" method="post" action="/payment?id=<?php echo htmlspecialchars($_GET['id']); ?>">
+=======
+                    <form class="mt-3" method="post" action="/payment?id=<?php echo $_GET['id']; ?>">
+>>>>>>> feature
                         <div class="mb-3">
                             <label for="firstName" class="form-label">Họ tên</label>
                             <input type="text" class="form-control" id="firstName" name="full_name" value="<?php echo htmlspecialchars($_SESSION['user']['full_name']); ?>" required>
@@ -77,7 +100,11 @@ echo "</pre>";
                         </div>
                         <input type="hidden" name="product_name" value="<?php echo htmlspecialchars(implode(', ', $product_names)); ?>">
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['id']; ?>">
+<<<<<<< HEAD
                         <input type="hidden" name="total" value="<?php echo $total; ?>"> <!-- Tổng tiền sau khi áp dụng giảm giá -->
+=======
+                        <input type="hidden" name="total" value="<?php echo $total; ?>">
+>>>>>>> feature
                         <input type="hidden" name="size" value="<?php echo implode(', ', $product_size); ?>">
                         <div class="mt-3">
                             <div class="d-block my-3">
@@ -116,6 +143,7 @@ echo "</pre>";
                         <hr>
                     <?php endforeach; ?>
                     <div class="d-flex justify-content-between">
+<<<<<<< HEAD
                         <span class="fw-semibold">Giảm giá:</span>
                         <?php
                         if (isset($_SESSION['coupon'])) {
@@ -129,10 +157,18 @@ echo "</pre>";
                         <span class="fw-semibold">Tổng cộng:</span>
 
                         <span class="text-muted"><?php echo formatVND($total) ?></span>
+=======
+                        <span class="fw-semibold">Tổng cộng:</span>
+                        <span class="fw-semibold"><?php echo formatVND($total) ?></span>
+>>>>>>> feature
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <?php include_once "includes/footer.php"; ?>
+=======
+<?php include_once "includes/footer.php"; ?>
+>>>>>>> feature

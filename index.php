@@ -190,10 +190,13 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->addCoupon();
         break;
+<<<<<<< HEAD
     case '/active-coupon':
         $admincontroller = new AdminController();
         $admincontroller->getCoupon();
         break;
+=======
+>>>>>>> feature
     case '/admin/coupon/addCoupon':
         $controller = new AdminController();
         var_dump($_POST);

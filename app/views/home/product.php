@@ -61,7 +61,26 @@ if ($currentCategoryId) {
         Các sản phẩm có tại website của chúng tôi.
     </p>
 </section>
+<!-- Mobile -->
+<section class="shop2 text-left">
+    <a href="/" class="text-decoration-none">
+        <h1 class="text-left mt-5">Trang Chủ</h1>
+    </a>
+    <h2 id="past-category">Tên danh mục</h2>
+</section>
 
+
+
+<button id="toggleSidebarBtn" class="btn-filter-sidebar"><i class="fa-solid fa-sliders"></i></button>
+
+<div class="filter-mobile-sidebar">
+    <button class="btn-close-sidebar-mb">&times;</button>
+    <h5>Danh Mục</h5>
+    <?php foreach ($danhmuc as $category) { ?>
+        <a href="/product?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted"><?php echo $category['name']; ?></a>
+    <?php } ?>
+</div>
+<!-- end mobile -->
 <div class="container">
     <div class="row">
         <div class="col-md-3 sidebar">
@@ -122,6 +141,7 @@ if ($currentCategoryId) {
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchInput");
@@ -152,7 +172,48 @@ if ($currentCategoryId) {
         sortSelect.addEventListener("change", filterAndSortProducts);
     });
 </script>
+=======
+>>>>>>> feature
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("searchInput");
+        const sortSelect = document.getElementById("sortSelect");
+        const productContainer = document.getElementById("productContainer");
+        const products = Array.from(document.getElementsByClassName("product-item"));
+
+        function filterAndSortProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortValue = sortSelect.value;
+
+            let filteredProducts = products.filter(product => {
+                const productName = product.getAttribute("data-name").toLowerCase();
+                return productName.includes(searchTerm);
+            });
+
+            if (sortValue === "az") {
+                filteredProducts.sort((a, b) => a.getAttribute("data-name").localeCompare(b.getAttribute("data-name")));
+            } else if (sortValue === "za") {
+                filteredProducts.sort((a, b) => b.getAttribute("data-name").localeCompare(a.getAttribute("data-name")));
+            }
+
+            productContainer.innerHTML = "";
+            filteredProducts.forEach(product => productContainer.appendChild(product));
+        }
+
+        searchInput.addEventListener("input", filterAndSortProducts);
+        sortSelect.addEventListener("change", filterAndSortProducts);
+    });
+</script>
+<script>
+    document.getElementById('toggleSidebarBtn').addEventListener('click', function() {
+        document.querySelector('.filter-mobile-sidebar').classList.toggle('open');
+    });
+
+    document.querySelector('.btn-close-sidebar-mb').addEventListener('click', function() {
+        document.querySelector('.filter-mobile-sidebar').classList.remove('open');
+    });
+</script>
 <?php
 include_once "includes/footer.php";
 ?>

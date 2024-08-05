@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php
+=======
+<?php 
+>>>>>>> feature
 include_once "includes/header.php"; ?>
 
 <section class="yourcart-section">
@@ -9,12 +13,20 @@ include_once "includes/header.php"; ?>
                 <hr>
                 <?php
                 echo "<pre>";
+<<<<<<< HEAD
                 // var_dump($_SESSION);
+=======
+                // var_dump($_SESSION['cart']);
+>>>>>>> feature
                 echo "</pre>";
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature
                 $carts = $cartss;
                 if ($carts) {
                     foreach ($carts as $cart) {
@@ -48,7 +60,11 @@ include_once "includes/header.php"; ?>
                         <button type="submit" class="btn btn-dark">Áp dụng</button>
                     </form>
                     <div class="d-flex justify-content-between">
+<<<<<<< HEAD
                         <p>Tổng phụ:</p>
+=======
+                        <p>Tổng phụ</p>
+>>>>>>> feature
                         <p><?php
                             $subtotal = 0;
                             foreach ($carts as $cart) {
@@ -56,6 +72,7 @@ include_once "includes/header.php"; ?>
                             }
                             echo formatVND($subtotal);
                             ?></p>
+<<<<<<< HEAD
                     </div>
                     <div class="d-flex justify-content-between">
                         <p>Giảm giá:</p>
@@ -73,6 +90,12 @@ include_once "includes/header.php"; ?>
                         <p><?php
                                 echo formatVND($subtotal);
                             ?></p>
+=======
+                    </div>
+                    <div class="d-flex justify-content-between total">
+                        <p>Tổng cộng</p>
+                        <p><?php echo formatVND($subtotal) ?></p>
+>>>>>>> feature
                     </div>
                     <form action="/add-order?id=<?php echo isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 'No user ID found'; ?>" method="post">
                         <?php
@@ -83,9 +106,16 @@ include_once "includes/header.php"; ?>
                             <input type="hidden" name="carts[<?php echo $index; ?>][quantity]" value="<?php echo $cart['quantity']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][price]" value="<?php echo $cart['price']; ?>">
                             <input type="hidden" name="carts[<?php echo $index; ?>][size]" value="<?php echo $cart['size']; ?>">
+<<<<<<< HEAD
                         <?php
                         }
                         if (empty($carts)) {
+=======
+                            <!-- <input type="hidden" name="carts[<?php echo $index; ?>][image]" value="<?php echo $cart['image']; ?>"> -->
+                        <?php
+                        }
+                        if(empty($carts)){
+>>>>>>> feature
                             echo "<p class='text-center'>Giỏ hàng trống</p>";
                         }
                         ?>

@@ -53,6 +53,7 @@ class Coupon
             return ['success' => false, 'errors' => $errors, 'data' => $data];
         }
     }
+<<<<<<< HEAD
 
     public function activeCoupon($data)
     {
@@ -82,4 +83,6 @@ class Coupon
             }
         }
     }
+=======
+>>>>>>> feature
 }

@@ -8,7 +8,10 @@ class Order
     public function __construct()
     {
         try {
+<<<<<<< HEAD
             date_default_timezone_set('Asia/Ho_Chi_Minh');
+=======
+>>>>>>> feature
             $this->db = db_connect();
         } catch (PDOException $e) {
             die("Kết nối thất bại: " . $e->getMessage());
@@ -178,7 +181,11 @@ class Order
 
     public function getOrderDetailsByOrderId($orderId)
     {
+<<<<<<< HEAD
         $sql = "SELECT o.total, p.product_name as product_name, od.quantity, od.price, od.coupon
+=======
+        $sql = "SELECT o.total, p.product_name as product_name, od.quantity, od.price
+>>>>>>> feature
             FROM orders o
             JOIN order_details od ON o.id = od.order_id
             JOIN products p ON od.product_id = p.id
@@ -187,6 +194,7 @@ class Order
         $stmt->execute([$orderId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+<<<<<<< HEAD
 
     public function updateProductQuantity($productId, $quantity)
 {
@@ -195,4 +203,6 @@ class Order
     $stmt->execute([$quantity, $productId]);
 }
 
+=======
+>>>>>>> feature
 }

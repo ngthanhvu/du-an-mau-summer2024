@@ -81,8 +81,11 @@ class Cart
                 foreach ($_SESSION['cart'] as $key => $item) {
                     if ($item['id'] == $id) {
                         unset($_SESSION['cart'][$key]);
+<<<<<<< HEAD
                         unset($_SESSION['cart']['subtotal']);
                         unset($_SESSION['coupon']);
+=======
+>>>>>>> feature
                         break;
                     }
                 }
