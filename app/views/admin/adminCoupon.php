@@ -10,7 +10,6 @@
                 <th>Mã giảm giá</th>
                 <th>Số tiền giảm giá</th>
                 <th>Số lần sử dụng tối đa</th>
-                <th>Số lần đã sử dụng</th>
                 <th>Ngày tạo</th>
                 <th>Ngày kết thúc</th>
                 <th>Hành động</th>
@@ -34,12 +33,11 @@
                 echo "<td>" . $value['code'] . "</td>";
                 echo "<td>" . formatVND($value['discount_amount']) . "</td>";
                 echo "<td>" . $value['max_uses'] . "</td>";
-                echo "<td>" . $value['uses'] . "</td>";
                 echo "<td>" . formatDate($value['created_at']) . "</td>";
                 echo "<td>" . formatDate($value['end_date']) . "</td>";
                 echo "<td>
                 <a href='/admin/coupon/update/" . $value['id'] . "' class='btn btn-success btn-sm'><i class='bi bi-pencil-square'></i> Sửa</a> 
-                <a href='/admin/coupon/delete/" . $value['id'] . "' class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Xóa</a>
+                <a href='/admin/coupon/delete?id=" . $value['id'] . "' class='btn btn-danger btn-sm'><i class='bi bi-trash'></i> Xóa</a>
                 </td>";
                 echo "</tr>";
             }

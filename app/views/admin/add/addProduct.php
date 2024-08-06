@@ -4,7 +4,7 @@ echo '
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 ';
-var_dump($_POST);
+// var_dump($_POST);
 ?>
 
 <div class="container mt-5">
@@ -44,11 +44,14 @@ var_dump($_POST);
                 foreach ($categories as $category) {
                     echo '<option value="' . $category['id'] . '">' . $category['name'] . '</option>';
                 }
+                if (empty($categories)) {
+                    echo '<option value="">Danh mục sản phẩm không được để trống</option>';
+                }
                 ?>
             </select>
             <?php
-            if (isset($errors['category_id'])) {
-                echo '<p class="text-danger">' . $errors['category_id'] . '</p>';
+            if (empty($categories)) {
+                echo '<p class="text-danger">Danh mục sản phẩm không được để trống</p>';
             }
             ?>
         </div>

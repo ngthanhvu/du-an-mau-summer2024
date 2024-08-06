@@ -608,4 +608,12 @@ class AdminController
             include __DIR__ . '/../../app/views/home/cart.php';
         }
     }
+
+    public function deleteCoupon($id)
+    {
+        include_once __DIR__ . '/../../app/models/Coupon.php';
+        $coupon = new Coupon();
+        $coupon->deleteCoupon($id);
+        header("Location: /admin/coupon");
+    }
 }

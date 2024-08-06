@@ -190,6 +190,10 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->addCoupon();
         break;
+    case '/admin/coupon/delete':
+        $controllers = new AdminController();
+        $controllers->deleteCoupon($_GET['id']);
+        break;
     case '/active-coupon':
         $admincontroller = new AdminController();
         $admincontroller->getCoupon();
@@ -198,6 +202,10 @@ switch ($base_path) {
         $controller = new AdminController();
         var_dump($_POST);
         $controller->addCoupon();
+        break;
+    case '/admin/comment':
+        $controller = new HomeController();
+        $controller->adminComment();
         break;
         #end admin tempalte
 

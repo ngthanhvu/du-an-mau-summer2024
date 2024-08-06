@@ -21,10 +21,10 @@ echo '
         </div>
         <div class="mb-3">
             <label for="productName" class="form-label">Tên sản phẩm</label>
-            <input name="name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm" value="<?= $products['name'] ?>">
+            <input name="product_name" type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm" value="<?= $products['product_name'] ?>">
             <?php
-            if (isset($errors['name'])) {
-                echo '<p class="text-danger">' . $errors['name'] . '</p>';
+            if (isset($errors['product_name'])) {
+                echo '<p class="text-danger">' . $errors['product_name'] . '</p>';
             }
             ?>
         </div>

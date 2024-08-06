@@ -30,6 +30,7 @@ $monthlyData = array_values($monthlyRevenue);
 
 $dailyJson = json_encode(['labels' => $dailyLabels, 'data' => $dailyData]);
 $monthlyJson = json_encode(['labels' => $monthlyLabels, 'data' => $monthlyData]);
+// var_dump($dailyData);
 ?>
 
 
@@ -103,7 +104,10 @@ $monthlyJson = json_encode(['labels' => $monthlyLabels, 'data' => $monthlyData])
                                 {
                                     return number_format($number, 0, ',', '.') . ' đ';
                                 }
-                                $countTotal = $db->countTotal();
+                                $countTotal = 0;
+                                foreach ($dailyData as $value) {
+                                    $countTotal += intval($value);
+                                }
                                 echo '<p class="card-text text-muted mt-2">' . formatVND($countTotal) . '</p>';
                                 ?>
                             </div>

@@ -106,17 +106,16 @@
                         </span></a></li>
                 <?php
                 if (empty($_SESSION['user'])) {
-                    echo '<li><a href="/login" class="login-buton">Login</a></li>';
+                    echo '<li><a href="/login" class="login-buton">Đăng nhập</a></li>';
                 } else {
                     echo '<li class="nav-item dropdown">
                     <a style="color: #333;" href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Profile</a></li>
-                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Order</a></li>
-                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/checkout">Checkout</a></li>
-                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/profile?id=' . $_SESSION['user']['id'] . '">Hồ sơ cá nhân</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/order?id=' . $_SESSION['user']['id'] . '">Lịch sử mua hàng</a></li>
+                        <li><a class="dropdown-item text-dark" style="width: 80%;" href="/logout">Đăng xuất</a></li>
                     </ul>
                 </li>';
                 }

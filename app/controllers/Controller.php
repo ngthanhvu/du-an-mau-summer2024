@@ -137,4 +137,9 @@ class HomeController
     {
         include __DIR__ . '/../../app/views/admin/add/addCoupon.php';
     }
+
+    public function adminComment()
+    {
+        include __DIR__ . '/../../app/views/admin/adminComment.php';
+    }
 }

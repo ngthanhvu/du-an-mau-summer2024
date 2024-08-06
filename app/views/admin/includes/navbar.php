@@ -23,32 +23,37 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/User">
-                            <i class="bi bi-people-fill"></i> Người dùng
+                            <i class="bi bi-people-fill"></i> Quản lý người dùng
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/product">
-                            <i class="bi bi-table"></i> Sản phẩm
+                            <i class="bi bi-table"></i> Quản lý sản phẩm
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/category">
-                            <i class="bi bi-tags-fill"></i> Danh mục
+                            <i class="bi bi-tags-fill"></i> Quản lý danh mục
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/order">
-                        <i class="bi bi-bag-heart-fill"></i> Đặt hàng
+                        <i class="bi bi-bag-heart-fill"></i> Quản lý đặt hàng
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/bill">
-                        <i class="bi bi-receipt"></i> Đơn hàng
+                        <i class="bi bi-receipt"></i> Quản lý đơn hàng
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/coupon">
-                        <i class="bi bi-ticket-detailed-fill"></i> Mã giảm giá
+                        <i class="bi bi-ticket-detailed-fill"></i> Quản lý mã giảm giá
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/comment">
+                        <i class="bi bi-chat-right-dots"></i> Quản lý bình luận
                         </a>
                     </li>
                 </ul>
