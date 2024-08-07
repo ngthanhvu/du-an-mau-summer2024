@@ -127,6 +127,14 @@ switch ($base_path) {
         $controllers = new AdminController();
         $controllers->getProductId($_GET['id']);
         break;
+    case '/admin/category/update':
+        $controllers = new AdminController();
+        $controllers->getCategoryId($_GET['id']);
+        break;
+    case '/admin/category/updateCategory':
+        $controllers = new AdminController();
+        $controllers->updateCategory($_GET['id'], $_POST);
+        break;
     case '/admin/product/updateProduct':
         $controllers = new AdminController();
         $controllers->updateProduct($_GET['id'], $_POST);

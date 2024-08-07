@@ -49,7 +49,7 @@
                         <div class="product-info">
                             <h3><?php echo $value['name'] ?></h3>
                             <p>Áo bóng đá, giày bóng đá, tất bóng đá,...</p>
-                            <a href="#" class="btn btn-custom">Mua Ngay</a>
+                            <a href="/product?id=<?php echo $value['id'] ?>" class="btn btn-custom">Mua Ngay</a>
                         </div>
                         <div class="product-image">
                             <img src="/uploads/<?php echo $value['image'] ?>" alt="Đồ bóng đá">

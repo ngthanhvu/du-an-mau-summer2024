@@ -130,6 +130,14 @@ class AdminController
         include_once __DIR__ . '/../../app/views/admin/update/updateProduct.php';
     }
 
+    public function getCategoryId($id)
+    {
+        include_once __DIR__ . '/../../app/models/Category.php';
+        $category = new Category();
+        $categories = $category->getCategoryById($id);
+        include_once __DIR__ . '/../../app/views/admin/update/updateCategory.php';
+    }
+
     public function recommendProduct($id)
     {
         include_once __DIR__ . '/../../app/models/Product.php';
@@ -175,6 +183,14 @@ class AdminController
         $product = new Product();
         $product->updateProduct($id, $data);
         header('Location: /admin/product');
+    }
+
+    public function updateCategory($id, $data)
+    {
+        include_once __DIR__ . '/../../app/models/Category.php';
+        $category = new Category();
+        $category->updateCategory($id, $data);
+        header('Location: /admin/category');
     }
 
     public function updateProfile($id, $data)

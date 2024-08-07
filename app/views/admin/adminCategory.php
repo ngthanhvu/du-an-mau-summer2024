@@ -23,7 +23,7 @@
                 echo "<td><img width='100' height='100' src='../uploads/$value[image]' alt='anh'></td>";
                 echo "<td>
                  <a class='btn btn-danger' href='/delete-category?id=$value[id]'><i class='bi bi-trash-fill'></i></a>
-                 <a class='btn btn-primary' href='/admin/product/update?id=$value[id]'><i class='bi bi-pencil-square'></i></a>
+                 <a class='btn btn-primary' href='/admin/category/update?id=$value[id]'><i class='bi bi-pencil-square'></i></a>
                  </td>";
                 echo "</tr>";
             }
