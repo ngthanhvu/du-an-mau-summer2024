@@ -83,6 +83,10 @@ switch ($base_path) {
         $controller = new HomeController();
         $controller->logout();
         break;
+    case '/update-new-password':
+        $admincontroller = new AdminController();
+        $admincontroller->update_password();
+        break;
     case '/admin':
         include_once 'app/models/Count.php';
         $controller = new HomeController();

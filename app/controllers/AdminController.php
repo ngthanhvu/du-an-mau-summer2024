@@ -634,4 +634,25 @@ class AdminController
         $coupon->deleteCoupon($id);
         header("Location: /admin/coupon");
     }
+
+    public function update_password()
+    {
+        $data = [
+            'old_password' => $_POST['old_password'],
+            'id' => $_POST['id'],
+            'new_password' => $_POST['new_password']
+        ];
+        include_once __DIR__ . '/../../app/models/User.php';
+        $user = new User();
+        $result = $user->updateNewPassWord($data);
+        // var_dump($data);
+        if ($result['success']) {
+            header('Location: /profile?id=' . $data['id']);
+            exit();
+        } else {
+            $errors = $result['errors'];
+            // header('Location: /profile?id=' . $data['id']);
+            include __DIR__ . '/../../app/views/home/profile.php';
+        }
+    }
 }

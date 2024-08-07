@@ -1,5 +1,7 @@
 <?php include_once "includes/header.php" ?>
-
+<?php
+$users = $_SESSION['user'];
+?>
 <div class="container profile-section">
     <div class="row mb-5">
         <div class="col-md-4">
@@ -79,15 +81,26 @@
                     <h5 class="card-title">Đổi mật khẩu</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="/update-new-password" method="POST">
                         <div class="mb-3">
                             <label for="oldPassword" class="form-label">Mật khẩu cũ</label>
-                            <input type="password" class="form-control" id="oldPassword" placeholder="Điền mật khẩu cũ">
+                            <input type="password" class="form-control" id="oldPassword" name="old_password" placeholder="Điền mật khẩu cũ">
+                            <?php
+                            if (isset($errors['old_password'])) {
+                                echo "<div class='text-danger'>" . $errors['old_password'] . "</div>";
+                            }
+                            ?>
                         </div>
                         <div class="mb-3">
                             <label for="newPassword" class="form-label">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="newPassword" placeholder="Điền mật khẩu mới">
+                            <input type="password" class="form-control" id="newPassword" name="new_password" placeholder="Điền mật khẩu mới">
+                            <?php
+                            if (isset($errors['new_password'])) {
+                                echo "<div class='text-danger'>" . $errors['new_password'] . "</div>";
+                            }
+                            ?>
                         </div>
+                        <input type="hidden" name="id" value="<?php echo $users['id'] ?>">
                         <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Đổi mật khẩu</button>
                     </form>
                 </div>

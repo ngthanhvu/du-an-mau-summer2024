@@ -34,16 +34,14 @@
             echo "Quên mật khẩu";
         } elseif ($url == '/very-otp') {
             echo "Xác thực OTP";
+        } elseif ($url == '/detail?id=' . $_GET['id']) {
+            echo "Chi tiết sản phẩm";
+        } elseif ($url == '/profile?id=' . $_GET['id']) {
+            echo "Thông tin cá nhân";
+        } elseif ($url == "/product?id=" . $_GET['id']) {
+            echo "Sản phẩm";
         } else {
-            if ($url == '/detail?id=' . $_GET['id']) {
-                echo "Chi tiết sản phẩm";
-            } elseif ($url == '/profile?id=' . $_GET['id']) {
-                echo "Thông tin cá nhân";
-            } elseif ($url == "/product?id=" . $_GET['id']) {
-                echo "Sản phẩm";
-            } else {
-                echo "MiniStore";
-            }
+            echo "Hang Sport";
         }
         ?>
     </title>

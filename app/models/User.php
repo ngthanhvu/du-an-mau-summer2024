@@ -178,4 +178,46 @@ class User
             return ['success' => false, 'message' => 'Invalid OTP or OTP expired'];
         }
     }
+
+    public function updateNewPassWord($data)
+    {
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (empty($data['new_password'])) {
+                $errors['new_password'] = "Mật khẩu mới không được để trống";
+            }
+
+            if (empty($data['old_password'])) {
+                $errors['old_password'] = "Mật khẩu cũ không được để trống";
+            }
+
+            if (count($errors) == 0) {
+                try {
+                    // Lấy mật khẩu hiện tại của người dùng
+                    $sql = "SELECT password FROM users WHERE id = :id";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->execute([':id' => $data['id']]);
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    // Kiểm tra mật khẩu cũ nhập vào có khớp không
+                    if (password_verify($data['old_password'], $user['password'])) {
+                        // Cập nhật mật khẩu mới
+                        $sql = "UPDATE users SET password = :password WHERE id = :id";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->execute([
+                            ':password' => password_hash($data['new_password'], PASSWORD_DEFAULT),
+                            ':id' => $data['id']
+                        ]);
+                        return ['success' => true];
+                    } else {
+                        $errors['old_password'] = "Mật khẩu cũ không đúng";
+                    }
+                } catch (\PDOException $th) {
+                    return ['success' => false, 'errors' => $th->getMessage()];
+                }
+            }
+            return ['success' => false, 'errors' => $errors, 'data' => $data];
+        }
+    }
 }
