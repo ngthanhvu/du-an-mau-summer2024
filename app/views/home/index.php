@@ -86,11 +86,13 @@
                         <div class="slider-wrapper">
                             <?php
                             foreach ($products as $product) {
+                                $images = explode(',', $product['image']);
+                                $firstImage = $images[0]; // Bức ảnh đầu tiên
                             ?>
                                 <div class="slider-slide">
                                     <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
                                         <div class="card border-0">
-                                            <img src="/uploads/<?php echo $product['image'] ?>" class="border">
+                                            <img src="/uploads/<?php echo $firstImage ?>" class="border" style="width: 250px; height: 250px">
                                             <div class="card-body">
                                                 <div class="rating">
                                                     <span class="fa fa-star checked"></span>

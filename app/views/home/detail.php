@@ -4,17 +4,29 @@ function formatVND($number)
 {
     return number_format($number, 0, '', '.',) . 'đ';
 }
-echo "<pre>";
-// var_dump($detailProduct);
-echo "</pre>";
-?>
 
+// Tách các đường dẫn ảnh thành một mảng
+$images = explode(',', $detailProduct['image']);
+?>
 
 <section class="py-5 bg-light section-detail">
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6">
-                <img src="/uploads/<?php echo $detailProduct['image'] ?>" class="product-image11" alt="BDN Home Jersey">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Ảnh chính -->
+                        <img id="mainImage" src="/uploads/<?php echo $images[0]; ?>" class="product-image11" alt="BDN Home Jersey">
+                    </div>
+                    <div class="col-12 mt-3 d-flex">
+                        <!-- Ảnh nhỏ -->
+                        <?php
+                        for ($i = 0; $i < count($images); $i++) {
+                            echo '<img src="/uploads/' . $images[$i] . '" class="product-image-small me-2 mx-2 border" alt="Additional Image" width="150">';
+                        }
+                        ?>
+                    </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <h2><?php echo $detailProduct['product_name'] ?></h2>
@@ -46,7 +58,7 @@ echo "</pre>";
                             <input type="hidden" name="user_id" value="<?php if (isset($_SESSION['user']['id']) && !empty($_SESSION['user']['id'])) {
                                                                             echo ($_SESSION['user']['id']);
                                                                         } ?>">
-                            <input type="hidden" name="image" value="<?php echo $detailProduct['image']; ?>">
+                            <input type="hidden" name="image" value="<?php echo $images[0]; ?>">
                             <input type="hidden" name="name" value="<?php echo $detailProduct['product_name']; ?>">
                             <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
                             <input type="hidden" name="size" id="selectedSize" value="">
@@ -66,6 +78,12 @@ echo "</pre>";
 </section>
 
 <script>
+    document.querySelectorAll('.product-image-small').forEach(function(image) {
+        image.addEventListener('click', function() {
+            document.getElementById('mainImage').src = this.src;
+        });
+    });
+
     document.querySelectorAll('input[name="size"]').forEach(function(sizeInput) {
         sizeInput.addEventListener('change', function() {
             document.getElementById('selectedSize').value = this.value;

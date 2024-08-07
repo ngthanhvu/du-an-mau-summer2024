@@ -107,12 +107,15 @@ if ($currentCategoryId) {
                 {
                     return number_format($number, 0, '', '.',) . 'đ';
                 }
-                foreach ($sanpham as $product) { ?>
+                foreach ($sanpham as $product) {
+                    $images = explode(',', $product['image']);
+                    $firstImage = $images[0]; // Bức ảnh đầu tiên
+                ?>
                     <div class="col-md-3 col-sm-6 mb-4 product-item" data-name="<?php echo $product['product_name']; ?>">
                         <a href="/detail?id=<?php echo $product['id']; ?>" class="text-decoration-none text-black">
                             <div class="card product-card1">
                                 <div class="card-img-wrapper">
-                                    <img src="/uploads/<?php echo $product['image']; ?>" class="card-img-top" alt="Product 1" width="100%">
+                                    <img src="/uploads/<?php echo $firstImage; ?>" class="card-img-top" alt="Product 1" width="100%">
                                 </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-left small text-warning mb-2">

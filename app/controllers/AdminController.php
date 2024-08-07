@@ -240,6 +240,8 @@ class AdminController
         } else {
             $errors = $result['errors'];
             echo 'Lỗi: ' . $errors;
+            header('Location: /detail?id=' . $data['product_id']);
+            include __DIR__ . '/../../app/views/home/detail.php';
         }
     }
 
