@@ -14,7 +14,7 @@ $images = explode(',', $detailProduct['image']);
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 d-flex justify-content-center">
                         <!-- Ảnh chính -->
                         <img id="mainImage" src="/uploads/<?php echo $images[0]; ?>" class="product-image11" alt="BDN Home Jersey">
                     </div>

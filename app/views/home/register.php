@@ -19,35 +19,39 @@
                         <form action="/admin/users/register" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Tên đăng nhập</label>
-                                <input name="username" type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập" value="<?= htmlspecialchars($data['username'] ?? '') ?>">
-                                <?php if (!empty($errors['username'])) : ?>
-                                    <div class="text-danger"><?= htmlspecialchars($errors['username']) ?></div>
-                                <?php endif; ?>
+                                <input name="username" type="text" class="form-control" id="" placeholder="Nhập tên đăng nhập">
+                                <?php
+                                if (!empty($errors['username'])) {
+                                    echo "<div class='text-danger'>" . $errors['username'] . "</div>";
+                                }
+                                ?>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input name="email" type="text" class="form-control" id="email" placeholder="Nhập email" value="<?= htmlspecialchars($data['email'] ?? '') ?>">
-                                <?php if (!empty($errors['email'])) : ?>
-                                    <div class="text-danger"><?= htmlspecialchars($errors['email']) ?></div>
-                                <?php endif; ?>
+                                <input name="email" type="text" class="form-control" id="" placeholder="Nhập email">
+                                <?php
+                                if (!empty($errors['email'])) {
+                                    echo "<div class='text-danger'>" . $errors['email'] . "</div>";
+                                }
+                                ?>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input name="phone" type="text" class="form-control" id="username" placeholder="Nhập số điện thoại" value="<?= htmlspecialchars($data['phone'] ?? '') ?>">
+                                <input name="phone" type="text" class="form-control" id="" placeholder="Nhập số điện thoại">
                                 <?php if (!empty($errors['phone'])) : ?>
                                     <div class="text-danger"><?= htmlspecialchars($errors['phone']) ?></div>
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mật khẩu</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+                                <input name="password" type="password" class="form-control" id="" placeholder="Nhập mật khẩu">
                                 <?php if (!empty($errors['password'])) : ?>
                                     <div class="text-danger"><?= htmlspecialchars($errors['password']) ?></div>
                                 <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="confirm-password" class="form-label">Xác nhận mật khẩu</label>
-                                <input name="confirm_password" type="password" class="form-control" id="confirm-password" placeholder="Xác nhận mật khẩu">
+                                <input name="confirm_password" type="password" class="form-control" id="" placeholder="Xác nhận mật khẩu">
                                 <?php if (!empty($errors['confirm_password'])) : ?>
                                     <div class="text-danger"><?= htmlspecialchars($errors['confirm_password']) ?></div>
                                 <?php endif; ?>

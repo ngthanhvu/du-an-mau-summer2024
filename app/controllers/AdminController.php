@@ -16,7 +16,19 @@ class AdminController
         $result = $loginRegister->register($data);
 
         if ($result['success']) {
-            header('Location: /login');
+            echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+            echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Đăng ký thành công',
+                        text: 'Thành công',
+                        icon: 'success'
+                    }).then(function() {
+                        window.location.href = '/login';
+                    });
+                });
+                </script>";
+            // header('Location: /login');
         } else {
             $errors = $result['errors'];
             include __DIR__ . '/../../app/views/home/register.php';
@@ -55,8 +67,20 @@ class AdminController
         $result = $loginRegister->login($data);
 
         if ($result['success']) {
+            echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+            echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: 'Đăng nhập thành công',
+                        text: 'Thành công',
+                        icon: 'success'
+                    }).then(function() {
+                        window.location.href = '/';
+                    });
+                });
+                </script>";
             $_SESSION['user'] = $result['user'];
-            header('Location: /');
+            // header('Location: /');
         } else {
             $errors = $result['errors'];
             include __DIR__ . '/../../app/views/home/login.php';

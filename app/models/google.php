@@ -52,11 +52,23 @@ class Google
 
                 if ($user) {
                     $_SESSION['user'] = $user;
-                    header('Location: /');
+                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                        echo "<script type='text/javascript'>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    Swal.fire({
+                                        title: 'Đăng nhập thành công',
+                                        text: 'Thành công',
+                                        icon: 'success'
+                                    }).then(function() {
+                                        window.location.href = '/';
+                                    });
+                                });
+                            </script>";
+                    // header('Location: /');
                     exit();
                 } else {
                     $radomUs = rand(1000, 9999);
-                    $usergg= 'GoogleUser' . $radomUs;
+                    $usergg = 'GoogleUser' . $radomUs;
                     $data = [
                         'username' => $usergg,
                         'email' => $email,
@@ -66,8 +78,20 @@ class Google
                     $result = $this->registerFromGoogle($data);
 
                     if ($result['success']) {
+                        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+                        echo "<script type='text/javascript'>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    Swal.fire({
+                                        title: 'Đăng nhập thành công',
+                                        text: 'Thành công',
+                                        icon: 'success'
+                                    }).then(function() {
+                                        window.location.href = '/';
+                                    });
+                                });
+                            </script>";
                         $_SESSION['user'] = $result['user'];
-                        header('Location: /');
+                        // header('Location: /');
                         exit();
                     } else {
                         error_log(print_r($result['errors'], true));

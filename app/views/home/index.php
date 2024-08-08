@@ -117,10 +117,6 @@
                         <button class="slider-button-prev">❮</button>
                         <button class="slider-button-next">❯</button>
                     </div>
-                    <!-- Nút Xem thêm -->
-                    <!-- <div class="text-center mt-3">
-                        <button class="btn btn-primary view-more" data-category-id="<?php echo $categoryId ?>">Xem thêm</button>
-                    </div> -->
                 </div>
             <?php
             }
