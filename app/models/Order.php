@@ -189,10 +189,16 @@ class Order
     }
 
     public function updateProductQuantity($productId, $quantity)
-{
-    $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
-    $stmt = $this->db->prepare($sql);
-    $stmt->execute([$quantity, $productId]);
-}
+    {
+        $sql = "UPDATE products SET quantity = quantity - ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$quantity, $productId]);
+    }
 
+    public function cancelOrder($orderId)
+    {
+        $sql = "UPDATE bill SET status = 3 WHERE order_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$orderId]);
+    }
 }

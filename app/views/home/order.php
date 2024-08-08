@@ -1,4 +1,6 @@
-<?php include_once "includes/header.php" ?>
+<?php include_once "includes/header.php";
+$bill = $bill;
+?>
 <!-- end header  -->
 <section class="vieworder-section">
     <h1 class="text-center mb-5">Lịch sử mua hàng</h1>
@@ -26,7 +28,11 @@
                 {
                     return number_format($number, 0, ',', '.') . ' đ';
                 }
-                foreach ($bills as $key => $value) {
+                
+                echo "<pre>";
+                // var_dump($bills);
+                echo "</pre>";
+                foreach ($bill as $key => $value) {
                     echo "<tr>";
                     echo "<td class='text-center'>" . ($key + 1) . "</td>";
                     echo "<td class='text-center'>" . $value['full_name'] . "</td>";
@@ -37,13 +43,12 @@
                     echo "<td class='text-center'>" . $value['size'] . "</td>";
                     echo "<td class='text-center'>" . formatVND($value['total']) . "</td>";
                     echo "<td class='text-center'>" . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>')) . "</td>";
-                    echo "<td>" . ($value['status'] == 1 ? '<a class="btn btn-danger btn-sm" href="/cancel-order?id=' . $value['id'] . '"><i class="bi bi-trash-fill"></i></a>' : '') . "
+                    echo "<td>" . ($value['status'] == 1 ? '<a class="btn btn-danger btn-sm" href="/cancel-order?id=' . $value['order_id'] . '"><i class="bi bi-trash-fill"></i></a>' : '') . "
                     " . ($value['status'] != 1 ? '<a class="btn btn-primary btn-sm" href="/product"><i class="bi bi-arrow-counterclockwise"></i></a>' : '') . "
                     </td>";
                     echo "</tr>";
                 }
-
-                if (empty($bills)) {
+                if (empty($bill)) {
                     echo "<tr>";
                     echo "<td class='text-center' colspan='11'>Không tìm thấy đơn hàng</td>";
                     echo "</tr>";
@@ -56,7 +61,7 @@
     <!-- Cards for mobile -->
     <div class="d-block d-md-none">
         <?php
-        foreach ($bills as $key => $value) {
+        foreach ($bill as $key => $value) {
         ?>
             <div class="card mb-3">
                 <div class="card-header">
@@ -80,7 +85,7 @@
         <?php
         }
 
-        if (empty($bills)) {
+        if (empty($bill)) {
         ?>
             <div class="alert alert-warning text-center" role="alert">
                 Không tìm thấy đơn hàng

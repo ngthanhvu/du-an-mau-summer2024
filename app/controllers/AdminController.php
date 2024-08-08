@@ -117,7 +117,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/User.php';
         $user = new User();
         $user->deleteUser($id);
-        header('Location: /admin/User');
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/User';
+                    });
+                });
+                </script>";
+        // header('Location: /admin/User');
     }
 
     #product
@@ -198,7 +213,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/Product.php';
         $product = new Product();
         $product->deleteProduct($id);
-        header('Location: /admin/product');
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/product';
+                    });
+                });
+                </script>";
+        // header('Location: /admin/product');
     }
 
     public function updateProduct($id, $data)
@@ -347,7 +377,22 @@ class AdminController
         $order = new Order();
         $result = $order->deleteOrder($id);
         if ($result['success']) {
-            header('Location: /admin/order');
+            echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/order';
+                    });
+                });
+                </script>";
+            // header('Location: /admin/order');
         } else {
             $errors = $result['errors'];
             echo 'Lỗi: ' . $errors;
@@ -502,7 +547,7 @@ class AdminController
     {
         include_once __DIR__ . '/../../app/models/Bill.php';
         $bill = new Bill();
-        $bills = $bill->userBill($id);
+        $bill = $bill->userBill($id);
         include __DIR__ . '/../../app/views/home/order.php';
     }
 
@@ -542,7 +587,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/Comment.php';
         $comment = new Comment();
         $comment->deleteComment($id);
-        header("Location: /detail?id=$product_id");
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/detail?id=$product_id';
+                    });
+                });
+                </script>";
+        // header("Location: /detail?id=$product_id");
     }
 
     public function deleteBill($id)
@@ -550,7 +610,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/Bill.php';
         $bill = new Bill();
         $bill->deleteBill($id);
-        header("Location: /admin/bill");
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/bill';
+                    });
+                });
+                </script>";
+        // header("Location: /admin/bill");
     }
 
     public function deleteCategory($id)
@@ -558,7 +633,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/Category.php';
         $category = new Category();
         $category->deleteCategory($id);
-        header("Location: /admin/category");
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/category';
+                    });
+                });
+                </script>";
+        // header("Location: /admin/category");
     }
     public function googleLogin()
     {
@@ -647,6 +737,8 @@ class AdminController
             exit();
         } else {
             echo $result['message'];
+            header('Location: /cart');
+            exit();
             include __DIR__ . '/../../app/views/home/cart.php';
         }
     }
@@ -656,7 +748,22 @@ class AdminController
         include_once __DIR__ . '/../../app/models/Coupon.php';
         $coupon = new Coupon();
         $coupon->deleteCoupon($id);
-        header("Location: /admin/coupon");
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/coupon';
+                    });
+                });
+                </script>";
+        // header("Location: /admin/coupon");
     }
 
     public function update_password()
@@ -678,5 +785,13 @@ class AdminController
             // header('Location: /profile?id=' . $data['id']);
             include __DIR__ . '/../../app/views/home/profile.php';
         }
+    }
+
+    public function cancelOrder($id)
+    {
+        include_once __DIR__ . '/../../app/models/Order.php';
+        $order = new Order();
+        $order->cancelOrder($id);
+        header('Location: /order?id=' . $_SESSION['user']['id']);
     }
 }

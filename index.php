@@ -261,6 +261,10 @@ switch ($base_path) {
         $controller = new AdminController();
         $controller->deleteCategory($_GET['id']);
         break;
+    case '/cancel-order':
+        $controller = new AdminController();
+        $controller->cancelOrder($_GET['id']);
+        break;
         // Google OAuth routes
     case '/login/google':
         $controller = new AdminController();

@@ -42,6 +42,7 @@
     <div class="container">
         <div class="row">
             <?php
+            $danhmuc = $danhmuc;
             foreach ($danhmuc as $value) {
             ?>
                 <div class="col-md-4">
@@ -73,6 +74,7 @@
             {
                 return number_format($number, 0, '', '.',) . 'đ';
             }
+            $danhmuc = $danhmuc;
             foreach ($danhmuc as $category) {
                 $categoryId = $category['id'];
                 $categoryName = $category['name'];
@@ -81,6 +83,7 @@
             ?>
                 <div class="col-md-12 mb-4">
                     <h2><?php echo $categoryName ?></h2>
+                    
 
                     <div class="slider-container">
                         <div class="slider-wrapper">

@@ -76,7 +76,7 @@ if ($currentCategoryId) {
 <div class="filter-mobile-sidebar">
     <button class="btn-close-sidebar-mb">&times;</button>
     <h5>Danh Mục</h5>
-    <?php foreach ($danhmuc as $category) { ?>
+    <?php $danhmuc = $danhmuc; foreach ($danhmuc as $category) { ?>
         <a href="/product?id=<?php echo $category['id']; ?>" class="text-decoration-none text-black text-muted"><?php echo $category['name']; ?></a>
     <?php } ?>
 </div>
