@@ -5,9 +5,46 @@ function formatVND($number)
     return number_format($number, 0, '', '.',) . 'đ';
 }
 
+function daysSinceComment($commentDate)
+{
+    // Ngày hiện tại
+    $currentDate = new DateTime();
+
+    // Ngày bình luận (chuyển đổi từ chuỗi ngày tháng sang đối tượng DateTime)
+    $commentDate = new DateTime($commentDate);
+
+    // Tính khoảng cách giữa hai ngày
+    $interval = $currentDate->diff($commentDate);
+
+    // Trả về số ngày
+    return $interval->days;
+}
+
 // Tách các đường dẫn ảnh thành một mảng
 $images = explode(',', $detailProduct['image']);
 ?>
+<section class="shop2 text-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/" class="text-decoration-none" style="color: #dc3545;">
+                            <span>Trang Chủ</span>
+                        </a>
+                        <span class="icon-arrow-right"> -> </span>
+                    </li>
+                    <li>
+                        <strong>
+                            <span><?php echo $detailProduct['product_name'] ?></span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <section class="py-5 bg-light section-detail">
     <div class="container my-5">
@@ -97,18 +134,30 @@ $images = explode(',', $detailProduct['image']);
         <h2 class="fw-bolder mb-4">Bình luận</h2>
         <?php if (!empty($comments)) : ?>
             <?php foreach ($comments as $comment) : ?>
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($comment['username']); ?></h5>
-                        <p class="card-text"><?php echo htmlspecialchars($comment['text']); ?></p>
-                        <span class="card-text"><small class="text-muted">Ngày: <?php echo date('d/m/Y', strtotime($comment['date'])); ?></small></span>
-                        <span><a href="/delete-comment?id=<?php echo $comment['id'] ?>&product_id=<?php echo $detailProduct['id'] ?>" class="btn btn-danger btn-sm float-end"><i class="bi bi-trash"></i></a></span>
+                <div class="comment-card border">
+                    <div class="comment-user">
+                        <img src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png" alt="Avatar" class="rounded-circle me-2" width="40" height="40">
+                        <span><?php echo htmlspecialchars($comment['username']); ?></span>
+                    </div>
+                    <div class="comment-text">
+                        <?php echo htmlspecialchars($comment['text']); ?>
+                    </div>
+                    <div class="comment-actions">
+                        <a href="/delete-comment?id=<?php echo $comment['id'] ?>&product_id=<?php echo $detailProduct['id'] ?>">Xóa</a>
+                        <a href="#">Trả lời</a>
+                        <div class="comment-icon">
+                            <span class="comment-time"><?php echo daysSinceComment($comment['date']) . ' ngày trước' ?></span>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
             <p>Chưa có bình luận nào.</p>
         <?php endif; ?>
+
+
+
         <h3 class="fw-bolder mt-4">Thêm bình luận</h3>
         <form action="/add-comment" method="post">
             <div class="mb-3">
@@ -133,12 +182,17 @@ $images = explode(',', $detailProduct['image']);
 
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
+            $recommendProduct = $recommendProduct;
+
             foreach ($recommendProduct as $value) {
+                // Tách chuỗi hình ảnh và lấy hình ảnh đầu tiên
+                $pictures = explode(',', $value['image']);
+                $firstImage = $pictures[0];
             ?>
                 <div class="col mb-5">
                     <a href="/detail?id=<?php echo $value['id'] ?>" class="text-decoration-none text-black">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="/uploads/<?php echo $value['image'] ?>" alt="..." />
+                        <div class="card h-100 border-0">
+                            <img class="card-img-top" src="/uploads/<?php echo $firstImage ?>" alt="..." />
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <div class="star-rating" style="color: orange;">
@@ -148,18 +202,15 @@ $images = explode(',', $detailProduct['image']);
                                     <?php echo formatVND($value['price']) ?>
                                 </div>
                             </div>
-                            <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                            </div> -->
                         </div>
                     </a>
                 </div>
             <?php
             }
             ?>
-
         </div>
     </div>
 </section>
+
 <!-- ... -->
 <?php include_once "includes/footer.php" ?>

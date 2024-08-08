@@ -27,6 +27,8 @@
                 return date('d/m/Y', strtotime($date));
             }
 
+            $coupon = $coupon;
+
             foreach ($coupon as $key => $value) {
                 echo "<tr class='text-center'>";
                 echo "<td>" . ($key + 1) . "</td>";

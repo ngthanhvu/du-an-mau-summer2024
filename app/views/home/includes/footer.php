@@ -43,23 +43,23 @@
                     <li>
                         <i class="bi bi-telephone-fill"></i>
                         <p>
-                            0528 503 503
+                            0555 555 555
                         </p>
                     </li>
                     <li>
                         <i class="bi bi-globe"></i>
                         <p>
-                            https://hangthethao.com
+                            https://hangsport.online
                         </p>
                     </li>
                     <li>
                         <i class="bi bi-facebook"></i>
-                        <a href="https://Fb.com/hangthethao88" class="text-decoration-none text-white">fb.com/hangthethao88</a>
+                        <a href="https://Fb.com/hangthethao88" class="text-decoration-none text-white">fb.com/hangsport88</a>
                     </li>
                     <li>
                         <i class="bi bi-envelope"></i>
                         <p>
-                            shop@hangthethao.com
+                            shop@hangsport.com
                         </p>
                     </li>
                 </ul>
@@ -67,7 +67,7 @@
 
         </div>
         <div class="copyright">
-            Hangthethao copyright © 2023
+            Hangsport copyright © 2023
         </div>
     </div>
 </footer>
@@ -84,66 +84,64 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 </script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const prevButton = document.querySelector('.slider-button-prev');
-        const nextButton = document.querySelector('.slider-button-next');
-        const sliderWrapper = document.querySelector('.slider-wrapper');
-        const slides = document.querySelectorAll('.slider-slide');
-        const slidesToShow = 6;
-        const totalSlides = slides.length;
-        let currentIndex = 0;
+        const sliderContainers = document.querySelectorAll('.slider-container');
 
-        function updateSliderPosition() {
-            const slideWidth = slides[0].getBoundingClientRect().width + parseInt(window.getComputedStyle(slides[0]).marginRight); // Adjust offset to include margin
-            const offset = -currentIndex * slideWidth;
-            sliderWrapper.style.transform = `translateX(${offset}px)`;
-        }
+        sliderContainers.forEach(container => {
+            const prevButton = container.querySelector('.slider-button-prev');
+            const nextButton = container.querySelector('.slider-button-next');
+            const sliderWrapper = container.querySelector('.slider-wrapper');
+            const slides = container.querySelectorAll('.slider-slide');
+            const slideWidth = slides[0].getBoundingClientRect().width + parseInt(window.getComputedStyle(slides[0]).marginRight); // Include margin-right in calculation
+            const totalSlides = slides.length;
+            let slidesToShow = 4; // Default number of slides visible at once
+            let currentIndex = 0;
 
-        function handleButtonsVisibility() {
-            if (totalSlides <= slidesToShow) {
-                prevButton.style.display = 'none';
-                nextButton.style.display = 'none';
-            } else {
-                prevButton.style.display = 'block';
-                nextButton.style.display = 'block';
+            // Adjust slidesToShow based on screen size
+            const updateSlidesToShow = () => {
+                const screenWidth = window.innerWidth;
+                if (screenWidth < 576) {
+                    slidesToShow = 1; // 1 slide for very small screens
+                } else if (screenWidth < 768) {
+                    slidesToShow = 2; // 2 slides for small screens
+                } else if (screenWidth < 992) {
+                    slidesToShow = 3; // 3 slides for medium screens
+                } else {
+                    slidesToShow = 4; // 4 slides for larger screens
+                }
+                updateSliderPosition();
+            };
+
+            function updateSliderPosition() {
+                const offset = -currentIndex * slideWidth;
+                sliderWrapper.style.transform = `translateX(${offset}px)`;
             }
-        }
 
-        nextButton.addEventListener('click', () => {
-            if (totalSlides <= slidesToShow) return;
-            if (currentIndex < totalSlides - slidesToShow) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            updateSliderPosition();
-        });
-
-        prevButton.addEventListener('click', () => {
-            if (totalSlides <= slidesToShow) return;
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = totalSlides - slidesToShow;
-            }
-            updateSliderPosition();
-        });
-
-        updateSliderPosition();
-        handleButtonsVisibility();
-        document.querySelectorAll('.view-more').forEach(button => {
-            button.addEventListener('click', function() {
-                const categoryId = this.getAttribute('data-category-id');
-                window.location.href = `/more-products?category_id=${categoryId}`;
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < totalSlides - slidesToShow) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateSliderPosition();
             });
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalSlides - slidesToShow;
+                }
+                updateSliderPosition();
+            });
+
+            window.addEventListener('resize', updateSlidesToShow); // Update slidesToShow on window resize
+
+            updateSlidesToShow();
         });
     });
 </script>
-
-
-
 
 </body>
 

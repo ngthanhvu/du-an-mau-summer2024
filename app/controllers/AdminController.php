@@ -365,9 +365,17 @@ class AdminController
 
     public function getBill()
     {
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $recordsPerPage = 8; //chỉnh sửa số lưới nội dung hiện thị trên 1 trang
+
         include_once __DIR__ . '/../../app/models/Bill.php';
         $bill = new Bill();
-        $bills = $bill->getBill();
+        $totalBills = $bill->getTotalBill();
+        $totalPages = ceil($totalBills / $recordsPerPage);
+
+        $offset = ($currentPage - 1) * $recordsPerPage;
+
+        $bills = $bill->getBills($offset, $recordsPerPage);
         include __DIR__ . '/../../app/views/admin/adminBill.php';
     }
 
@@ -378,7 +386,7 @@ class AdminController
         $result = $order->deleteOrder($id);
         if ($result['success']) {
             echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
-        echo "<script type='text/javascript'>
+            echo "<script type='text/javascript'>
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
                         position: 'top-end',
@@ -595,7 +603,7 @@ class AdminController
                         icon: 'success',
                         title: 'Xóa thành công',
                         showConfirmButton: false,
-                        timer: 1000,
+                        timer: 500,
                         toast: true
                     }).then(function() {
                         window.location.href = '/detail?id=$product_id';
@@ -793,5 +801,64 @@ class AdminController
         $order = new Order();
         $order->cancelOrder($id);
         header('Location: /order?id=' . $_SESSION['user']['id']);
+    }
+
+    public function startPayment($id)
+    {
+        include_once __DIR__ . '/../../app/models/Order.php';
+        $order = new Order();
+        $order->startPayment($id);
+        header('Location: /order?id=' . $_SESSION['user']['id']);
+    }
+
+    public function getComment()
+    {
+        include_once __DIR__ . '/../../app/models/Comment.php';
+        $comment = new Comment();
+        $comments = $comment->getComment();
+        include __DIR__ . '/../../app/views/admin/adminComment.php';
+    }
+
+    public function deleteCm($id)
+    {
+        include_once __DIR__ . '/../../app/models/Comment.php';
+        $comment = new Comment();
+        $comment->deleteComment($id);
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script type='text/javascript'>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Xóa thành công',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        toast: true
+                    }).then(function() {
+                        window.location.href = '/admin/comment';
+                    });
+                })
+                </script>";
+        // header('Location: /admin/comment');
+    }
+
+    public function contactForm()
+    {
+        $data = [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'subject' => $_POST['subject'],
+            'message' => $_POST['message']
+        ];
+        include_once __DIR__ . '/../../app/models/Mail.php';
+        $mail = new Mail();
+        $result = $mail->contact($data);
+        if ($result['success']) {
+            header('Location: /contact');
+            exit();
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/home/contact.php';
+        }
     }
 }

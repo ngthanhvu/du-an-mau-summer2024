@@ -677,7 +677,7 @@ footer .footer .logo {
 
 .section-3 .card img {
     width: 250px;
-    height: auto;
+    height: 250px;
     margin-right: 10px;   
 }
 
@@ -720,4 +720,56 @@ footer .footer .logo {
     width: 100%;
     height: 100%; 
     object-fit: cover; 
+}
+.comment-card {
+    color: #343a40;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.comment-card .comment-user {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.comment-card .comment-text {
+    margin-bottom: 10px;
+}
+
+.comment-card .comment-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comment-card .comment-actions a {
+    color: #adb5bd;
+    text-decoration: none;
+}
+
+.comment-card .comment-actions a:hover {
+    text-decoration: underline;
+}
+
+.comment-card .comment-time {
+    font-size: 0.875rem;
+    color: #adb5bd;
+}
+
+.comment-card .comment-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-card .comment-icon i {
+    cursor: pointer;
+    color: orange;
+}
+
+.comment-card .comment-icon i:hover {
+    color: #333;
 }

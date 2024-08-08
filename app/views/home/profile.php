@@ -2,6 +2,27 @@
 <?php
 $users = $_SESSION['user'];
 ?>
+<section class="shop2 text-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/" class="text-decoration-none" style="color: #dc3545;">
+                            <span>Trang Chủ</span>
+                        </a>
+                        <span class="icon-arrow-right"> -> </span>
+                    </li>
+                    <li>
+                        <strong>
+                            <span> Hồ sơ cá nhân </span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="container profile-section">
     <div class="row mb-5">
         <div class="col-md-4">

@@ -41,4 +41,13 @@ class Comment
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function getComment()
+    {
+        $sql = "SELECT * FROM comments";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

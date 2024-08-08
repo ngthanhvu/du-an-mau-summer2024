@@ -244,4 +244,37 @@ class Mail
             return ['success' => false, 'error' => $mail->ErrorInfo];
         }
     }
+
+
+    public function contact($data)
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Thay bằng host SMTP của bạn
+            $mail->SMTPAuth = true;
+            $mail->Username = 'ngthanhvu205@gmail.com'; // Thay bằng email của bạn
+            $mail->Password = 'ncyp agwy mzvc zrwk'; // Thay bằng mật khẩu email của bạn
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            //Recipients
+            $mail->setFrom(''. $data['email'] . '', ''. $data['name'] . '');
+            $mail->addAddress('vuntpk03665@gmail.com', 'Thanh vu');
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Liên hệ mới: ' . $data['subject'];
+            $mail->Body    = "Tên: {$data['name']}<br>Email: {$data['email']}<br><br>Tin nhắn:<br>{$data['message']}";
+            $mail->AltBody = "Tên: {$data['name']}\nEmail: {$data['email']}\n\nTin nhắn:\n{$data['message']}";
+
+            $mail->send();
+            echo 'Email đã được gửi thành công';
+            return ['success' => true];
+        } catch (Exception $e) {
+            return ['success' => false, 'error' => $mail->ErrorInfo];
+            echo "Email không thể gửi được. Lỗi: {$mail->ErrorInfo}";
+        }
+    }
 }

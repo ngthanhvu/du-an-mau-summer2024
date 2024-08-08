@@ -1,6 +1,27 @@
 <?php include_once "includes/header.php" ?>
 
 <!-- start about  -->
+<section class="shop2 text-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/" class="text-decoration-none" style="color: #dc3545;">
+                            <span>Trang Chủ</span>
+                        </a>
+                        <span class="icon-arrow-right"> -> </span>
+                    </li>
+                    <li>
+                        <strong>
+                            <span> Về chúng tôi </span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="about-section">
     <section class="bg-light py-5">
         <div class="container">

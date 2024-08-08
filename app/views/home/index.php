@@ -83,7 +83,7 @@
             ?>
                 <div class="col-md-12 mb-4">
                     <h2><?php echo $categoryName ?></h2>
-                    
+
 
                     <div class="slider-container">
                         <div class="slider-wrapper">
@@ -95,7 +95,7 @@
                                 <div class="slider-slide">
                                     <a href="/detail?id=<?php echo $product['id'] ?>" class="text-decoration-none text-black">
                                         <div class="card border-0">
-                                            <img src="/uploads/<?php echo $firstImage ?>" class="border" style="width: 250px; height: 250px">
+                                            <img src="/uploads/<?php echo $firstImage ?>" class="border">
                                             <div class="card-body">
                                                 <div class="rating">
                                                     <span class="fa fa-star checked"></span>
@@ -147,7 +147,7 @@
                         </a>
                         <div class="des">
                             <a href="#" class="lien-he btn btn-danger mb-4 btn-lg" title="Xem thêm">Liên hệ ngay</a>
-                            <p>Hỗ trợ, tư vấn ngay qua messenger FB hoặc qua SĐT: 0528503503
+                            <p>Hỗ trợ, tư vấn ngay qua messenger FB hoặc qua SĐT: 0987654321
                             </p>
                         </div>
                     </div>

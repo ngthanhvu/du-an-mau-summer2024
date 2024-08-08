@@ -137,6 +137,11 @@
                     <li><a href="/product">Sản Phẩm</a></li>
                     <li><a href="/contact">Liên Hệ</a></li>
                     <li><a href="/about">Về Chúng tôi </a></li>
+                    <?php
+                    if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] == "admin") {
+                        echo '<li><a href="/admin">Admin</a></li>';
+                    }
+                    ?>
                 </ul>
             </div>
         </div>

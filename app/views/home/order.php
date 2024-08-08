@@ -2,6 +2,27 @@
 $bill = $bill;
 ?>
 <!-- end header  -->
+<section class="shop2 text-left">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/" class="text-decoration-none" style="color: #dc3545;">
+                            <span>Trang Chủ</span>
+                        </a>
+                        <span class="icon-arrow-right"> -> </span>
+                    </li>
+                    <li>
+                        <strong>
+                            <span> Lịch sử mua hàng </span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="vieworder-section">
     <h1 class="text-center mb-5">Lịch sử mua hàng</h1>
 
@@ -28,7 +49,7 @@ $bill = $bill;
                 {
                     return number_format($number, 0, ',', '.') . ' đ';
                 }
-                
+
                 echo "<pre>";
                 // var_dump($bills);
                 echo "</pre>";
@@ -42,10 +63,15 @@ $bill = $bill;
                     echo "<td class='text-center'>" . $value['product_name'] . "</td>";
                     echo "<td class='text-center'>" . $value['size'] . "</td>";
                     echo "<td class='text-center'>" . formatVND($value['total']) . "</td>";
-                    echo "<td class='text-center'>" . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>')) . "</td>";
-                    echo "<td>" . ($value['status'] == 1 ? '<a class="btn btn-danger btn-sm" href="/cancel-order?id=' . $value['order_id'] . '"><i class="bi bi-trash-fill"></i></a>' : '') . "
-                    " . ($value['status'] != 1 ? '<a class="btn btn-primary btn-sm" href="/product"><i class="bi bi-arrow-counterclockwise"></i></a>' : '') . "
-                    </td>";
+                    echo "<td class='text-center'>"
+                        . ($value['status'] == 1 ? '<span class="badge text-bg-warning">Chưa thanh toán</span>' : ($value['status'] == 2 ? '<span class="badge text-bg-success">Đã thanh toán</span>' : '<span class="badge text-bg-danger">Hủy thanh toán</span>'))
+                        . "</td>";
+                    echo "<td>"
+                        . ($value['status'] == 1 ? '<a class="btn btn-danger btn-sm" href="/cancel-order?id=' . $value['order_id']
+                            . '"><i class="bi bi-trash-fill"></i></a>' : '')
+                        . "
+                    " . ($value['status'] != 1 ? '<a class="btn btn-primary btn-sm" href="/product"><i class="bi bi-arrow-counterclockwise"></i></a>' : '')
+                        . ($value['status'] == 1 ? '<a class="btn btn-success btn-sm" href="/start-payment?id=' . $value['order_id'] . '"><i class="bi bi-credit-card"></i></a>' : '') . "</td>";
                     echo "</tr>";
                 }
                 if (empty($bill)) {

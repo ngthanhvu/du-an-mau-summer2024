@@ -201,4 +201,11 @@ class Order
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$orderId]);
     }
+
+    public function startPayment($orderId)
+    {
+        $sql = "UPDATE bill SET status = 2 WHERE order_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$orderId]);
+    }
 }

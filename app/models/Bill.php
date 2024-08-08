@@ -22,6 +22,16 @@ class Bill
         return $stmt->fetchAll();
     }
 
+    public function getBills($offset = 0, $limit = 10)
+    {
+        $sql = "SELECT * FROM `bill` LIMIT :offset, :limit";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function userBill($user_id)
     {
         $sql = "SELECT * FROM `bill` WHERE `user_id` = :user_id";
@@ -37,5 +47,13 @@ class Bill
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
+    }
+
+    public function getTotalBill()
+    {
+        $sql = "SELECT COUNT(*) as count FROM `bill`";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 }

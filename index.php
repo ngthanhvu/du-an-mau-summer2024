@@ -217,7 +217,14 @@ switch ($base_path) {
         break;
     case '/admin/comment':
         $controller = new HomeController();
+        $adminController = new AdminController();
+        $adminController->getComment();
+        break;
         $controller->adminComment();
+        break;
+    case '/admin/comment/delete':
+        $adminController = new AdminController();
+        $adminController->deleteCm($_GET['id']);
         break;
         #end admin tempalte
 
@@ -299,6 +306,15 @@ switch ($base_path) {
         $admincontroller = new AdminController();
         $admincontroller->updateNewPassword();
         break;
+    case '/start-payment':
+        $admincontroller = new AdminController();
+        $admincontroller->startPayment($_GET['id']);
+        break;
+    case '/contact-form':
+        $adminController = new AdminController();
+        $adminController->contactForm();
+        break;
+
     default:
         http_response_code(404);
         include_once '404.html';

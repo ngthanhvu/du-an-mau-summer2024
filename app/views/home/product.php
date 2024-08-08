@@ -63,10 +63,25 @@ if ($currentCategoryId) {
 </section>
 <!-- Mobile -->
 <section class="shop2 text-left">
-    <a href="/" class="text-decoration-none">
-        <h1 class="text-left mt-5">Trang Chủ</h1>
-    </a>
-    <h2 id="past-category">Tên danh mục</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li class="home">
+                        <a href="/" class="text-decoration-none" style="color: #dc3545;">
+                            <span>Trang Chủ</span>
+                        </a>
+                        <span class="icon-arrow-right"> -> </span>
+                    </li>
+                    <li>
+                        <strong>
+                            <span> Sản phẩm </span>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </section>
 
 
