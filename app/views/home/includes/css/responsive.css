@@ -54,11 +54,18 @@
 /* mobile */
 @media only screen and (max-width: 600px) {
 
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     /* header start */
     header {
+        width: 100%;
         padding: 0 20px;
         flex-direction: column;
         align-items: flex-start;
+        overflow: hidden;
     }
 
     .logo img {
@@ -67,11 +74,13 @@
         margin: -1px -342px auto;
 
     }
-    .logo-mb img{
+
+    .logo-mb img {
         width: 90px;
         display: block;
         margin: -50px 28px auto;
     }
+
     .navicon a {
         margin: 2px 11px auto;
         font-size: 17px;
@@ -457,7 +466,7 @@
         margin-right: auto;
         margin-left: auto;
     }
-    
+
     .slider-button-prev,
     .slider-button-next {
         background-color: rgba(174, 172, 172, 0.5);
@@ -486,6 +495,7 @@
     .btn-sm {
         width: 100%;
     }
+
     .btn-link.toggle-details {
         text-decoration: none;
         color: #007bff;
@@ -493,7 +503,7 @@
         margin: -4px -95px auto;
         float: right;
     }
-    
+
     .btn-link.toggle-details:hover {
         color: #1577e0;
         text-decoration: underline;
@@ -505,24 +515,30 @@
         margin: -40px 0 auto;
         height: 371px;
     }
+
     .product-image-small {
-        cursor: pointer; 
+        cursor: pointer;
         border-radius: 5px;
-        transition: transform 0.3s ease, border-color 0.3s ease; 
-        width: 100px; 
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        width: 100px;
         height: auto;
         margin: 5px 5px auto;
     }
-    .h2, h2 {
+
+    .h2,
+    h2 {
         font-size: calc(1.325rem + .9vw);
         padding: inherit;
     }
+
     .btn-danger {
         width: 100%;
     }
+
     .btn-success {
         width: 100%;
     }
+
     /* .contact-section{
         display: none;
     } */
@@ -532,20 +548,24 @@
         padding-bottom: 3rem !important;
     }
 
-    .pagination{
+    .pagination {
         text-align: center;
         margin: 0 140px auto;
     }
-    .profile-section{
+
+    .profile-section {
         margin: 0 0 auto;
     }
-    .vieworder-section{
+
+    .vieworder-section {
         margin: 0 60px auto;
     }
-    .yourcart-section{
+
+    .yourcart-section {
         margin: 0 60px auto;
     }
-    .checkout-section{
+
+    .checkout-section {
         margin: 0 60px auto;
     }
 }
@@ -554,4 +574,3 @@
 
 
 @media only screen and (min-width: 1025px) {}
-
