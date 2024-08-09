@@ -50,13 +50,19 @@ include_once "includes/header.php"; ?>
                 <hr>
                 <?php
                 echo "<pre>";
-                // var_dump($_SESSION);
+                // var_dump($_SESSION['cart']);
                 echo "</pre>";
                 function formatVND($number)
                 {
                     return number_format($number, 0, '', '.') . 'đ';
                 }
-                $carts = $cartss;
+
+                if (isset($_SESSION['cart'])) {
+                    $carts = $_SESSION['cart'];
+                } else {
+                    $carts = null;
+                }
+
                 if ($carts) {
                     foreach ($carts as $cart) {
                 ?>
@@ -92,6 +98,7 @@ include_once "includes/header.php"; ?>
                         <p>Tổng phụ:</p>
                         <p><?php
                             $subtotal = 0;
+                            $carts = isset($_SESSION['cart']) && is_array($_SESSION['cart']) ? $_SESSION['cart'] : [];
                             foreach ($carts as $cart) {
                                 $subtotal += $cart['price'] * $cart['quantity'];
                             }
