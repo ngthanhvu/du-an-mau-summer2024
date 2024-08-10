@@ -4,7 +4,9 @@ echo '
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 ';
-
+echo '<pre>';
+// var_dump($categories);
+echo '</pre>';
 ?>
 
 <div class="container mt-5">
@@ -46,15 +48,15 @@ echo '
             }
             ?>
         </div>
-        <!-- <div class="mb-3">
+        <div class="mb-3">
             <label for="productCategory" class="form-label">Danh mục sản phẩm</label>
-            <select class="form-select" id="productCategory">
+            <select class="form-select" id="productCategory" name="category_id">
                 <option selected>Chọn danh mục</option>
                 <option value="1">Danh mục 1</option>
                 <option value="2">Danh mục 2</option>
                 <option value="3">Danh mục 3</option>
             </select>
-        </div> -->
+        </div>
         <div class="mb-3">
             <label for="productImage" class="form-label">Hình ảnh sản phẩm: </label>
             <img src="/uploads/<?= $products['image'] ?>" alt="No image" class="mb-3 border" width="100" height="100">

@@ -85,7 +85,8 @@ $images = explode(',', $detailProduct['image']);
                     <p class="text-muted"><?php echo $detailProduct['description'] ?></p>
                 </div>
                 <div class="mb-3">
-                    <label for="soluongtrongkhi"><b>Số lượng trong kho:</b> <span class="badge text-bg-danger"><?php echo $detailProduct['quantity'] ?></span></label>
+                    <label for="soluongtrongkhi"><b>Số lượng trong kho:</b> <span class="badge text-bg-danger"><?php echo $detailProduct['quantity'] ?></span>
+                    </label>
                 </div>
                 <div class="mt-3">
                     <p><b>Giá tiền:</b><strong class="text-danger text-nowrap fs-5"> <?php echo formatVND($detailProduct['price']) ?></strong></p>
@@ -100,7 +101,22 @@ $images = explode(',', $detailProduct['image']);
                             <input type="hidden" name="price" value="<?php echo $detailProduct['price']; ?>">
                             <input type="hidden" name="size" id="selectedSize" value="">
                             <label for="inputQuantity" class="form-label me-3 text-center"><b>Số lượng:</b></label>
+                            <input type="hidden" name="storage" value="<?php echo $detailProduct['quantity']; ?>">
                             <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="number" value="1" style="max-width: 3rem" /><br>
+                            <?php
+                            if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
+                                $error_message = $_SESSION['error'];
+                                echo '<p class="text-danger">' . $error_message . '</p>';
+                            
+                                // Kiểm tra xem trang đã được tải lại chưa
+                                if (isset($_SESSION['error_displayed'])) {
+                                    unset($_SESSION['error']); // Unset thông báo lỗi sau khi trang được tải lại
+                                    unset($_SESSION['error_displayed']); // Unset cờ sau khi xóa lỗi
+                                } else {
+                                    $_SESSION['error_displayed'] = true; // Đặt cờ để biết rằng trang đã hiển thị lỗi
+                                }
+                            }
+                            ?>
                         </div>
                         <div>
                             <button class="btn btn-danger mt-3" type="submit">

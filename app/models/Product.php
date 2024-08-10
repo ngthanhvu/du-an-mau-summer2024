@@ -164,6 +164,10 @@ class Product
                 $errors['description'] = "Mô tả sản phẩm không được để trống";
             }
 
+            if (empty($data['category_id'])) {
+                $errors['category_id'] = "Danh mục sản phẩm không được để trống";
+            }
+
             if (!empty($_FILES['image']['name'][0])) {
                 $target_dir = "uploads/";
                 $file_count = count($_FILES['image']['name']);
@@ -205,13 +209,14 @@ class Product
                 try {
                     $imagePath = !empty($uploadedFile) ? implode(',', $uploadedFile) : $data['old_image'];
 
-                    $sql = "UPDATE products SET name = ?, price = ?, quantity = ?, description = ?, image = ? WHERE id = ?";
+                    $sql = "UPDATE products SET name = ?, price = ?, quantity = ?, description = ?, image = ?, category_id = ? WHERE id = ?";
                     $stmt = $this->db->prepare($sql);
                     $stmt->execute([
                         $data['product_name'],
                         $data['price'],
                         $data['quantity'],
                         $data['description'],
+                        $data['category_id'],
                         $imagePath,
                         $id
                     ]);

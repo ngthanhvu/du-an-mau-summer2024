@@ -32,6 +32,11 @@ class Cart
                 $errors['quantity'] = 'Số lượng phải lớn hơn 0';
             }
 
+            if($data['quantity'] > $data['storage']) {
+                $errors['quantity'] = 'Số lượng không đủ';
+                $_SESSION['error'] = 'Số lượng không đủ';
+            }
+
             if (count($errors) == 0) {
                 try {
                     $sql = "SELECT * FROM `cart` WHERE `product_id` = ? AND `user_id` = ?";

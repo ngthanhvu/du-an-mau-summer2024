@@ -233,10 +233,26 @@ class AdminController
 
     public function updateProduct($id, $data)
     {
+        $data = [
+            'product_name' => $_POST['product_name'] ?? '',
+            'price' => $_POST['price'] ?? '',
+            'quantity' => $_POST['quantity'] ?? '',
+            'description' => $_POST['description'] ?? '',
+            'image' => $_POST['image'] ?? '',
+            'category_id' => $_POST['category_id'] ?? '',
+            'size' => $_POST['size'] ?? '',
+        ];
         include_once __DIR__ . '/../../app/models/Product.php';
         $product = new Product();
-        $product->updateProduct($id, $data);
-        header('Location: /admin/product');
+        $result = $product->updateProduct($id, $data);
+
+        if ($result['success']) {
+            header('Location: /admin/product');
+        } else {
+            $errors = $result['errors'];
+            include __DIR__ . '/../../app/views/admin/update/updateProduct.php';
+        }
+        // header('Location: /admin/product');
     }
 
     public function updateCategory($id, $data)
@@ -285,6 +301,7 @@ class AdminController
             'image' => $_POST['image'] ?? '',
             'price' => $_POST['price'] ?? '',
             'size' => $_POST['size'] ?? '',
+            'storage' => $_POST['storage'] ?? '',
         ];
         include_once __DIR__ . '/../../app/models/Cart.php';
         $cart = new Cart();
@@ -293,7 +310,7 @@ class AdminController
             header('Location: /cart');
         } else {
             $errors = $result['errors'];
-            echo 'Lỗi: ' . $errors;
+            // echo 'Lỗi: ' . $errors;
             header('Location: /detail?id=' . $data['product_id']);
             include __DIR__ . '/../../app/views/home/detail.php';
         }

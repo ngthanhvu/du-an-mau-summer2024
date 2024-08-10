@@ -133,6 +133,9 @@ switch ($base_path) {
         break;
     case '/admin/category/update':
         $controllers = new AdminController();
+        $view = new ViewController();
+        $view->viewCategory();
+        break;
         $controllers->getCategoryId($_GET['id']);
         break;
     case '/admin/category/updateCategory':
