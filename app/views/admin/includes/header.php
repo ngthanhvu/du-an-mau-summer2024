@@ -1,3 +1,12 @@
+<?php
+if(empty($_SESSION['user'])) {
+    header("Location: /login");
+} else {
+    if($_SESSION['user']['role'] != "admin") {
+        header("Location: /");
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
